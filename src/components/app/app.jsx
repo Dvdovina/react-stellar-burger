@@ -9,8 +9,8 @@ function App() {
     <div className={styles.app}>
       <AppHeader />
       <main className={styles.main}>
-          <BurgerIngredients />
-          <BurgerConstructor />
+        <BurgerIngredients data={data} />
+        <BurgerConstructor />
       </main>
     </div>
   );

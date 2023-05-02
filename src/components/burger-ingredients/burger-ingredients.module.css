@@ -1,9 +1,31 @@
 .section {
+    display: flex;
+    flex-direction: column;
     margin-top: 40px;
     width: 600px;
-    border: 1px solid red;
 }
 
 .tab {
-    padding: 20px 0 40px;
+    display: flex;
+    flex-direction: row;
+    padding: 20px 0 20px;
+}
+
+.ingredients_box {
+    display: flex;
+    flex-direction: column;
+    max-height: 600px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+.ingredients_list {
+    column-gap: 24px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0;
+    padding-left: 0;
+    row-gap: 32px;
 }

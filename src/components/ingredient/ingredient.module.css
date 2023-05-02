@@ -1,0 +1,24 @@
+.item {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    max-width: 272px;
+    padding: 0;
+    position: relative;
+}
+
+
+.counter {
+    position: fixed;
+}
+
+.price {
+    display: flex;
+    flex-direction: row;
+}
+
+.text {
+    text-align: center;
+}

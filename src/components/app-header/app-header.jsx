@@ -1,4 +1,4 @@
-import {Logo, BurgerIcon, ListIcon, ProfileIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import { Logo, BurgerIcon, ListIcon, ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import headerStyles from './app-header.module.css';
 
 
@@ -12,15 +12,15 @@ function AppHeader() {
                 <ul className={headerStyles.list}>
                     <li className={`${headerStyles.item} pb-4 pt-4 pl-5`}>
                         <BurgerIcon />
-                        <p className="text text_type_main-default">Конструктор</p>     
+                        <p className="text text_type_main-default">Конструктор</p>
                     </li>
                     <li className={`${headerStyles.item} pb-4 pt-4 pl-5`}>
-                        <ListIcon type="secondary"/>
-                        <p className="text text_type_main-default text_color_inactive">Лента заказов</p>     
+                        <ListIcon type="secondary" />
+                        <p className="text text_type_main-default text_color_inactive">Лента заказов</p>
                     </li>
                     <li className={`${headerStyles.item} pb-4 pt-4 pl-5 pr-5`}>
-                        <ProfileIcon type="secondary"/>
-                        <p className="text text_type_main-default text_color_inactive">Личный кабинет</p>     
+                        <ProfileIcon type="secondary" />
+                        <p className="text text_type_main-default text_color_inactive">Личный кабинет</p>
                     </li>
                 </ul>
             </nav>
