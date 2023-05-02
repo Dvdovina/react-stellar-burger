@@ -16,9 +16,14 @@
 
 .navigation {
     align-self: center;
-    width: 66.67%;
+    min-width: 66.67%;
 }
 
+@media (max-width: 1600px) {
+    .navigation {
+        min-width: 95%;
+    }
+}
 
 .list {
     display: flex;

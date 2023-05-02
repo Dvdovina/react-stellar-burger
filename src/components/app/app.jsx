@@ -8,13 +8,9 @@ function App() {
   return (
     <div className={styles.app}>
       <AppHeader />
-      <main>
-        <section>
+      <main className={styles.main}>
           <BurgerIngredients />
-        </section>
-        <section>
           <BurgerConstructor />
-        </section>
       </main>
     </div>
   );

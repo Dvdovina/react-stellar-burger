@@ -1,0 +1,9 @@
+.section {
+    margin-top: 40px;
+    width: 600px;
+    border: 1px solid red;
+}
+
+.tab {
+    padding: 20px 0 40px;
+}
