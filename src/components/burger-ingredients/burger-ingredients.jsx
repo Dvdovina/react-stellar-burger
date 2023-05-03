@@ -12,7 +12,7 @@ function BurgerIngredients(props) {
     const sauces = props.data.filter((ingredient) => ingredient.type === 'sauce');
     const mains = props.data.filter((ingredient) => ingredient.type === 'main');
 
-    
+
     return (
         <>
             <section className={ingredientsStyles.section}>
@@ -54,7 +54,7 @@ function BurgerIngredients(props) {
 }
 
 BurgerIngredients.propTypes = {
-    data: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired,
+    props: PropTypes.arrayOf(ingredientPropType).isRequired,
 };
 
 

@@ -6,11 +6,11 @@ import BurgerConstructor from "../burger-constructor/burger-constructor";
 
 function App() {
   return (
-    <div className={styles.app}>
+    <div className={`custom-scroll ${styles.app}`}>
       <AppHeader />
       <main className={styles.main}>
         <BurgerIngredients data={data} />
-        <BurgerConstructor />
+        <BurgerConstructor data={data} />
       </main>
     </div>
   );

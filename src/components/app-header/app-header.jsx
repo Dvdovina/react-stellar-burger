@@ -10,7 +10,7 @@ function AppHeader() {
             </div>
             <nav className={headerStyles.navigation}>
                 <ul className={headerStyles.list}>
-                    <li className={`${headerStyles.item} pb-4 pt-4 pl-5`}>
+                    <li className={`${headerStyles.item} pb-4 pt-4 pl-5 pr-5`}>
                         <BurgerIcon />
                         <p className="text text_type_main-default">Конструктор</p>
                     </li>

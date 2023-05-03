@@ -1,5 +1,56 @@
-.section{
-    width: 600px;
+.section {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
     margin-top: 100px;
-    border: 1px solif blue
+    max-height: 600px;
+    min-width: 600px;
+    padding-bottom: 52px;
+}
+
+.scroll {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+.buns {
+    align-self: center;
+    padding-left: 30px;
+    width: 536px;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 0;
+    min-width: 568px;
+    padding: 0;
+}
+
+.item {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.checkout {
+    align-items: center;
+    align-self: flex-end;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+
+.price {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
 }
