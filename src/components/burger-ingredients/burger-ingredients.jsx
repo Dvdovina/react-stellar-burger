@@ -12,7 +12,7 @@ function BurgerIngredients(props) {
     const sauces = props.data.filter((ingredient) => ingredient.type === 'sauce');
     const mains = props.data.filter((ingredient) => ingredient.type === 'main');
 
-
+    
     return (
         <>
             <section className={ingredientsStyles.section}>
@@ -28,7 +28,7 @@ function BurgerIngredients(props) {
                         Начинки
                     </Tab>
                 </div>
-                <div className={ingredientsStyles.ingredients_box}>
+                <div className={`custom-scroll ${ingredientsStyles.ingredients_box}`}>
                     <h2 className="text text_type_main-medium pt-5 pb-5">Булки</h2>
                     <ul className={`${ingredientsStyles.ingredients_list} pt-5 pb-5`}>
                         {buns.map((item) => (
