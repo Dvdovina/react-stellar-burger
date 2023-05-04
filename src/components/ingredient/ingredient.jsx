@@ -20,7 +20,7 @@ const Ingredient = (props) => {
 }
 
 Ingredient.propTypes = {
-    data: PropTypes.arrayOf(ingredientPropType).isRequired,
+    data: ingredientPropType.isRequired,
 };
 
 export default Ingredient
