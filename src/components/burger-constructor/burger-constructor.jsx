@@ -14,16 +14,16 @@ function BurgerConstructor(props) {
     return (
         <>
             <section className={` ${constructorStyles.section} pt-5 pl-4 pr-4`}>
-                <div className={`pb-5 custom-scroll ${constructorStyles.scroll}`}>
-                    <div className={constructorStyles.buns}>
-                        <ConstructorElement
-                            type="top"
-                            isLocked={true}
-                            text={`${bun.name} (верх)`}
-                            price={bun.price}
-                            thumbnail={bun.image}
-                        />
-                    </div>
+                <div className={` ${constructorStyles.buns} pb-5 pr-5`}>
+                    <ConstructorElement
+                        type="top"
+                        isLocked={true}
+                        text={`${bun.name} (верх)`}
+                        price={bun.price}
+                        thumbnail={bun.image}
+                    />
+                </div>
+                <div className={`custom-scroll ${constructorStyles.scroll}`}>
                     <ul className={constructorStyles.list}>
                         {ingredient.map((item) => (
                             item.type !== 'bun' &&
@@ -37,17 +37,17 @@ function BurgerConstructor(props) {
                             </li>
                         ))}
                     </ul>
-                    <div className={constructorStyles.buns}>
-                        <ConstructorElement
-                            type="bottom"
-                            isLocked={true}
-                            text={`${bun.name} (низ)`}
-                            price={bun.price}
-                            thumbnail={bun.image}
-                        />
-                    </div>
                 </div>
-                <div className={`pt-5 ${constructorStyles.checkout}`}>
+                <div className={` ${constructorStyles.buns} pb-5 pr-5 pt-5`}>
+                    <ConstructorElement
+                        type="bottom"
+                        isLocked={true}
+                        text={`${bun.name} (низ)`}
+                        price={bun.price}
+                        thumbnail={bun.image}
+                    />
+                </div>
+                <div className={`pt-10 pr-8 ${constructorStyles.checkout}`}>
                     <div className={constructorStyles.price}>
                         <p className="text text_type_digits-medium pr-2">610</p>
                         <CurrencyIcon type="primary" />
