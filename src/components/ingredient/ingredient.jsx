@@ -1,5 +1,7 @@
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import ingredientStyles from "./ingredient.module.css"
+import PropTypes from "prop-types";
+import { ingredientPropType } from "../../utils/prop-types";
 
 const Ingredient = (props) => {
     return (
@@ -16,5 +18,9 @@ const Ingredient = (props) => {
         </>
     )
 }
+
+Ingredient.propTypes = {
+    data: PropTypes.arrayOf(ingredientPropType).isRequired,
+};
 
 export default Ingredient

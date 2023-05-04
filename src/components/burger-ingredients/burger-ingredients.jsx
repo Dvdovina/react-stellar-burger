@@ -54,7 +54,7 @@ function BurgerIngredients(props) {
 }
 
 BurgerIngredients.propTypes = {
-    props: PropTypes.arrayOf(ingredientPropType).isRequired,
+    data: PropTypes.arrayOf(ingredientPropType).isRequired,
 };
 
 
