@@ -6,7 +6,7 @@ import ingredientsStyles from "./burger-ingredients.module.css"
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function BurgerIngredients(props) {
-    const [current, setCurrent] = useState('buns');
+    const [current, setCurrent] = useState('bun');
 
     const buns = props.data.filter((ingredient) => ingredient.type === 'bun');
     const sauces = props.data.filter((ingredient) => ingredient.type === 'sauce');
