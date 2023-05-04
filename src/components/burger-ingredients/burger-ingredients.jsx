@@ -6,7 +6,7 @@ import ingredientsStyles from "./burger-ingredients.module.css"
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function BurgerIngredients(props) {
-    const [current, setCurrent] = useState('bun');
+    const [current, setCurrent] = useState("buns");
 
     const buns = props.data.filter((ingredient) => ingredient.type === 'bun');
     const sauces = props.data.filter((ingredient) => ingredient.type === 'sauce');
@@ -18,13 +18,13 @@ function BurgerIngredients(props) {
             <section className={ingredientsStyles.section}>
                 <h1 className="text text_type_main-large">Соберите бургер</h1>
                 <div className={ingredientsStyles.tab}>
-                    <Tab value="bun" active={current === 'bun'} onClick={setCurrent}>
+                    <Tab value="buns" active={current === "buns"} onClick={setCurrent}>
                         Булки
                     </Tab>
-                    <Tab value="sauce" active={current === 'sauce'} onClick={setCurrent}>
+                    <Tab value="sauces" active={current === "sauces"} onClick={setCurrent}>
                         Соусы
                     </Tab>
-                    <Tab value="main" active={current === 'main'} onClick={setCurrent}>
+                    <Tab value="mains" active={current === "mains"} onClick={setCurrent}>
                         Начинки
                     </Tab>
                 </div>
