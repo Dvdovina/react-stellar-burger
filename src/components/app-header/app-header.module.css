@@ -28,10 +28,23 @@
 .list {
     display: flex;
     flex-direction: row;
-    gap: 8px;
     list-style: none;
     margin: 0;
     padding: 0;
+}
+
+.link {
+    color: inherit;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    text-decoration: none;
+    transition: .2s ease-in-out;
+}
+
+.link:hover {
+    opacity: .7;
 }
 
 .item {
