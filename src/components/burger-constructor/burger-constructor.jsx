@@ -5,10 +5,10 @@ import { ingredientPropType } from "../../utils/prop-types";
 
 
 
-function BurgerConstructor(props) {
+function BurgerConstructor({ingredients}) {
 
-    const bun = props.data.find(item => item.type === 'bun');
-    const ingredient = props.data.filter(item => item.type !== 'bun');
+    const bun = ingredients.find(item => item.type === 'bun');
+    const ingredient = ingredients.filter(item => item.type !== 'bun');
 
 
     return (
@@ -60,7 +60,7 @@ function BurgerConstructor(props) {
 }
 
 BurgerConstructor.propTypes = {
-    data: PropTypes.arrayOf(ingredientPropType).isRequired,
+    ingredients: PropTypes.arrayOf(ingredientPropType).isRequired,
 };
 
 export default BurgerConstructor
