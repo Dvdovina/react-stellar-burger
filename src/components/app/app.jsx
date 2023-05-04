@@ -9,7 +9,7 @@ function App() {
     <div className={`custom-scroll ${styles.app}`}>
       <AppHeader />
       <main className={styles.main}>
-        <BurgerIngredients data={data} />
+        <BurgerIngredients ingredients={data} />
         <BurgerConstructor ingredients={data} />
       </main>
     </div>
