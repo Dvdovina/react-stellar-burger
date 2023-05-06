@@ -1,5 +1,5 @@
 import styles from "./app.module.css";
-// import { data } from "../../utils/data";
+// import { data } from "../../utils/data"; исходные данные без апи
 import { useState, useEffect } from "react";
 import AppHeader from "../app-header/app-header";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
