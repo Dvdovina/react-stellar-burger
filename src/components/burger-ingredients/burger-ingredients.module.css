@@ -24,7 +24,6 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
     margin: 0;
     padding-left: 0;
     row-gap: 32px;

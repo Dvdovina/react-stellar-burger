@@ -1,5 +1,5 @@
 import styles from "./app.module.css";
-import { data } from "../../utils/data";
+// import { data } from "../../utils/data";
 import { useState, useEffect } from "react";
 import AppHeader from "../app-header/app-header";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
@@ -27,8 +27,8 @@ function App() {
     <div className={`custom-scroll ${styles.app}`}>
       <AppHeader />
       <main className={styles.main}>
-        <BurgerIngredients ingredients={data} />
-        <BurgerConstructor ingredients={data} />
+        <BurgerIngredients ingredients={burgerData} />
+        <BurgerConstructor ingredients={burgerData} />
       </main>
     </div>
   );

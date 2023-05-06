@@ -14,6 +14,8 @@ function BurgerConstructor({ingredients}) {
     return (
         <>
             <section className={` ${constructorStyles.section} pt-5 pl-4 pr-4`}>
+            {ingredients.length > 0 && (
+                <>
                 <div className={` ${constructorStyles.buns} pb-5 pr-5`}>
                     <ConstructorElement
                         type="top"
@@ -47,6 +49,8 @@ function BurgerConstructor({ingredients}) {
                         thumbnail={bun.image}
                     />
                 </div>
+                </>
+                )}
                 <div className={`pt-10 pr-8 ${constructorStyles.checkout}`}>
                     <div className={constructorStyles.price}>
                         <p className="text text_type_digits-medium pr-2">610</p>
