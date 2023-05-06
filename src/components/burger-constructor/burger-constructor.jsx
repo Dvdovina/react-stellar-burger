@@ -22,7 +22,7 @@ function BurgerConstructor({ ingredients }) {
             <section className={` ${constructorStyles.section} pt-5 pl-4 pr-4`}>
                 {ingredients.length > 0 && (
                     <>
-                        <div className={` ${constructorStyles.buns} pb-5 pr-5`}>
+                        <div className={` ${constructorStyles.buns} pb-5 pr-7`}>
                             <ConstructorElement
                                 type="top"
                                 isLocked={true}
@@ -31,7 +31,7 @@ function BurgerConstructor({ ingredients }) {
                                 thumbnail={bun.image}
                             />
                         </div>
-                        <div className={`custom-scroll ${constructorStyles.scroll}`}>
+                        <div className={`custom-scroll thin_scroll ${constructorStyles.scroll}`}>
                             <ul className={constructorStyles.list}>
                                 {ingredient.map((item) => (
                                     item.type !== 'bun' &&
@@ -46,7 +46,7 @@ function BurgerConstructor({ ingredients }) {
                                 ))}
                             </ul>
                         </div>
-                        <div className={` ${constructorStyles.buns} pb-5 pr-5 pt-5`}>
+                        <div className={` ${constructorStyles.buns} pb-5 pr-7 pt-5`}>
                             <ConstructorElement
                                 type="bottom"
                                 isLocked={true}
