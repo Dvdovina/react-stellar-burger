@@ -6,6 +6,7 @@ import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import { getData } from "../../utils/api";
 
+
 function App() {
   const [burgerData, setBurgerData] = useState([]);
 

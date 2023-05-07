@@ -8,18 +8,18 @@
     padding-bottom: 52px;
 }
 
+.buns {
+    align-self: center;
+    padding-left: 30px;
+    width: 536px;
+}
+
 .scroll {
     display: flex;
     flex-direction: column;
     gap: 16px;
     overflow-y: scroll;
     scroll-behavior: smooth;
-}
-
-.buns {
-    align-self: center;
-    padding-left: 30px;
-    width: 536px;
 }
 
 .list {

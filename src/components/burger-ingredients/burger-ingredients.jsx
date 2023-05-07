@@ -5,15 +5,13 @@ import Ingredient from "../ingredient/ingredient";
 import ingredientsStyles from "./burger-ingredients.module.css"
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 
+
 function BurgerIngredients({ ingredients }) {
     const [current, setCurrent] = useState("buns");
 
     const buns = ingredients.filter((ingredient) => ingredient.type === 'bun');
     const sauces = ingredients.filter((ingredient) => ingredient.type === 'sauce');
     const mains = ingredients.filter((ingredient) => ingredient.type === 'main');
-
-
-
 
     //Элементы табов по ID
     const tabs = {
@@ -27,7 +25,6 @@ function BurgerIngredients({ ingredients }) {
         setCurrent(item);
         if (item) tabs[item].scrollIntoView({ behavior: "smooth" });
     };
-
 
     return (
         <>
@@ -72,6 +69,5 @@ function BurgerIngredients({ ingredients }) {
 BurgerIngredients.propTypes = {
     ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired,
 };
-
 
 export default BurgerIngredients

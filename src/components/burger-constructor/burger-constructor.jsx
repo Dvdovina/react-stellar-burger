@@ -7,10 +7,8 @@ import { useMemo } from "react";
 
 
 function BurgerConstructor({ ingredients }) {
-
     const bun = ingredients.find(item => item.type === 'bun');
     const ingredient = ingredients.filter(item => item.type !== 'bun');
-
 
     //Функция подсчета цены
     const fullPrice = useMemo(() => {
