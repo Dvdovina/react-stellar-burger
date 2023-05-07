@@ -4,6 +4,7 @@ import { ingredientPropType } from "../../utils/prop-types";
 import Ingredient from "../ingredient/ingredient";
 import ingredientsStyles from "./burger-ingredients.module.css"
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
+import Modal from "../modal/modal";
 
 
 function BurgerIngredients({ ingredients }) {
