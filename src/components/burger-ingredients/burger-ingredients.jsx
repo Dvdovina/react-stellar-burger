@@ -8,6 +8,19 @@ import Modal from "../modal/modal";
 
 
 function BurgerIngredients({ ingredients }) {
+    const [isOpen, setIsOpen] = useState(false);
+    const [currentIngredient, setCurrentIngredient] = useState(null);
+
+    const handleOpenModal = (item) => {
+        setIsOpen(true);
+        setCurrentIngredient(item);
+    };
+
+    const handleCloseModal = () => {
+        setIsOpen(false);
+        setCurrentIngredient(null);
+    };
+
     const [current, setCurrent] = useState("buns");
 
     const buns = ingredients.filter((ingredient) => ingredient.type === 'bun');
@@ -46,22 +59,27 @@ function BurgerIngredients({ ingredients }) {
                     <h2 id="buns" className="text text_type_main-medium pt-5 pb-5">Булки</h2>
                     <ul className={`${ingredientsStyles.ingredients_list} pt-5 pb-5`}>
                         {buns.map((item) => (
-                            <Ingredient key={item._id} ingredients={item} />
+                            <Ingredient key={item._id} ingredients={item} current={handleOpenModal} />
                         ))}
                     </ul>
                     <h2 id="sauces" className="text text_type_main-medium pt-5 pb-5">Соусы</h2>
                     <ul className={`${ingredientsStyles.ingredients_list} pt-1 pb-5`}>
                         {sauces.map((item) => (
-                            <Ingredient key={item._id} ingredients={item} />
+                            <Ingredient key={item._id} ingredients={item} current={handleOpenModal} />
                         ))}
                     </ul>
                     <h2 id="mains" className="text text_type_main-medium pt-5 pb-5">Начинки</h2>
                     <ul className={`${ingredientsStyles.ingredients_list} pt-5 pb-5`}>
                         {mains.map((item) => (
-                            <Ingredient key={item._id} ingredients={item} />
+                            <Ingredient key={item._id} ingredients={item} current={handleOpenModal} />
                         ))}
                     </ul>
                 </div>
+                {isOpen &&
+                    (<Modal onClose={handleCloseModal}>
+                        {/* ingredient details component */}
+                    </Modal>)
+                }
             </section>
         </>
     )

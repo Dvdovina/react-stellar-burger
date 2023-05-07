@@ -20,6 +20,7 @@
     border: none;
     cursor: pointer;
     margin: 60px 40px 0 0;
+    transition: .2s ease-in-out;
 }
 
 .close_btn:hover {

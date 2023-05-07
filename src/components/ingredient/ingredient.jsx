@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 import { ingredientPropType } from "../../utils/prop-types";
 
 
-const Ingredient = ({ingredients}) => {
+const Ingredient = ({ ingredients, current }) => {
     return (
         <>
-            <li className={ingredientStyles.item}>
+            <li className={ingredientStyles.item} onClick={() => current(ingredients)}>
                 <Counter count={1} size="default" className={ingredientStyles.counter} extraClass="m-1" />
                 <img src={ingredients.image} alt={`Изображение ${ingredients.name}`} />
                 <div className={`pb-2 pt-2 ${ingredientStyles.price}`}>
