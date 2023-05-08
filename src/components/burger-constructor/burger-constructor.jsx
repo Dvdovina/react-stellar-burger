@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { ingredientPropType } from "../../utils/prop-types";
 import { useState, useMemo } from "react";
 import Modal from "../modal/modal";
+import OrderDetails from "../order-details/order-details";
 
 
 
@@ -74,7 +75,7 @@ function BurgerConstructor({ ingredients }) {
                     <Button htmlType="button" type="primary" size="large" onClick={handleOpenModal}>Оформить заказ</Button>
                     {isOpen &&
                         (<Modal onClose={handleCloseModal}>
-                            {/* order-details component */}
+                            <OrderDetails />
                         </Modal>)
                     }
                 </div>
