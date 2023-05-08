@@ -78,7 +78,7 @@ function BurgerIngredients({ ingredients }) {
                 </div>
                 {isOpen &&
                     (<Modal onClose={handleCloseModal}>
-                        {/* ingredient details component */}
+                        <IngredientDetails currentIngredient={currentIngredient} />
                     </Modal>)
                 }
             </section>
