@@ -9,14 +9,15 @@ import { getData } from "../../utils/api";
 
 function App() {
   const [burgerData, setBurgerData] = useState([]);
+  const [error, setError] = useState(false);
 
   const getBurgerData = () => {
     getData()
       .then((res) => {
         setBurgerData(res.data);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        setError(true);
       })
   };
 
@@ -26,11 +27,18 @@ function App() {
 
   return (
     <div className={`custom-scroll ${styles.app}`}>
-      <AppHeader />
-      <main className={styles.main}>
-        <BurgerIngredients ingredients={burgerData} />
-        <BurgerConstructor ingredients={burgerData} />
-      </main>
+      {error ? (
+        <span className={`${styles.error} text_type_main-medium`}>Ошибка загрузки данных.
+          Приносим свои извинения,попробуйте перезагрузить страницу.</span>
+      ) : (
+        <>
+          <AppHeader />
+          <main className={styles.main}>
+            <BurgerIngredients ingredients={burgerData} />
+            <BurgerConstructor ingredients={burgerData} />
+          </main>
+        </>
+      )}
     </div>
   );
 }
