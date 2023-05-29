@@ -2,13 +2,16 @@ import constructorStyles from "./burger-constructor.module.css"
 import { DragIcon, CurrencyIcon, ConstructorElement, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import { ingredientPropType } from "../../utils/prop-types";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useContext } from "react";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
+import { BurgerIngredientsContext } from "../../services/burgerIngredientsContext";
 
 
 
-function BurgerConstructor({ ingredients }) {
+function BurgerConstructor() {
+
+    const ingredients = useContext(BurgerIngredientsContext)
     const [isOpen, setIsOpen] = useState(false);
 
     const handleOpenModal = () => {
