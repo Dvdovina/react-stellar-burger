@@ -5,6 +5,7 @@ import AppHeader from "../app-header/app-header";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import { getData } from "../../utils/api";
+import { BurgerIngredientsContext } from "../../services/burgerIngredientsContext";
 
 
 function App() {
@@ -33,10 +34,12 @@ function App() {
       ) : (
         <>
           <AppHeader />
-          <main className={styles.main}>
-            <BurgerIngredients ingredients={burgerData} />
-            <BurgerConstructor ingredients={burgerData} />
-          </main>
+          <BurgerIngredientsContext.Provider value={burgerData}>
+            <main className={styles.main}>
+              <BurgerIngredients ingredients={burgerData} />
+              <BurgerConstructor ingredients={burgerData} />
+            </main>
+          </BurgerIngredientsContext.Provider>
         </>
       )}
     </div>
