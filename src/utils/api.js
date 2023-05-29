@@ -1,5 +1,6 @@
 const config = {
     url: `https://norma.nomoreparties.space/api/ingredients`,
+    orderUrl: `https://norma.nomoreparties.space/api/orders`,
     headers: {
         'Content-Type': 'application/json'
     }
@@ -24,4 +25,19 @@ const getData = () => {
         });
 }
 
-export { getData }
+const postOrder = (array) => {
+    return fetch(`${config.orderUrl}`,
+        {
+            method: 'POST',
+            headers: config.headers,
+            body: JSON.stringify({
+                'ingredients': array,
+            })
+        })
+        .then(checkResponse)
+        .catch((err) => {
+            console.log(err)
+        });
+}
+
+export { getData, postOrder }

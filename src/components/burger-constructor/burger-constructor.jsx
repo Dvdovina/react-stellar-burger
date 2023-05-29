@@ -1,26 +1,52 @@
 import constructorStyles from "./burger-constructor.module.css"
 import { DragIcon, CurrencyIcon, ConstructorElement, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
-import { ingredientPropType } from "../../utils/prop-types";
-import { useState, useMemo } from "react";
+import { ingredientPropType} from "../../utils/prop-types";
+import { useState, useMemo, useContext } from "react";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
+import { BurgerIngredientsContext, OrderContext } from "../../services/burgerIngredientsContext";
+import { postOrder } from "../../utils/api";
 
 
 
-function BurgerConstructor({ ingredients }) {
+function BurgerConstructor() {
+
+    const ingredients = useContext(BurgerIngredientsContext)
+    const [order, setOrder] = useState("");
+    const [error, setError] = useState(false);
+
+
+    //modal
     const [isOpen, setIsOpen] = useState(false);
 
     const handleOpenModal = () => {
         setIsOpen(true);
+        handleOrder()
     };
 
     const handleCloseModal = () => {
         setIsOpen(false);
     };
 
+    //filtering buns and ingredients
     const bun = ingredients.find(item => item.type === 'bun');
     const ingredient = ingredients.filter(item => item.type !== 'bun');
+
+    //id ingredients
+    const ingredientsId = useMemo(() => ingredients.map((item) => item._id), [ingredients]);
+
+    //api Order
+    function handleOrder() {
+        postOrder(ingredientsId)
+            .then((res) => {
+                setOrder(res.order.number.toString());
+                setError(false);
+            })
+            .catch((err) => {
+                setError(true);
+            });
+    }
 
     //Функция подсчета цены
     const fullPrice = useMemo(() => {
@@ -73,11 +99,13 @@ function BurgerConstructor({ ingredients }) {
                         <CurrencyIcon type="primary" />
                     </div>
                     <Button htmlType="button" type="primary" size="large" onClick={handleOpenModal}>Оформить заказ</Button>
-                    {isOpen &&
-                        (<Modal onClose={handleCloseModal}>
-                            <OrderDetails />
-                        </Modal>)
-                    }
+                    <OrderContext.Provider value={order}>
+                        {error ? <span className={`${constructorStyles.error} text_type_main-medium`}>Ошибка загрузки данных</span> : isOpen &&
+                            (<Modal onClose={handleCloseModal}>
+                                <OrderDetails />
+                            </Modal>)
+                        }
+                    </OrderContext.Provider>
                 </div>
             </section>
         </>
