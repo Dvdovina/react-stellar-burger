@@ -34,11 +34,11 @@ function BurgerConstructor() {
     const ingredient = ingredients.filter(item => item.type !== 'bun');
 
     //id ingredients
-    const orderIngredients = useMemo(() => ingredients.map((item) => item._id), [ingredients]);
+    const ingredientsId = useMemo(() => ingredients.map((item) => item._id), [ingredients]);
 
     //api Order
     function handleOrder() {
-        postOrder(orderIngredients)
+        postOrder(ingredientsId)
             .then((res) => {
                 setOrder(res.order.number.toString());
                 setError(false);

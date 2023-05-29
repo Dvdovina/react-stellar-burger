@@ -13,7 +13,6 @@ function BurgerIngredients() {
 
     const ingredients = useContext(BurgerIngredientsContext)
 
-
     const [isOpen, setIsOpen] = useState(false);
     const [currentIngredient, setCurrentIngredient] = useState(null);
 
