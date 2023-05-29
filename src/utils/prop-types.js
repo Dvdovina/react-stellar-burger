@@ -12,3 +12,7 @@ export const ingredientPropType = PropTypes.shape({
   calories: PropTypes.number.isRequired,
   image_large: PropTypes.string.isRequired,
 });
+
+export const orderPropType = PropTypes.shape({
+  order: PropTypes.number.isRequired,
+});

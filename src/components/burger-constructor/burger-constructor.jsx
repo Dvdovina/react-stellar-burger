@@ -1,17 +1,18 @@
 import constructorStyles from "./burger-constructor.module.css"
 import { DragIcon, CurrencyIcon, ConstructorElement, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
-import { ingredientPropType } from "../../utils/prop-types";
+import { ingredientPropType, orderPropType } from "../../utils/prop-types";
 import { useState, useMemo, useContext } from "react";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
-import { BurgerIngredientsContext } from "../../services/burgerIngredientsContext";
+import { BurgerIngredientsContext, OrderContext } from "../../services/burgerIngredientsContext";
 
 
 
 function BurgerConstructor() {
 
     const ingredients = useContext(BurgerIngredientsContext)
+    const order = useContext(OrderContext);
     const [isOpen, setIsOpen] = useState(false);
 
     const handleOpenModal = () => {
@@ -76,11 +77,13 @@ function BurgerConstructor() {
                         <CurrencyIcon type="primary" />
                     </div>
                     <Button htmlType="button" type="primary" size="large" onClick={handleOpenModal}>Оформить заказ</Button>
-                    {isOpen &&
-                        (<Modal onClose={handleCloseModal}>
-                            <OrderDetails />
-                        </Modal>)
-                    }
+                    <OrderContext.Provider value={order}>
+                        {isOpen &&
+                            (<Modal onClose={handleCloseModal}>
+                                <OrderDetails />
+                            </Modal>)
+                        }
+                    </OrderContext.Provider>
                 </div>
             </section>
         </>
@@ -89,6 +92,7 @@ function BurgerConstructor() {
 
 BurgerConstructor.propTypes = {
     ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired,
+    order: orderPropType.isRequired
 };
 
 export default BurgerConstructor
