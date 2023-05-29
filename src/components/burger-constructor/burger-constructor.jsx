@@ -1,7 +1,7 @@
 import constructorStyles from "./burger-constructor.module.css"
 import { DragIcon, CurrencyIcon, ConstructorElement, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
-import { ingredientPropType, orderPropType } from "../../utils/prop-types";
+import { ingredientPropType} from "../../utils/prop-types";
 import { useState, useMemo, useContext } from "react";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
@@ -44,7 +44,6 @@ function BurgerConstructor() {
                 setError(false);
             })
             .catch((err) => {
-                console.log(err);
                 setError(true);
             });
     }
@@ -115,7 +114,6 @@ function BurgerConstructor() {
 
 BurgerConstructor.propTypes = {
     ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired,
-    order: orderPropType
 };
 
 export default BurgerConstructor
