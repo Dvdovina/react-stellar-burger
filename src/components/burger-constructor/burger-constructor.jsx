@@ -22,7 +22,7 @@ function BurgerConstructor() {
 
     const handleOpenModal = () => {
         setIsOpen(true);
-        postOrderFetch()
+        handleOrder()
     };
 
     const handleCloseModal = () => {
@@ -37,7 +37,7 @@ function BurgerConstructor() {
     const orderIngredients = useMemo(() => ingredients.map((item) => item._id), [ingredients]);
 
     //api Order
-    function postOrderFetch() {
+    function handleOrder() {
         postOrder(orderIngredients)
             .then((res) => {
                 setOrder(res.order.number.toString());
