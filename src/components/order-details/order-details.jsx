@@ -1,14 +1,18 @@
 // import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import orderStyles from "./order-details.module.css"
 import checkMarkGraphics from "../../images/graphics.svg"
+import { useContext } from "react";
+import { OrderContext } from "../../services/burgerIngredientsContext";
 
 
 function OrderDetails() {
+    const order = useContext(OrderContext);
+
     return (
         <>
             <ul className={orderStyles.container}>
                 <li className={orderStyles.detail}>
-                    <p className={`${orderStyles.number} text text_type_digits-large pb-5`}>034536</p>
+                    <p className={`${orderStyles.number} text text_type_digits-large pb-5`}>{order}</p>
                     <p className="text text_type_main-medium pt-3">идентификатор заказа</p>
                 </li>
                 <li className={orderStyles.detail}>

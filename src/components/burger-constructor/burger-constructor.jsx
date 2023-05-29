@@ -6,25 +6,48 @@ import { useState, useMemo, useContext } from "react";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import { BurgerIngredientsContext, OrderContext } from "../../services/burgerIngredientsContext";
+import { postOrder } from "../../utils/api";
 
 
 
 function BurgerConstructor() {
 
     const ingredients = useContext(BurgerIngredientsContext)
-    const order = useContext(OrderContext);
+    const [order, setOrder] = useState("");
+    const [error, setError] = useState(false);
+
+
+    //modal
     const [isOpen, setIsOpen] = useState(false);
 
     const handleOpenModal = () => {
         setIsOpen(true);
+        postOrderFetch()
     };
 
     const handleCloseModal = () => {
         setIsOpen(false);
     };
 
+    //filtering buns and ingredients
     const bun = ingredients.find(item => item.type === 'bun');
     const ingredient = ingredients.filter(item => item.type !== 'bun');
+
+    //id ingredients
+    const orderIngredients = useMemo(() => ingredients.map((item) => item._id), [ingredients]);
+
+    //api Order
+    function postOrderFetch() {
+        postOrder(orderIngredients)
+            .then((res) => {
+                setOrder(res.order.number.toString());
+                setError(false);
+            })
+            .catch((err) => {
+                console.log(err);
+                setError(true);
+            });
+    }
 
     //Функция подсчета цены
     const fullPrice = useMemo(() => {
@@ -78,7 +101,7 @@ function BurgerConstructor() {
                     </div>
                     <Button htmlType="button" type="primary" size="large" onClick={handleOpenModal}>Оформить заказ</Button>
                     <OrderContext.Provider value={order}>
-                        {isOpen &&
+                        {error ? <span className={`${constructorStyles.error} text_type_main-medium`}>Ошибка загрузки данных</span> : isOpen &&
                             (<Modal onClose={handleCloseModal}>
                                 <OrderDetails />
                             </Modal>)
@@ -92,7 +115,7 @@ function BurgerConstructor() {
 
 BurgerConstructor.propTypes = {
     ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired,
-    order: orderPropType.isRequired
+    order: orderPropType
 };
 
 export default BurgerConstructor
