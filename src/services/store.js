@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import currentIngredientReducer from "./currentIngredientSlice"
+import currentIngredientSlice from "./currentIngredientSlice"
+import ingredientsSlice from './ingredientsSlice'
 
 export const store = configureStore({
     reducer: {
-        currentIngredient: currentIngredientReducer
+        ingredients: ingredientsSlice,
+        currentIngredient: currentIngredientSlice
     },
 })
