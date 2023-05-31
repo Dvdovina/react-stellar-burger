@@ -7,6 +7,8 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import { BurgerIngredientsContext } from "../../services/burgerIngredientsContext";
+import { useSelector, useDispatch } from 'react-redux';
+import { showIngredient, hideIngredient } from "../../services/currentIngredientSlice"
 
 
 function BurgerIngredients() {
