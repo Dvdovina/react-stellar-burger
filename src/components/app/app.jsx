@@ -5,41 +5,49 @@ import AppHeader from "../app-header/app-header";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import { getData } from "../../utils/api";
-import { BurgerIngredientsContext } from "../../services/burgerIngredientsContext";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchIngredients } from "../../services/ingredientsSlice";
 
 
 function App() {
-  const [burgerData, setBurgerData] = useState([]);
-  const [error, setError] = useState(false);
-
-  const getBurgerData = () => {
-    getData()
-      .then((res) => {
-        setBurgerData(res.data);
-      })
-      .catch(() => {
-        setError(true);
-      })
-  };
+  const dispatch = useDispatch();
+  const { ingredients, ingredientsStatus, ingredientsError } = useSelector(
+    (store) => store.ingredients,
+  );
 
   useEffect(() => {
-    getBurgerData();
-  }, []);
+    dispatch(fetchIngredients());
+  }, [dispatch]);
+
+  // const [burgerData, setBurgerData] = useState([]);
+  // const [error, setError] = useState(false);
+
+  // const getBurgerData = () => {
+  //   getData()
+  //     .then((res) => {
+  //       setBurgerData(res.data);
+  //     })
+  //     .catch(() => {
+  //       setError(true);
+  //     })
+  // };
+
+  // useEffect(() => {
+  //   getBurgerData();
+  // }, []);
 
   return (
     <div className={`custom-scroll ${styles.app}`}>
-      {error ? (
+      {ingredientsError ? (
         <span className={`${styles.error} text_type_main-medium`}>Ошибка загрузки данных.
           Приносим свои извинения,попробуйте перезагрузить страницу.</span>
       ) : (
         <>
           <AppHeader />
-          <BurgerIngredientsContext.Provider value={burgerData}>
-            <main className={styles.main}>
-              <BurgerIngredients ingredients={burgerData} />
-              <BurgerConstructor ingredients={burgerData} />
-            </main>
-          </BurgerIngredientsContext.Provider>
+          <main className={styles.main}>
+            <BurgerIngredients ingredients={ingredients} />
+            <BurgerConstructor ingredients={ingredients} />
+          </main>
         </>
       )}
     </div>

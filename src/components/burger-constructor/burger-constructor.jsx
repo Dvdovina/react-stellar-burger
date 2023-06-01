@@ -2,20 +2,17 @@ import constructorStyles from "./burger-constructor.module.css"
 import { DragIcon, CurrencyIcon, ConstructorElement, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import { ingredientPropType} from "../../utils/prop-types";
-import { useState, useMemo, useContext } from "react";
+import { useState, useMemo} from "react";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
-import { BurgerIngredientsContext, OrderContext } from "../../services/burgerIngredientsContext";
 import { postOrder } from "../../utils/api";
 
 
 
-function BurgerConstructor() {
+function BurgerConstructor({ingredients}) {
 
-    const ingredients = useContext(BurgerIngredientsContext)
     const [order, setOrder] = useState("");
     const [error, setError] = useState(false);
-
 
     //modal
     const [isOpen, setIsOpen] = useState(false);
@@ -99,13 +96,11 @@ function BurgerConstructor() {
                         <CurrencyIcon type="primary" />
                     </div>
                     <Button htmlType="button" type="primary" size="large" onClick={handleOpenModal}>Оформить заказ</Button>
-                    <OrderContext.Provider value={order}>
                         {error ? <span className={`${constructorStyles.error} text_type_main-medium`}>Ошибка загрузки данных</span> : isOpen &&
                             (<Modal onClose={handleCloseModal}>
-                                <OrderDetails />
+                                <OrderDetails order={order} />
                             </Modal>)
                         }
-                    </OrderContext.Provider>
                 </div>
             </section>
         </>
