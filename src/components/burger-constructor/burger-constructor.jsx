@@ -1,16 +1,19 @@
 import constructorStyles from "./burger-constructor.module.css"
 import { DragIcon, CurrencyIcon, ConstructorElement, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
-import { ingredientPropType} from "../../utils/prop-types";
 import { useState, useMemo} from "react";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import { postOrder } from "../../utils/api";
+import { useSelector, useDispatch } from 'react-redux';
 
 
 
-function BurgerConstructor({ingredients}) {
+function BurgerConstructor() {
 
+
+    const { ingredients,  ingredientsStatus, ingredientsError} = useSelector(
+        (store) => store.ingredients,
+    );
     const [order, setOrder] = useState("");
     const [error, setError] = useState(false);
 
@@ -106,10 +109,6 @@ function BurgerConstructor({ingredients}) {
         </>
     )
 }
-
-BurgerConstructor.propTypes = {
-    ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired,
-};
 
 export default BurgerConstructor
 
