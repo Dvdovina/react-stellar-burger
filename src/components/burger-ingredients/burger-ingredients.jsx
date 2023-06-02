@@ -19,7 +19,7 @@ function BurgerIngredients() {
     }, [dispatch]);
 
     //ингредиенты из стора
-    const { ingredients, ingredientsStatus, ingredientsError } = useSelector(
+    const { ingredients, ingredientsError } = useSelector(
         (store) => store.ingredients,
     );
 
@@ -56,28 +56,25 @@ function BurgerIngredients() {
         if (item) tabs[item].scrollIntoView({ behavior: "smooth" });
     };
 
-    //показываем ошибку пользователю
-    if (ingredientsError) {
-        return <span className={`${ingredientsStyles.error} text_type_main-medium`}>Ошибка загрузки данных.
-            Приносим свои извинения,попробуйте перезагрузить страницу.</span>;
-    } else if (ingredientsStatus) {
-        return <p className={'pt-5 pl-5'}> Загрузка...</p>;
-    } else {
-        return (
-            <>
-                <section className={ingredientsStyles.section}>
-                    <h1 className="text text_type_main-large">Соберите бургер</h1>
-                    <div className={ingredientsStyles.tab}>
-                        <Tab value="buns" active={current === "buns"} onClick={tabScroll}>
-                            Булки
-                        </Tab>
-                        <Tab value="sauces" active={current === "sauces"} onClick={tabScroll}>
-                            Соусы
-                        </Tab>
-                        <Tab value="mains" active={current === "mains"} onClick={tabScroll}>
-                            Начинки
-                        </Tab>
-                    </div>
+    return (
+        <>
+            <section className={ingredientsStyles.section}>
+                <h1 className="text text_type_main-large">Соберите бургер</h1>
+                <div className={ingredientsStyles.tab}>
+                    <Tab value="buns" active={current === "buns"} onClick={tabScroll}>
+                        Булки
+                    </Tab>
+                    <Tab value="sauces" active={current === "sauces"} onClick={tabScroll}>
+                        Соусы
+                    </Tab>
+                    <Tab value="mains" active={current === "mains"} onClick={tabScroll}>
+                        Начинки
+                    </Tab>
+                </div>
+                {ingredientsError ? (
+                    <span className={`${ingredientsStyles.error} text text_type_main-default`}>Ошибка загрузки данных.
+                        Попробуйте перезагрузить страницу.</span>
+                ) : (
                     <div className={`custom-scroll ${ingredientsStyles.ingredients_box}`}>
                         <h2 id="buns" className="text text_type_main-medium pt-5 pb-5">Булки</h2>
                         <ul className={`${ingredientsStyles.ingredients_list} pt-5 pb-5`}>
@@ -98,15 +95,17 @@ function BurgerIngredients() {
                             ))}
                         </ul>
                     </div>
-                    {isOpen &&
-                        (<Modal onClose={handleCloseModal}>
-                            <IngredientDetails />
-                        </Modal>)
-                    }
-                </section>
-            </>
-        )
-    }
+                )
+                }
+                {isOpen &&
+                    (<Modal onClose={handleCloseModal}>
+                        <IngredientDetails />
+                    </Modal>)
+                }
+            </section>
+        </>
+    )
 }
+
 
 export default BurgerIngredients
