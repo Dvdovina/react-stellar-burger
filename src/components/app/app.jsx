@@ -9,7 +9,7 @@ import { fetchIngredients } from "../../services/ingredientsSlice";
 
 function App() {
   const dispatch = useDispatch();
-  const { ingredients } = useSelector(
+  const { ingredients, ingredientsStatus, ingredientsError } = useSelector(
     (store) => store.ingredients,
   );
 
@@ -17,15 +17,22 @@ function App() {
     dispatch(fetchIngredients());
   }, [dispatch]);
 
-  return (
-    <div className={`custom-scroll ${styles.app}`}>
-          <AppHeader />
-          <main className={styles.main}>
-            <BurgerIngredients ingredients={ingredients} />
-            <BurgerConstructor ingredients={ingredients} />
-          </main>
-    </div>
-  );
-}
 
+  if (ingredientsError) {
+    return <span className={`${styles.error} text_type_main-medium`}>Ошибка загрузки данных.
+      Приносим свои извинения,попробуйте перезагрузить страницу.</span>;
+  } else if (ingredientsStatus) {
+    return <p className={'pt-5 pl-5'}> Загрузка...</p>;
+  } else {
+    return (
+      <div className={`custom-scroll ${styles.app}`}>
+        <AppHeader />
+        <main className={styles.main}>
+          <BurgerIngredients ingredients={ingredients} />
+          <BurgerConstructor ingredients={ingredients} />
+        </main>
+      </div>
+    );
+  }
+}
 export default App;
