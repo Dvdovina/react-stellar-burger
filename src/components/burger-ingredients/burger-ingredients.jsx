@@ -10,19 +10,21 @@ import { useSelector, useDispatch } from 'react-redux';
 import { showIngredient, hideIngredient } from "../../services/currentIngredientSlice"
 
 
-function BurgerIngredients({ingredients}) {
+function BurgerIngredients() {
+    const dispatch = useDispatch();
 
-    const [isOpen, setIsOpen] = useState(false);
-    const [currentIngredient, setCurrentIngredient] = useState(null);
+    const { ingredients } = useSelector(
+        (store) => store.ingredients,
+    );
+
+    const { isOpen } = useSelector((state) => state.currentIngredient);
 
     const handleOpenModal = (item) => {
-        setIsOpen(true);
-        setCurrentIngredient(item);
+        dispatch(showIngredient(item))
     };
 
     const handleCloseModal = () => {
-        setIsOpen(false);
-        setCurrentIngredient(null);
+        dispatch(hideIngredient())
     };
 
     const [current, setCurrent] = useState("buns");
@@ -81,7 +83,7 @@ function BurgerIngredients({ingredients}) {
                 </div>
                 {isOpen &&
                     (<Modal onClose={handleCloseModal}>
-                        <IngredientDetails currentIngredient={currentIngredient} />
+                        <IngredientDetails />
                     </Modal>)
                 }
             </section>
@@ -89,8 +91,8 @@ function BurgerIngredients({ingredients}) {
     )
 }
 
-BurgerIngredients.propTypes = {
-    ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired,
-};
+// BurgerIngredients.propTypes = {
+//     ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired,
+// };
 
 export default BurgerIngredients

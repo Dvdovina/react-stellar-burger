@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    ingredient: null
+    currentIngredient: null,
+    isOpen: false
 };
 
 const currentIngredientSlice = createSlice({
@@ -9,10 +10,12 @@ const currentIngredientSlice = createSlice({
     initialState,
     reducers: {
         showIngredient: (state, action) => {
-            state.ingredient = action.payload
+            state.isOpen = true;
+            state.currentIngredient = action.payload
         },
-        hideIngredient: () => {
-            return initialState
+        hideIngredient: (state) => {
+            state.currentIngredient = null
+            state.isOpen = false
         }
     },
 })

@@ -28,7 +28,7 @@ function App() {
       <div className={`custom-scroll ${styles.app}`}>
         <AppHeader />
         <main className={styles.main}>
-          <BurgerIngredients ingredients={ingredients} />
+          <BurgerIngredients/>
           <BurgerConstructor ingredients={ingredients} />
         </main>
       </div>
