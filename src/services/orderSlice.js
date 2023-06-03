@@ -13,12 +13,20 @@ const initialState = {
   orderNumber: null,
   orderRequest: false,
   orderError: false,
+  isOpen: false
 };
 
 export const orderSlice = createSlice({
   name: 'order',
   initialState,
-  reducers: {},
+  reducers: {
+    showOrderModal: (state) => {
+      state.isOpen = true;
+    },
+    hideOrderModal: (state) => {
+      state.isOpen = false
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(submitOrder.pending, (state) => {
@@ -37,3 +45,4 @@ export const orderSlice = createSlice({
 
 
 export default orderSlice.reducer;
+export const {showOrderModal, hideOrderModal} = orderSlice.actions

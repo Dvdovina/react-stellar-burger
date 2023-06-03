@@ -25,13 +25,13 @@ const getData = () => {
         });
 }
 
-const postOrder = (array) => {
+const postOrder = (ingredients) => {
     return fetch(`${config.orderUrl}`,
         {
             method: 'POST',
             headers: config.headers,
             body: JSON.stringify({
-                'ingredients': array,
+                ingredients
             })
         })
         .then(checkResponse)

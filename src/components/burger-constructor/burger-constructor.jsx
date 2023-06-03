@@ -1,20 +1,24 @@
 import constructorStyles from "./burger-constructor.module.css"
 import { DragIcon, CurrencyIcon, ConstructorElement, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState, useMemo} from "react";
+import { useState, useMemo } from "react";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import { postOrder } from "../../utils/api";
 import { useSelector, useDispatch } from 'react-redux';
-
-
+import { showOrderModal, hideOrderModal } from "../../services/orderSlice";
 
 function BurgerConstructor() {
 
     const dispatch = useDispatch();
-    
-    const { ingredients} = useSelector(
-        (store) => store.ingredients,
+
+    const { ingredients, bun } = useSelector(
+        (store) => store.userBurgerIngredients,
     );
+
+        //id ingredients
+    const ingredientsId = useMemo(() => ingredients.map((item) => item._id), [ingredients]);
+
+
     const [order, setOrder] = useState("");
     const [error, setError] = useState(false);
 
@@ -30,12 +34,7 @@ function BurgerConstructor() {
         setIsOpen(false);
     };
 
-    //filtering buns and ingredients
-    const bun = ingredients.find(item => item.type === 'bun');
-    const ingredient = ingredients.filter(item => item.type !== 'bun');
 
-    //id ingredients
-    const ingredientsId = useMemo(() => ingredients.map((item) => item._id), [ingredients]);
 
     //api Order
     function handleOrder() {
@@ -100,11 +99,11 @@ function BurgerConstructor() {
                         <CurrencyIcon type="primary" />
                     </div>
                     <Button htmlType="button" type="primary" size="large" onClick={handleOpenModal}>Оформить заказ</Button>
-                        {error ? <span className={`${constructorStyles.error} text_type_main-medium`}>Ошибка загрузки данных</span> : isOpen &&
-                            (<Modal onClose={handleCloseModal}>
-                                <OrderDetails order={order} />
-                            </Modal>)
-                        }
+                    {error ? <span className={`${constructorStyles.error} text_type_main-medium`}>Ошибка загрузки данных</span> : isOpen &&
+                        (<Modal onClose={handleCloseModal}>
+                            <OrderDetails order={order} />
+                        </Modal>)
+                    }
                 </div>
             </section>
         </>
