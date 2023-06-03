@@ -10,8 +10,9 @@ import { useSelector, useDispatch } from 'react-redux';
 
 function BurgerConstructor() {
 
-
-    const { ingredients,  ingredientsStatus, ingredientsError} = useSelector(
+    const dispatch = useDispatch();
+    
+    const { ingredients} = useSelector(
         (store) => store.ingredients,
     );
     const [order, setOrder] = useState("");

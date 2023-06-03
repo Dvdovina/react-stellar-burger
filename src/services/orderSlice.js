@@ -12,7 +12,7 @@ export const submitOrder = createAsyncThunk(
 const initialState = {
   orderNumber: null,
   orderRequest: false,
-  orderError: null,
+  orderError: false,
 };
 
 export const orderSlice = createSlice({
@@ -30,7 +30,7 @@ export const orderSlice = createSlice({
       })
       .addCase(submitOrder.rejected, (state, action) => {
         state.orderRequest = false;
-        state.orderError = action.payload
+        state.orderError = true;
       });
   }
 })
