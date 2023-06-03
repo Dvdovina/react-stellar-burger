@@ -1,11 +1,11 @@
 import constructorStyles from "./burger-constructor.module.css"
 import { DragIcon, CurrencyIcon, ConstructorElement, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
-import { postOrder } from "../../utils/api";
 import { useSelector, useDispatch } from 'react-redux';
 import { showOrderModal, hideOrderModal } from "../../services/orderSlice";
+import { submitOrder } from "../../services/orderSlice";
 
 function BurgerConstructor() {
 
@@ -14,39 +14,28 @@ function BurgerConstructor() {
     const { ingredients, bun } = useSelector(
         (store) => store.userBurgerIngredients,
     );
+    const { orderError } = useSelector(
+        (store) => store.order);
 
-        //id ingredients
+    const { isOpen } = useSelector((state) => state.order);
+
+    //id ingredients
     const ingredientsId = useMemo(() => ingredients.map((item) => item._id), [ingredients]);
 
 
-    const [order, setOrder] = useState("");
-    const [error, setError] = useState(false);
-
-    //modal
-    const [isOpen, setIsOpen] = useState(false);
-
-    const handleOpenModal = () => {
-        setIsOpen(true);
-        handleOrder()
+    const handleOpenModal = (order) => {
+        dispatch(showOrderModal(order));
     };
 
     const handleCloseModal = () => {
-        setIsOpen(false);
+        dispatch(hideOrderModal());
     };
 
+    useEffect(() => {
+        dispatch(submitOrder());
+    }, [dispatch]);
 
 
-    //api Order
-    function handleOrder() {
-        postOrder(ingredientsId)
-            .then((res) => {
-                setOrder(res.order.number.toString());
-                setError(false);
-            })
-            .catch((err) => {
-                setError(true);
-            });
-    }
 
     //Функция подсчета цены
     const fullPrice = useMemo(() => {
@@ -59,17 +48,18 @@ function BurgerConstructor() {
                 {ingredients.length > 0 && (
                     <>
                         <div className={` ${constructorStyles.buns} pb-5 pr-7`}>
-                            <ConstructorElement
+                            {bun && (<ConstructorElement
                                 type="top"
                                 isLocked={true}
                                 text={`${bun.name} (верх)`}
                                 price={bun.price}
                                 thumbnail={bun.image}
                             />
+                            )}
                         </div>
                         <div className={`custom-scroll thin_scroll ${constructorStyles.scroll}`}>
                             <ul className={constructorStyles.list}>
-                                {ingredient.map((item) => (
+                                {ingredients.map((item) => (
                                     item.type !== 'bun' &&
                                     <li className={constructorStyles.item} key={item._id}>
                                         <DragIcon type="primary" />
@@ -83,13 +73,15 @@ function BurgerConstructor() {
                             </ul>
                         </div>
                         <div className={` ${constructorStyles.buns} pb-5 pr-7 pt-5`}>
-                            <ConstructorElement
-                                type="bottom"
-                                isLocked={true}
-                                text={`${bun.name} (низ)`}
-                                price={bun.price}
-                                thumbnail={bun.image}
-                            />
+                            {bun && (
+                                <ConstructorElement
+                                    type="bottom"
+                                    isLocked={true}
+                                    text={`${bun.name} (низ)`}
+                                    price={bun.price}
+                                    thumbnail={bun.image}
+                                />
+                            )}
                         </div>
                     </>
                 )}
@@ -99,10 +91,13 @@ function BurgerConstructor() {
                         <CurrencyIcon type="primary" />
                     </div>
                     <Button htmlType="button" type="primary" size="large" onClick={handleOpenModal}>Оформить заказ</Button>
-                    {error ? <span className={`${constructorStyles.error} text_type_main-medium`}>Ошибка загрузки данных</span> : isOpen &&
+                    {orderError ? (
+                        <span className={`${constructorStyles.error} text text_type_main-default`}>Ошибка загрузки данных!</span>
+                    ) : (isOpen &&
                         (<Modal onClose={handleCloseModal}>
-                            <OrderDetails order={order} />
+                            <OrderDetails />
                         </Modal>)
+                    )
                     }
                 </div>
             </section>

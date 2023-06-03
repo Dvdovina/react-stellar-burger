@@ -4,8 +4,10 @@ import { postOrder } from '../utils/api';
 export const submitOrder = createAsyncThunk(
   'order/submitOrder',
   async (payload) => {
-    const data = await postOrder(payload);
-    return data;
+    const idBun = payload.bun._id;
+    const ingredientsArr = payload.ingredients.map(item => item._id);
+    const allIds = [idBun, ...ingredientsArr, idBun]
+    return await postOrder({ingredients: allIds});
   }
 );
 
@@ -25,6 +27,7 @@ export const orderSlice = createSlice({
     },
     hideOrderModal: (state) => {
       state.isOpen = false
+      state.orderNumber = null
     }
   },
   extraReducers: (builder) => {
@@ -35,8 +38,9 @@ export const orderSlice = createSlice({
       .addCase(submitOrder.fulfilled, (state, action) => {
         state.orderNumber = action.payload.order.number.toString();
         state.orderRequest = false;
+        state.isOpen = true;
       })
-      .addCase(submitOrder.rejected, (state, action) => {
+      .addCase(submitOrder.rejected, (state) => {
         state.orderRequest = false;
         state.orderError = true;
       });
