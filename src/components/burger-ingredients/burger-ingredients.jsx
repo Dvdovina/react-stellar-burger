@@ -20,8 +20,7 @@ function BurgerIngredients() {
 
     //ингредиенты из стора
     const { ingredients, ingredientsError } = useSelector(
-        (store) => store.ingredients,
-    );
+        (store) => store.ingredients);
 
     //стейт модального окна из стора
     const { isOpen } = useSelector((state) => state.currentIngredient);

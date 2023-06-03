@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  ingredients: [],
+  ingredient: [],
   bun: null
 };
 
@@ -13,14 +13,14 @@ export const constructorSlice = createSlice({
       if (item.type === 'bun') {
         state.bun = item
       } else {
-        state.ingredients = [...state.ingredients, item]
+        state.ingredient = [...state.ingredient, item]
       }
     },
     deleteIngredient(state, { item: id }) {
-      state.ingredients = state.ingredients.filter(ingredient => ingredient._id !== id)
+      state.ingredient = state.ingredient.filter(item => item._id !== id)
     },
     refreshIngredients(state, { items }) {
-      state.ingredients = items
+      state.ingredient = items
     }
   }
 })
