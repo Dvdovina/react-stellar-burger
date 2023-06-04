@@ -3,10 +3,14 @@ import { postOrder } from '../utils/api';
 
 export const submitOrder = createAsyncThunk(
   'order/submitOrder',
-  async (payload) => {
-    const data = await postOrder(payload);
-    return data;
-  }
+  async function (idIngredients, thunkAPI) {
+    try {
+      const data = await postOrder(idIngredients);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  },
 );
 
 const initialState = {
@@ -21,7 +25,8 @@ export const orderSlice = createSlice({
   initialState,
   reducers: {
     showOrderModal: (state, action) => {
-      state.isOpen = true;
+      state.isOpen = true
+      state.orderNumber = action.payload
     },
     hideOrderModal: (state) => {
       state.isOpen = false
@@ -47,4 +52,4 @@ export const orderSlice = createSlice({
 
 
 export default orderSlice.reducer;
-export const {showOrderModal, hideOrderModal} = orderSlice.actions
+export const { showOrderModal, hideOrderModal } = orderSlice.actions

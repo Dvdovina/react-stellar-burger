@@ -23,19 +23,14 @@ function BurgerConstructor() {
     const ingredientsId = useMemo(() => ingredients.map((item) => item._id), [ingredients]);
 
 
-    const handleOpenModal = (order) => {
-        dispatch(showOrderModal(order));
+    const handleOpenModal = () => {
+       showOrderModal()
+       dispatch(submitOrder(ingredientsId))
     };
 
     const handleCloseModal = () => {
         dispatch(hideOrderModal());
     };
-
-    useEffect(() => {
-        dispatch(submitOrder());
-    }, [dispatch]);
-
-
 
     //Функция подсчета цены
     const fullPrice = useMemo(() => {
