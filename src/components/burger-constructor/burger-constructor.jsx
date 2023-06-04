@@ -1,11 +1,12 @@
 import constructorStyles from "./burger-constructor.module.css"
 import { DragIcon, CurrencyIcon, ConstructorElement, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import { useSelector, useDispatch } from 'react-redux';
 import { showOrderModal, hideOrderModal } from "../../services/orderSlice";
 import { submitOrder } from "../../services/orderSlice";
+import { nanoid } from '@reduxjs/toolkit'
 
 function BurgerConstructor() {
 
@@ -24,9 +25,16 @@ function BurgerConstructor() {
 
 
     const handleOpenModal = () => {
-       showOrderModal()
-       dispatch(submitOrder(ingredientsId))
+        showOrderModal()
+        dispatch(submitOrder())
     };
+
+     //потом поменять на 
+    //  const handleOpenModal = () => {
+    //     showOrderModal()
+    //     const fullOrder = [...ingredientsId, bun._id]
+    //     dispatch(submitOrder(fullOrder))
+    // };
 
     const handleCloseModal = () => {
         dispatch(hideOrderModal());
@@ -36,6 +44,14 @@ function BurgerConstructor() {
     const fullPrice = useMemo(() => {
         return ingredients.reduce((total, item) => total + item.price, 0);
     }, [ingredients]);
+
+    //потом поменять на
+        //Функция подсчета цены
+    // const fullPrice = useMemo(() => {
+    //     const ingredientsPrice = ingredients.reduce((total, item) => total + item.price, 0);
+    //     const bunsPrice =  bun.reduce((total, item) => total + item.price, 0);
+    //     return ingredientsPrice + bunsPrice
+    // }, [ingredients, bun]);
 
     return (
         <>
