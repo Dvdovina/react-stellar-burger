@@ -3,6 +3,7 @@ import ingredientStyles from "./ingredient.module.css"
 import { ingredientPropType } from "../../utils/prop-types";
 import { useMemo } from "react";
 import { useSelector } from 'react-redux';
+import { useDrag } from "react-dnd";
 
 
 const Ingredient = ({ item, current }) => {
@@ -11,12 +12,31 @@ const Ingredient = ({ item, current }) => {
         (store) => store.userBurgerIngredients,
     );
 
-    const ingredientsCounter = {}
+    //Счетчик ингредиентов
+    // const ingredientsCounter = useMemo(() => {
+    //     ingredients.reduce((total, element) => {
+    //     if (element._id === item._id) {
+    //         total++;
+    //       }
+    //       return total;
+    //     }, 0
+    //     )
+    // }, [ingredients]);
+
+
+    // Перетаскивание ингредиентов через drag
+    const [{ onDrag }, dragRef] = useDrag({
+        type: 'item',
+        item: { ...item },
+        collect: monitor => ({
+            onDrag: monitor.isDragging() ? .5 : 1
+        })
+    })
 
 
     return (
         <>
-            <li className={ingredientStyles.item} onClick={() => current(item)}>
+            <li className={ingredientStyles.item} onClick={() => current(item)} ref={dragRef} style={{ onDrag }}>
                 <Counter count={1} size="default" className={ingredientStyles.counter} extraClass="m-1" />
                 <img src={item.image} alt={`Изображение ${item.name}`} />
                 <div className={`pb-2 pt-2 ${ingredientStyles.price}`}>
