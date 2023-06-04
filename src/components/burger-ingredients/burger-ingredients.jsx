@@ -84,19 +84,19 @@ function BurgerIngredients() {
                         <h2 id="buns" className="text text_type_main-medium pt-5 pb-5">Булки</h2>
                         <ul className={`${ingredientsStyles.ingredients_list} pt-5 pb-5`} ref={bunsRef}>
                             {buns.map((item) => (
-                                <Ingredient key={item._id} ingredients={item} current={handleOpenModal} />
+                                <Ingredient key={item._id} item={item} current={handleOpenModal} />
                             ))}
                         </ul>
                         <h2 id="sauces" className="text text_type_main-medium pt-5 pb-5">Соусы</h2>
                         <ul className={`${ingredientsStyles.ingredients_list} pt-1 pb-5`} ref={saucesRef}>
                             {sauces.map((item) => (
-                                <Ingredient key={item._id} ingredients={item} current={handleOpenModal} />
+                                <Ingredient key={item._id} item={item} current={handleOpenModal} />
                             ))}
                         </ul>
                         <h2 id="mains" className="text text_type_main-medium pt-5 pb-5">Начинки</h2>
                         <ul className={`${ingredientsStyles.ingredients_list} pt-5 pb-5`} ref={mainsRef}>
                             {mains.map((item) => (
-                                <Ingredient key={item._id} ingredients={item} current={handleOpenModal} />
+                                <Ingredient key={item._id} item={item} current={handleOpenModal} />
                             ))}
                         </ul>
                     </div>

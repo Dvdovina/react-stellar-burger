@@ -1,27 +1,36 @@
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import ingredientStyles from "./ingredient.module.css"
-import PropTypes from "prop-types";
 import { ingredientPropType } from "../../utils/prop-types";
+import { useMemo } from "react";
+import { useSelector } from 'react-redux';
 
 
-const Ingredient = ({ ingredients, current }) => {
+const Ingredient = ({ item, current }) => {
+
+    const { ingredients, bun } = useSelector(
+        (store) => store.userBurgerIngredients,
+    );
+
+    const ingredientsCounter = {}
+
+
     return (
         <>
-            <li className={ingredientStyles.item} onClick={() => current(ingredients)}>
+            <li className={ingredientStyles.item} onClick={() => current(item)}>
                 <Counter count={1} size="default" className={ingredientStyles.counter} extraClass="m-1" />
-                <img src={ingredients.image} alt={`Изображение ${ingredients.name}`} />
+                <img src={item.image} alt={`Изображение ${item.name}`} />
                 <div className={`pb-2 pt-2 ${ingredientStyles.price}`}>
-                    <p className="text text_type_digits-default pr-2">{ingredients.price}</p>
+                    <p className="text text_type_digits-default pr-2">{item.price}</p>
                     <CurrencyIcon type="primary" />
                 </div>
-                <p className={`text text_type_main-default ${ingredientStyles.text}`}>{ingredients.name}</p>
+                <p className={`text text_type_main-default ${ingredientStyles.text}`}>{item.name}</p>
             </li>
         </>
     )
 }
 
 Ingredient.propTypes = {
-    ingredients: ingredientPropType.isRequired,
+    item: ingredientPropType.isRequired,
 };
 
 export default Ingredient
