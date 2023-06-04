@@ -7,6 +7,7 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import { useSelector, useDispatch } from 'react-redux';
 import { showIngredient, hideIngredient } from "../../services/currentIngredientSlice"
 import { fetchIngredients } from "../../services/ingredientsSlice";
+import { useInView } from "react-intersection-observer";
 
 
 function BurgerIngredients() {
@@ -55,18 +56,23 @@ function BurgerIngredients() {
         if (item) tabs[item].scrollIntoView({ behavior: "smooth" });
     };
 
+    //реализация подсвечивания переключателя табов
+    const [bunsRef, bunsInView] = useInView({ threshold: 0 });
+    const [saucesRef, saucesInView] = useInView({ threshold: 0.7 });
+    const [mainsRef, mainsInView] = useInView({ threshold: 0.1 });
+
     return (
         <>
             <section className={ingredientsStyles.section}>
                 <h1 className="text text_type_main-large">Соберите бургер</h1>
                 <div className={ingredientsStyles.tab}>
-                    <Tab value="buns" active={current === "buns"} onClick={tabScroll}>
+                    <Tab value="buns" active={bunsInView === true} onClick={tabScroll}>
                         Булки
                     </Tab>
-                    <Tab value="sauces" active={current === "sauces"} onClick={tabScroll}>
+                    <Tab value="sauces" active={saucesInView === true} onClick={tabScroll}>
                         Соусы
                     </Tab>
-                    <Tab value="mains" active={current === "mains"} onClick={tabScroll}>
+                    <Tab value="mains" active={mainsInView === true} onClick={tabScroll}>
                         Начинки
                     </Tab>
                 </div>
@@ -76,19 +82,19 @@ function BurgerIngredients() {
                 ) : (
                     <div className={`custom-scroll ${ingredientsStyles.ingredients_box}`}>
                         <h2 id="buns" className="text text_type_main-medium pt-5 pb-5">Булки</h2>
-                        <ul className={`${ingredientsStyles.ingredients_list} pt-5 pb-5`}>
+                        <ul className={`${ingredientsStyles.ingredients_list} pt-5 pb-5`} ref={bunsRef}>
                             {buns.map((item) => (
                                 <Ingredient key={item._id} ingredients={item} current={handleOpenModal} />
                             ))}
                         </ul>
                         <h2 id="sauces" className="text text_type_main-medium pt-5 pb-5">Соусы</h2>
-                        <ul className={`${ingredientsStyles.ingredients_list} pt-1 pb-5`}>
+                        <ul className={`${ingredientsStyles.ingredients_list} pt-1 pb-5`} ref={saucesRef}>
                             {sauces.map((item) => (
                                 <Ingredient key={item._id} ingredients={item} current={handleOpenModal} />
                             ))}
                         </ul>
                         <h2 id="mains" className="text text_type_main-medium pt-5 pb-5">Начинки</h2>
-                        <ul className={`${ingredientsStyles.ingredients_list} pt-5 pb-5`}>
+                        <ul className={`${ingredientsStyles.ingredients_list} pt-5 pb-5`} ref={mainsRef}>
                             {mains.map((item) => (
                                 <Ingredient key={item._id} ingredients={item} current={handleOpenModal} />
                             ))}
