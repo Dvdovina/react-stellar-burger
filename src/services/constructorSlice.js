@@ -9,18 +9,18 @@ export const constructorSlice = createSlice({
   name: 'userBurgerIngredients',
   initialState,
   reducers: {
-    addIngredient(state, { item }) {
-      if (item.type === 'bun') {
-        state.bun = item
+    addIngredient(state, { payload }) {
+      if (payload.type === 'bun') {
+        state.bun = payload
       } else {
-        state.ingredients = [...state.ingredients, item]
+        state.ingredients = [...state.ingredients, payload]
       }
     },
-    deleteIngredient(state, { item: id }) {
+    deleteIngredient(state, { payload: id }) {
       state.ingredients = state.ingredients.filter(item => item._id !== id)
     },
-    refreshIngredients(state, { items }) {
-      state.ingredients = items
+    refreshIngredients(state, { payload }) {
+      state.ingredients = payload
     }
   }
 })

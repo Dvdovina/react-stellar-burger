@@ -18,7 +18,7 @@ function BurgerConstructor() {
         (store) => store.userBurgerIngredients,
     );
 
-    const { orderError } = useSelector(
+    const { orderError, orderNumber } = useSelector(
         (store) => store.order);
 
     const { isOpen } = useSelector((state) => state.order);
@@ -80,6 +80,7 @@ function BurgerConstructor() {
                         text={`${bun.name} (верх)`}
                         price={bun.price}
                         thumbnail={bun.image}
+                        bun={bun}
                     />
                     )}
                 </div>
@@ -93,6 +94,8 @@ function BurgerConstructor() {
                                     text={item.name}
                                     price={item.price}
                                     thumbnail={item.image}
+                                    ingredients={ingredients}
+                                    handleClose={() => dispatch(deleteIngredient(item._id))}
                                 />
                             </li>
                         ))}
@@ -106,6 +109,7 @@ function BurgerConstructor() {
                             text={`${bun.name} (низ)`}
                             price={bun.price}
                             thumbnail={bun.image}
+                            bun={bun}
                         />
                     )}
                 </div>
@@ -117,7 +121,7 @@ function BurgerConstructor() {
                     <Button htmlType="button" type="primary" size="large" onClick={handleOpenModal}>Оформить заказ</Button>
                     {orderError ? (
                         <span className={`${constructorStyles.error} text text_type_main-default`}>Ошибка загрузки данных!</span>
-                    ) : (isOpen &&
+                    ) : (isOpen && orderNumber &&
                         (<Modal onClose={handleCloseModal}>
                             <OrderDetails />
                         </Modal>)
