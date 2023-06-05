@@ -3,53 +3,51 @@ import { postOrder } from '../utils/api';
 
 export const submitOrder = createAsyncThunk(
   'order/submitOrder',
-  async function (idIngredients, thunkAPI) {
+  async (order, thunkApi) => {
     try {
-      const data = await postOrder(idIngredients);
-      return data;
+      const ingredientsId = order.ingredients.map(item => item._id);
+      const bunId = order.bun._id;
+      const allFoodIds = [bunId, ...ingredientsId, bunId];
+      return await postOrder({ ingredients: allFoodIds })
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return thunkApi.rejectWithValue(error);
     }
   },
 );
 
 const initialState = {
   orderNumber: null,
-  orderRequest: false,
+  orderFetchStatus: false,
   orderError: false,
   isOpen: false
 };
 
-export const orderSlice = createSlice({
+
+const orderSlice = createSlice({
   name: 'order',
   initialState,
   reducers: {
-    showOrderModal: (state, action) => {
-      state.isOpen = true
-      state.orderNumber = action.payload
-    },
     hideOrderModal: (state) => {
       state.isOpen = false
-      state.orderNumber = null
     }
   },
   extraReducers: (builder) => {
     builder
       .addCase(submitOrder.pending, (state) => {
-        state.orderRequest = true
+        state.orderFetchStatus = true;
       })
       .addCase(submitOrder.fulfilled, (state, action) => {
-        state.orderNumber = action.payload;
-        state.orderRequest = false;
-        state.isOpen = true;
+        state.orderNumber = action.payload.order.number.toString();
+        state.orderFetchStatus = false;
+        state.isOpen = true
       })
-      .addCase(submitOrder.rejected, (state) => {
-        state.orderRequest = false;
+      .addCase(submitOrder.rejected, (state, action) => {
+        state.orderFetchStatus = false;
         state.orderError = true;
+        console.error(action.payload);
       });
-  }
-})
-
+  },
+});
 
 export default orderSlice.reducer;
-export const { showOrderModal, hideOrderModal } = orderSlice.actions
+export const { hideOrderModal } = orderSlice.actions

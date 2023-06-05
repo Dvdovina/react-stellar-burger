@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import { useSelector, useDispatch } from 'react-redux';
-import { showOrderModal, hideOrderModal } from "../../services/orderSlice";
+import { hideOrderModal } from "../../services/orderSlice";
 import { submitOrder } from "../../services/orderSlice";
 import { nanoid } from '@reduxjs/toolkit'
 import { useDrop } from 'react-dnd'
@@ -18,30 +18,28 @@ function BurgerConstructor() {
         (store) => store.userBurgerIngredients,
     );
 
-    const { orderError, orderNumber } = useSelector(
+    const { orderError } = useSelector(
         (store) => store.order);
 
     const { isOpen } = useSelector((state) => state.order);
 
-    //id ingredients
-    const ingredientsId = useMemo(() => ingredients.map((item) => item._id), [ingredients]);
+    //Булки и ингредиенты вместе в корзине
+    const cart = { ingredients, bun }
 
-
-    const handleOpenModal = () => {
-        showOrderModal()
-        dispatch(submitOrder())
+    //Открытие модального окна (state isOpen) и отправление заказа 
+    const handleOpenModal = async () => {
+        await dispatch(submitOrder(cart));
     };
 
-    //потом поменять на 
-    //  const handleOpenModal = () => {
-    //     showOrderModal()
-    //     const fullOrder = [...ingredientsId, bun._id]
-    //     dispatch(submitOrder(fullOrder))
-    // };
-
+    //Закрытие модального окна
     const handleCloseModal = () => {
         dispatch(hideOrderModal());
     };
+
+    //Блокировка кнопки при пустой корзине
+    const isDisabled = useMemo(() => (cart.bun === null
+        || cart.ingredients.length === 0), [cart]);
+
 
     //Функция подсчета цены
     const fullPrice = useMemo(() => {
@@ -118,7 +116,7 @@ function BurgerConstructor() {
                         <p className="text text_type_digits-medium pr-2">{fullPrice}</p>
                         <CurrencyIcon type="primary" />
                     </div>
-                    <Button htmlType="button" type="primary" size="large" onClick={handleOpenModal}>Оформить заказ</Button>
+                    <Button htmlType="button" type="primary" size="large" onClick={handleOpenModal} disabled={isDisabled}>Оформить заказ</Button>
                     {orderError ? (
                         <span className={`${constructorStyles.error} text text_type_main-default`}>Ошибка загрузки данных!</span>
                     ) : (isOpen &&
