@@ -121,7 +121,7 @@ function BurgerConstructor() {
                     <Button htmlType="button" type="primary" size="large" onClick={handleOpenModal}>Оформить заказ</Button>
                     {orderError ? (
                         <span className={`${constructorStyles.error} text text_type_main-default`}>Ошибка загрузки данных!</span>
-                    ) : (isOpen && orderNumber &&
+                    ) : (isOpen &&
                         (<Modal onClose={handleCloseModal}>
                             <OrderDetails />
                         </Modal>)
