@@ -40,19 +40,17 @@ function BurgerConstructor() {
     const isDisabled = useMemo(() => (cart.bun === null
         || cart.ingredients.length === 0), [cart]);
 
-
     //Функция подсчета цены
     const fullPrice = useMemo(() => {
-        return ingredients.reduce((total, item) => total + item.price, 0);
-    }, [ingredients]);
+        if (cart.bun !== null) {
+            const bunPrice = cart.bun.price;
+            const ingredientsPrice = cart.ingredients.reduce((total, item) => total + item.price, 0);
+            return bunPrice * 2 + ingredientsPrice
+        } else {
+            return 0;
+        }
+    }, [cart.bun, cart.ingredients]);
 
-    //потом поменять на
-    //Функция подсчета цены
-    // const fullPrice = useMemo(() => {
-    //     const ingredientsPrice = ingredients.reduce((total, item) => total + item.price, 0);
-    //     const bunsPrice =  bun.reduce((total, item) => total + item.price, 0);
-    //     return ingredientsPrice + bunsPrice
-    // }, [ingredients, bun]);
 
     // Перетаскивание ингредиентов(конечная цель) через drop
     const [{ isActive }, dropRef] = useDrop({
