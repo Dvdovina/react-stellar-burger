@@ -8,7 +8,7 @@ import { hideOrderModal } from "../../services/orderSlice";
 import { submitOrder } from "../../services/orderSlice";
 import { nanoid } from '@reduxjs/toolkit'
 import { useDrop } from 'react-dnd'
-import { addIngredient, deleteIngredient, refreshIngredients } from "../../services/constructorSlice";
+import { addIngredient, deleteIngredient, refreshIngredients, clearOrder } from "../../services/constructorSlice";
 
 function BurgerConstructor() {
 
@@ -34,6 +34,7 @@ function BurgerConstructor() {
     //Закрытие модального окна
     const handleCloseModal = () => {
         dispatch(hideOrderModal());
+        dispatch(clearOrder());
     };
 
     //Блокировка кнопки при пустой корзине

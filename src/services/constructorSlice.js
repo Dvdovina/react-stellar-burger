@@ -21,10 +21,13 @@ export const constructorSlice = createSlice({
     },
     refreshIngredients(state, { payload }) {
       state.ingredients = payload
+    },
+    clearOrder() {
+      return initialState
     }
   }
 })
 
 
 export default constructorSlice.reducer;
-export const { addIngredient, deleteIngredient, refreshIngredients } = constructorSlice.actions
+export const { addIngredient, deleteIngredient, refreshIngredients, clearOrder } = constructorSlice.actions
