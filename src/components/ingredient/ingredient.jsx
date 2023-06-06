@@ -1,7 +1,6 @@
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import ingredientStyles from "./ingredient.module.css"
 import { ingredientPropType } from "../../utils/prop-types";
-import { useMemo } from "react";
 import { useSelector } from 'react-redux';
 import { useDrag } from "react-dnd";
 
@@ -12,17 +11,11 @@ const Ingredient = ({ item, current }) => {
         (store) => store.userBurgerIngredients,
     );
 
-    //Счетчик ингредиентов
-    // const ingredientsCounter = useMemo(() => {
-    //     ingredients.reduce((total, element) => {
-    //     if (element._id === item._id) {
-    //         total++;
-    //       }
-    //       return total;
-    //     }, 0
-    //     )
-    // }, [ingredients]);
+    // Деструктуризация ингредиента
+    const { _id, name, price, image } = item
 
+    //счетчик (Optional chaining)
+    const counter = [bun, ...ingredients].filter((i) => i?._id === _id).length
 
     // Перетаскивание ингредиентов через drag
     const [{ onDrag }, dragRef] = useDrag({
@@ -33,17 +26,16 @@ const Ingredient = ({ item, current }) => {
         })
     })
 
-
     return (
         <>
-            <li className={ingredientStyles.item} onClick={() => current(item)} ref={dragRef} style={{ onDrag }}>
-                <Counter count={1} size="default" className={ingredientStyles.counter} extraClass="m-1" />
-                <img src={item.image} alt={`Изображение ${item.name}`} />
+            <li className={ingredientStyles.item} onClick={() => current(item)} ref={dragRef} style={{ onDrag }} id={_id}>
+                {!!counter && <Counter count={counter} size="default" className={ingredientStyles.counter} extraClass="m-1" />}
+                <img src={image} alt={`Изображение ${name}`} />
                 <div className={`pb-2 pt-2 ${ingredientStyles.price}`}>
-                    <p className="text text_type_digits-default pr-2">{item.price}</p>
+                    <p className="text text_type_digits-default pr-2">{price}</p>
                     <CurrencyIcon type="primary" />
                 </div>
-                <p className={`text text_type_main-default ${ingredientStyles.text}`}>{item.name}</p>
+                <p className={`text text_type_main-default ${ingredientStyles.text}`}>{name}</p>
             </li>
         </>
     )
