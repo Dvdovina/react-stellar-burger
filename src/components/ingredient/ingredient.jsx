@@ -15,7 +15,7 @@ const Ingredient = ({ item, current }) => {
     const { _id, name, price, image } = item
 
     //счетчик (Optional chaining)
-    const counter = [bun, ...ingredients].filter((i) => i?._id === _id).length
+    const counter = [bun, ...ingredients, bun].filter((i) => i?._id === _id).length
 
     // Перетаскивание ингредиентов через drag
     const [{ onDrag }, dragRef] = useDrag({
