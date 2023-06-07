@@ -17,9 +17,25 @@ const DraggableIngredient = ({ item }) => {
     // Деструктуризация ингредиента
     const { _id, name, price, image } = item
 
+     // Перетаскивание ингредиентов внутри конструктора через drag
+     const [{ onDrag }, dragElRef] = useDrag({
+        type: 'constructor',
+        item: () => ({ id: item._id, index }),
+        collect: monitor => ({
+            onDrag: monitor.isDragging() ? .5 : 1
+        })
+    })
+
+
+
+
+
+
+
+
     return (
         <>
-            <div className={draggableIngredientStyles.item}>
+            <div className={draggableIngredientStyles.item} style={{ onDrag }}>
                 <DragIcon type="primary" />
                 <ConstructorElement
                     text={name}
