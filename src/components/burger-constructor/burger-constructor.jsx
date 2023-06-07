@@ -84,7 +84,6 @@ function BurgerConstructor() {
                 <div className={`custom-scroll thin_scroll ${constructorStyles.scroll}`}>
                     <ul className={constructorStyles.list}>
                         {ingredients.map((item) => (
-                            item.type !== 'bun' &&
                             <li className={constructorStyles.item} key={item._id}>
                                 <DragIcon type="primary" />
                                 <ConstructorElement
