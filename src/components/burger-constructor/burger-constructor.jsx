@@ -1,6 +1,6 @@
 import constructorStyles from "./burger-constructor.module.css"
 import { CurrencyIcon, ConstructorElement, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useMemo } from "react";
+import { useMemo, useCallback } from "react";
 import DraggableIngredient from "../draggable-ingredient/draggable-ingredient";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
@@ -9,7 +9,7 @@ import { hideOrderModal } from "../../services/orderSlice";
 import { submitOrder } from "../../services/orderSlice";
 import { nanoid } from '@reduxjs/toolkit'
 import { useDrop } from 'react-dnd'
-import { addIngredient, clearOrder } from "../../services/constructorSlice";
+import { addIngredient, clearOrder, refreshIngredients } from "../../services/constructorSlice";
 
 function BurgerConstructor() {
 
@@ -68,6 +68,15 @@ function BurgerConstructor() {
         }
     })
 
+    // Сортировка ингредиентов при перетаскивании
+    const moveItem = useCallback((dragIndex, hoverIndex) => {
+        const dragItem = ingredients[dragIndex]
+        const newOrder = [...ingredients]
+        newOrder.splice(dragIndex, 1)
+        newOrder.splice(hoverIndex, 0, dragItem)
+        dispatch(refreshIngredients(newOrder))
+    }, [ingredients, dispatch])
+
     return (
         <>
             <section className={` ${constructorStyles.section} pt-5 pl-4 pr-4`} ref={dropRef} >
@@ -86,7 +95,7 @@ function BurgerConstructor() {
                     <ul className={constructorStyles.list}>
                         {ingredients.map((item) => (
                             <li key={item._id}>
-                                <DraggableIngredient item={item} />
+                                <DraggableIngredient item={item} moveItem={moveItem} />
                             </li>
                         ))}
                     </ul>

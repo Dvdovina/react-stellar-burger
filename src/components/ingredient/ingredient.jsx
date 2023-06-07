@@ -18,17 +18,17 @@ const Ingredient = ({ item, current }) => {
     const counter = [bun, ...ingredients, bun].filter((i) => i?._id === _id).length
 
     // Перетаскивание ингредиентов через drag
-    const [{ onDrag }, dragRef] = useDrag({
+    const [{ isDrag }, dragRef] = useDrag({
         type: 'item',
         item: { ...item },
         collect: monitor => ({
-            onDrag: monitor.isDragging() ? .5 : 1
+            isDrag: monitor.isDragging()
         })
     })
 
     return (
         <>
-            <li className={ingredientStyles.item} onClick={() => current(item)} ref={dragRef} style={{ onDrag }} id={_id}>
+            <li className={ingredientStyles.item} onClick={() => current(item)} ref={dragRef} style={{ isDrag }} id={_id}>
                 {!!counter && <Counter count={counter} size="default" className={ingredientStyles.counter} extraClass="m-1" />}
                 <img src={image} alt={`Изображение ${name}`} />
                 <div className={`pb-2 pt-2 ${ingredientStyles.price}`}>
