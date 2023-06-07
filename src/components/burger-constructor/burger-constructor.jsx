@@ -1,6 +1,7 @@
 import constructorStyles from "./burger-constructor.module.css"
-import { DragIcon, CurrencyIcon, ConstructorElement, Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { CurrencyIcon, ConstructorElement, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useMemo } from "react";
+import DraggableIngredient from "../draggable-ingredient/draggable-ingredient";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import { useSelector, useDispatch } from 'react-redux';
@@ -8,7 +9,7 @@ import { hideOrderModal } from "../../services/orderSlice";
 import { submitOrder } from "../../services/orderSlice";
 import { nanoid } from '@reduxjs/toolkit'
 import { useDrop } from 'react-dnd'
-import { addIngredient, deleteIngredient, refreshIngredients, clearOrder } from "../../services/constructorSlice";
+import { addIngredient, clearOrder } from "../../services/constructorSlice";
 
 function BurgerConstructor() {
 
@@ -84,15 +85,8 @@ function BurgerConstructor() {
                 <div className={`custom-scroll thin_scroll ${constructorStyles.scroll}`}>
                     <ul className={constructorStyles.list}>
                         {ingredients.map((item) => (
-                            <li className={constructorStyles.item} key={item._id}>
-                                <DragIcon type="primary" />
-                                <ConstructorElement
-                                    text={item.name}
-                                    price={item.price}
-                                    thumbnail={item.image}
-                                    ingredients={ingredients}
-                                    handleClose={() => dispatch(deleteIngredient(item._id))}
-                                />
+                            <li key={item._id}>
+                                <DraggableIngredient item={item} />
                             </li>
                         ))}
                     </ul>
