@@ -7,7 +7,7 @@ import OrderDetails from "../order-details/order-details";
 import { useSelector, useDispatch } from 'react-redux';
 import { hideOrderModal } from "../../services/orderSlice";
 import { submitOrder } from "../../services/orderSlice";
-import { nanoid } from '@reduxjs/toolkit'
+import { v4 as uuidv4 } from 'uuid';
 import { useDrop } from 'react-dnd'
 import { addIngredient, clearOrder, refreshIngredients } from "../../services/constructorSlice";
 
@@ -63,7 +63,7 @@ function BurgerConstructor() {
         drop: (item) => {
             dispatch(addIngredient({
                 ...item,
-                dragId: nanoid()
+                id: uuidv4()
             }))
         }
     })
@@ -94,7 +94,7 @@ function BurgerConstructor() {
                 <div className={`custom-scroll thin_scroll ${constructorStyles.scroll}`}>
                     <ul className={constructorStyles.list}>
                         {ingredients.map((item) => (
-                            <li key={item._id}>
+                            <li key={item.id}>
                                 <DraggableIngredient item={item} moveItem={moveItem} />
                             </li>
                         ))}

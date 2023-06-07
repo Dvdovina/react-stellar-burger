@@ -88,7 +88,7 @@ const DraggableIngredient = ({ item, moveItem }) => {
                     text={name}
                     price={price}
                     thumbnail={image}
-                    handleClose={() => dispatch(deleteIngredient(_id))}
+                    handleClose={() => dispatch(deleteIngredient(id))}
                 />
             </div>
         </>
