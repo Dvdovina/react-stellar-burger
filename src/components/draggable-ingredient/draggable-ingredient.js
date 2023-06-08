@@ -7,7 +7,7 @@ import { deleteIngredient } from "../../services/constructorSlice";
 
 
 const DraggableIngredient = ({ item, moveItem }) => {
-
+    
     const dispatch = useDispatch();
 
     const { ingredients } = useSelector(
@@ -88,7 +88,7 @@ const DraggableIngredient = ({ item, moveItem }) => {
                     text={name}
                     price={price}
                     thumbnail={image}
-                    handleClose={() => dispatch(deleteIngredient(_id))}
+                    handleClose={() => dispatch(deleteIngredient(item.id))}
                 />
             </div>
         </>

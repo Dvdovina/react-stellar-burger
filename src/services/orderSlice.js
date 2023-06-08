@@ -35,6 +35,7 @@ const orderSlice = createSlice({
     builder
       .addCase(submitOrder.pending, (state) => {
         state.orderFetchStatus = true;
+        state.orderError = false
       })
       .addCase(submitOrder.fulfilled, (state, action) => {
         state.orderNumber = action.payload.order.number.toString();
@@ -45,6 +46,7 @@ const orderSlice = createSlice({
         state.orderFetchStatus = false;
         state.orderError = true;
         console.error(action.payload);
+        state.orderNumber = null
       });
   },
 });

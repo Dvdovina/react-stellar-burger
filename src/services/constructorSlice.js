@@ -17,7 +17,7 @@ export const constructorSlice = createSlice({
       }
     },
     deleteIngredient(state, { payload: id }) {
-      state.ingredients = state.ingredients.filter(item => item._id !== id)
+      state.ingredients = state.ingredients.filter(item => item.id !== id)
     },
     refreshIngredients(state, { payload }) {
       state.ingredients = payload

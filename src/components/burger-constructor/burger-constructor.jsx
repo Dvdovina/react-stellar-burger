@@ -95,7 +95,7 @@ function BurgerConstructor() {
                     <ul className={constructorStyles.list}>
                         {ingredients.map((item) => (
                             <li key={item.id}>
-                                <DraggableIngredient item={item} moveItem={moveItem} />
+                                <DraggableIngredient item={item} moveItem={moveItem} key={item.id} />
                             </li>
                         ))}
                     </ul>

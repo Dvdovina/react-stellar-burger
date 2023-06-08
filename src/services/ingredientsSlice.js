@@ -34,6 +34,7 @@ export const ingredientsSlice = createSlice({
       .addCase(fetchIngredients.rejected, (state, action) => {
         state.ingredientsStatus = false
         state.ingredientsError = true
+        state.ingredients = []
       });
   }
 })
