@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Ingredient from "../ingredient/ingredient";
 import ingredientsStyles from "./burger-ingredients.module.css"
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -36,9 +36,9 @@ function BurgerIngredients() {
     };
 
     //перебор ингредиентов по типу
-    const buns = ingredients.filter((ingredient) => ingredient.type === 'bun');
-    const sauces = ingredients.filter((ingredient) => ingredient.type === 'sauce');
-    const mains = ingredients.filter((ingredient) => ingredient.type === 'main');
+    const buns = useMemo(() => ingredients.filter((ingredient) => ingredient.type === 'bun'), [ingredients]);
+    const sauces = useMemo(() => ingredients.filter((ingredient) => ingredient.type === 'sauce'), [ingredients]);
+    const mains = useMemo(() => ingredients.filter((ingredient) => ingredient.type === 'main'), [ingredients]);
 
     //Стейт табов
     const [current, setCurrent] = useState("buns");
