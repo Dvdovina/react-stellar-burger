@@ -1,0 +1,14 @@
+.item {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+.item:hover {
+    opacity: .9;
+}

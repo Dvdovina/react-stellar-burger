@@ -1,27 +1,48 @@
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import ingredientStyles from "./ingredient.module.css"
-import PropTypes from "prop-types";
 import { ingredientPropType } from "../../utils/prop-types";
+import { useSelector } from 'react-redux';
+import { useDrag } from "react-dnd";
 
 
-const Ingredient = ({ ingredients, current }) => {
+const Ingredient = ({ item, current }) => {
+
+    const { ingredients, bun } = useSelector(
+        (store) => store.userBurgerIngredients,
+    );
+
+    // Деструктуризация ингредиента
+    const { _id, name, price, image } = item
+
+    //счетчик (Optional chaining)
+    const counter = [bun, ...ingredients, bun].filter((i) => i?._id === _id).length
+
+    // Перетаскивание ингредиентов через drag
+    const [{ isDrag }, dragRef] = useDrag({
+        type: 'item',
+        item: { ...item },
+        collect: monitor => ({
+            isDrag: monitor.isDragging()
+        })
+    })
+
     return (
         <>
-            <li className={ingredientStyles.item} onClick={() => current(ingredients)}>
-                <Counter count={1} size="default" className={ingredientStyles.counter} extraClass="m-1" />
-                <img src={ingredients.image} alt={`Изображение ${ingredients.name}`} />
+            <li className={ingredientStyles.item} onClick={() => current(item)} ref={dragRef} style={{ isDrag }} id={_id}>
+                {!!counter && <Counter count={counter} size="default" className={ingredientStyles.counter} extraClass="m-1" />}
+                <img src={image} alt={`Изображение ${name}`} />
                 <div className={`pb-2 pt-2 ${ingredientStyles.price}`}>
-                    <p className="text text_type_digits-default pr-2">{ingredients.price}</p>
+                    <p className="text text_type_digits-default pr-2">{price}</p>
                     <CurrencyIcon type="primary" />
                 </div>
-                <p className={`text text_type_main-default ${ingredientStyles.text}`}>{ingredients.name}</p>
+                <p className={`text text_type_main-default ${ingredientStyles.text}`}>{name}</p>
             </li>
         </>
     )
 }
 
 Ingredient.propTypes = {
-    ingredients: ingredientPropType.isRequired,
+    item: ingredientPropType.isRequired,
 };
 
 export default Ingredient
