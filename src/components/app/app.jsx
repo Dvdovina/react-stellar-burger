@@ -4,7 +4,7 @@ import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import ForgotPassword from "../pages/forgot-password/forgot-password";
 import Home from "../pages/home/home";
 import IngredientPage from "../pages/ingredient-page/ingredient-page";
@@ -21,7 +21,7 @@ function App() {
     <div className={`custom-scroll ${styles.app}`}>
       <AppHeader />
       <main className={styles.main}>
-        <Router>
+        <Routes >
           <Route path='/' element={<Home />} />
           <Route path='/ingredients/:id' element={<IngredientPage />} />
           <Route path='/profile' element={<Profile />} />
@@ -30,7 +30,7 @@ function App() {
           <Route path='/forgot-password' element={<ForgotPassword />} />
           <Route path='/reset-password' element={<ResetPassword />} />
           <Route path='*' element={<NotFoundPage />} />
-        </Router>
+        </Routes>
         <DndProvider backend={HTML5Backend}>
           <BurgerIngredients />
           <BurgerConstructor />
