@@ -9,7 +9,7 @@ import ForgotPassword from "../pages/forgot-password/forgot-password";
 import Home from "../pages/home/home";
 import IngredientPage from "../pages/ingredient-page/ingredient-page";
 import Login from "../pages/login/login";
-import NotFoundPage from "../pages/not-found-page/not-found-page";
+import ErrorPage from "../pages/error-page/error-page";
 import Profile from "../pages/profile/profile";
 import Register from "../pages/register/register";
 import ResetPassword from "../pages/reset-password/reset-password";
@@ -29,7 +29,7 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/forgot-password' element={<ForgotPassword />} />
           <Route path='/reset-password' element={<ResetPassword />} />
-          <Route path='*' element={<NotFoundPage />} />
+          <Route path='*' element={<ErrorPage />} />
         </Routes>
         <DndProvider backend={HTML5Backend}>
           <BurgerIngredients />
