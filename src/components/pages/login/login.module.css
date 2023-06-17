@@ -7,13 +7,19 @@
 }
 
 .form {
+    align-items: center;
     display: flex;
     flex-direction: column;
     gap: 24px;
-    align-items: center;
     margin-top: 180px;
 }
 
 .link {
+    color: #4C4CFF;
     text-decoration: none;
+    transition: .1s ease-in-out;
+}
+
+.link:hover {
+    opacity: .7;
 }
