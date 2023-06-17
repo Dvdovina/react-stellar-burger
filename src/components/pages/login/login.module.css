@@ -1,0 +1,19 @@
+.section {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+    margin-top: 180px;
+}
+
+.link {
+    text-decoration: none;
+}
