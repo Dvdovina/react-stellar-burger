@@ -57,9 +57,9 @@ function BurgerIngredients() {
     };
 
     //реализация подсвечивания переключателя табов
-    const [bunsRef, bunsInView] = useInView({ threshold: 0 });
-    const [saucesRef, saucesInView] = useInView({ threshold: 0.7 });
-    const [mainsRef, mainsInView] = useInView({ threshold: 0.1 });
+    const [bunsRef, bunsInView] = useInView({ threshold: .1 });
+    const [saucesRef, saucesInView] = useInView({ threshold: .9 });
+    const [mainsRef, mainsInView] = useInView({ threshold: 0.2 });
 
     return (
         <>
