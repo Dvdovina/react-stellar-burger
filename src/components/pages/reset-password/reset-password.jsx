@@ -8,11 +8,8 @@ import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burg
 function ResetPassword() {
 
     const [password, setPassword] = useState('');
-
     const [securityCode, setSecurityCode] = useState('');
     const inputRef = useRef(null);
-
-
 
     return (
         <>
