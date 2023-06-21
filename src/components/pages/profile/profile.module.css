@@ -1,0 +1,42 @@
+.section {
+    column-gap: 60px;
+    display: flex;
+    justify-content: flex-start;
+    margin: 120px 0 0 380px;
+    width: 100%;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    max-width: 320px;
+}
+
+.link {
+    align-items: center;
+    display: flex;
+    min-height: 64px;
+    text-align: center;
+    text-decoration: none;
+    transition: .2s ease-in-out;
+}
+
+.link:hover {
+    opacity: .5;
+}
+
+.link_active {
+    color: #F2F2F3;
+    text-decoration: none;
+}
+
+.link_active:hover {
+    opacity: 1;
+}
+
+.form {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
