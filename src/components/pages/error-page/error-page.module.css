@@ -4,6 +4,6 @@
     flex-direction: column;
     gap: 80px;
     justify-content: center;
-    padding-top: 300px;
+    margin-top: 300px;
     width: 100%;
 }
