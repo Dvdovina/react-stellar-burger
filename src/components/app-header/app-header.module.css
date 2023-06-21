@@ -34,7 +34,6 @@
 }
 
 .link {
-    color: inherit;
     cursor: pointer;
     display: flex;
     flex-direction: row;
@@ -45,6 +44,15 @@
 
 .link:hover {
     opacity: .7;
+}
+
+.link_active {
+    text-decoration: none;
+    color: #F2F2F3;
+}
+
+.link_active:hover {
+    opacity: 1;
 }
 
 .item {
