@@ -1,8 +1,10 @@
 .section {
+    box-sizing: border-box;
     column-gap: 60px;
     display: flex;
     justify-content: flex-start;
-    margin: 120px 0 0 380px;
+    margin: 120px 0;
+    padding-left: 380px;
     width: 100%;
 }
 
