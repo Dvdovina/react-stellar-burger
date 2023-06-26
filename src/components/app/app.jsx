@@ -9,7 +9,6 @@ import ErrorPage from "../pages/error-page/error-page";
 import Profile from "../pages/profile/profile";
 import Register from "../pages/register/register";
 import ResetPassword from "../pages/reset-password/reset-password";
-import { OnlyAuth, OnlyUnAuth } from "../protected-route-element/protected-route-element";
 
 
 function App() {

@@ -1,41 +1,47 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { getUserApi } from '../utils/api';
+import { postNewUser } from '../utils/api';
 
 
-export const getUser = createAsyncThunk(
-  'user/getUser',
-  async (payload) => {
+//AsyncThunk Регистрация
+export const registerUser = createAsyncThunk(
+  'user/register',
+  async (name, email, password) => {
     try {
-      return await getUserApi(payload);
+      return await postNewUser(name, email, password);
+    } catch (error) {
+      return rejectWithValue(error);
     }
-    catch (error) {
-      return thunkApi.rejectWithValue(error);
-    }
-  }
+  },
 );
 
 
 const initialState = {
-  user: {
-    name: null,
-    email: null
-  },
-  isAuthChecked: false,
+  user: {},
+  token: null,
+  registerUserStatus: false,
+  registerUserError: false,
 };
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {
-    setAuthChecked: (state, action) => {
-      state.isAuthChecked = action.payload;
-    },
-    setUser: (state, action) => {
-      state.user = action.payload;
-    },
-  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(registerUser.pending, (state) => {
+        state.registerUserStatus = true
+        state.registerUserError = false
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.registerUserStatus = false
+        state.registerUserError = false
+        state.user = action.payload;
+      })
+      .addCase(registerUser.rejected, (state, action) => {
+        state.registerUserStatus = false
+        state.registerUserError = true
+      });
+  }
 });
-
-export const { setAuthChecked, setUser } = userSlice.actions;
 
 export default userSlice.reducer;
