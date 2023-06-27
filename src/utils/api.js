@@ -124,4 +124,11 @@ const postNewUser = ({ name, email, password }) => {
         });
 }
 
-export { getData, postOrder, getToken, patchToken, refreshToken, fetchWithRefresh, postNewUser }
+
+const setTokens = ({accessToken, refreshToken}) => {
+    localStorage.setItem('accessToken', accessToken.split(' ')[1])
+    localStorage.setItem('refreshToken', refreshToken)
+  }
+  
+
+export { getData, postOrder, getToken, patchToken, refreshToken, fetchWithRefresh, postNewUser, setTokens }

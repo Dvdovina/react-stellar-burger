@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { postNewUser } from '../utils/api';
+import { postNewUser, patchToken, getToken, setTokens } from '../utils/api';
 
 
 //AsyncThunk Регистрация
@@ -36,6 +36,10 @@ export const userSlice = createSlice({
         state.registerUserStatus = false
         state.registerUserError = false
         state.user = action.payload;
+        setTokens({
+          accessToken: payload.accessToken,
+          refreshToken: payload.refreshToken
+        })
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.registerUserStatus = false

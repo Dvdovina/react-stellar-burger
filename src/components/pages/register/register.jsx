@@ -2,27 +2,51 @@ import registerStyles from './register.module.css'
 import { Link } from "react-router-dom";
 import { useState, useRef } from 'react';
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDispatch } from 'react-redux'
+import { registerUser } from '../../../services/userSlice';
 
 
 
 function Register() {
 
     const inputRef = useRef(null);
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+
+    const dispatch = useDispatch()
+
+    const onSubmit = (payload) => {
+        dispatch(registerUser(payload))
+    }
+
+    const [userInfo, setUserInfo] = useState({
+        name: '',
+        email: '',
+        password: '',
+    })
+
+    const onInputChange = (event) => {
+        const { name, value } = event.target
+        setUserInfo({
+            ...userInfo,
+            [name]: value,
+        })
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        onSubmit(userInfo)
+    }
 
 
     return (
         <>
             <section className={registerStyles.section}>
-                <form className={registerStyles.form}>
+                <form className={registerStyles.form} onSubmit={handleSubmit}>
                     <h2 className="text text_type_main-medium">Регистрация</h2>
                     <Input
                         type={'text'}
                         placeholder={'Имя'}
-                        onChange={e => setName(e.target.value)}
-                        value={name}
+                        onChange={onInputChange}
+                        value={userInfo.name}
                         name={'name'}
                         error={false}
                         ref={inputRef}
@@ -31,20 +55,20 @@ function Register() {
                     <Input
                         type={'email'}
                         placeholder={'E-mail'}
-                        onChange={e => setEmail(e.target.value)}
-                        value={email}
+                        onChange={onInputChange}
+                        value={userInfo.email}
                         name={'email'}
                         error={false}
                         ref={inputRef}
                         errorText={'Ошибка'}
                     />
                     <PasswordInput
-                        onChange={e => setPassword(e.target.value)}
-                        value={password}
+                        onChange={onInputChange}
+                        value={userInfo.password}
                         name={'password'}
                         placeholder={'Пароль'}
                     />
-                    <Button htmlType="submit" type="primary" size="large" disabled={!name || !email || !password}>Зарегистрироваться</Button>
+                    <Button htmlType="submit" type="primary" size="large" disabled={!userInfo.name || !userInfo.email || !userInfo.password}>Зарегистрироваться</Button>
                 </form>
                 <span className="text text_type_main-default text_color_inactive pt-20">
                     Уже зарегистрированы? <Link to="/login" className={registerStyles.link}>Войти</Link>
