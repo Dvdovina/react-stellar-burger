@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { postNewUser, patchToken, getToken, setTokens } from '../utils/api';
+import { postNewUser, setTokens, postLogin } from '../utils/api';
 
 
 //AsyncThunk Регистрация
@@ -14,12 +14,25 @@ export const registerUser = createAsyncThunk(
   },
 );
 
+//AsyncThunk Логин
+export const loginUser = createAsyncThunk(
+  'user/login',
+  async (email, password) => {
+    try {
+      return await postLogin(email, password);
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);
+
+
 
 const initialState = {
   user: {},
   token: null,
-  registerUserStatus: false,
-  registerUserError: false,
+  loading: false,
+  error: false,
 };
 
 export const userSlice = createSlice({
@@ -29,12 +42,12 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.pending, (state) => {
-        state.registerUserStatus = true
-        state.registerUserError = false
+        state.loading = true
+        state.error = false
       })
       .addCase(registerUser.fulfilled, (state, action) => {
-        state.registerUserStatus = false
-        state.registerUserError = false
+        state.loading = false
+        state.error = false
         state.user = action.payload;
         setTokens({
           accessToken: payload.accessToken,
@@ -42,9 +55,25 @@ export const userSlice = createSlice({
         })
       })
       .addCase(registerUser.rejected, (state, action) => {
-        state.registerUserStatus = false
-        state.registerUserError = true
-      });
+        state.loading = false
+        state.error = true
+      })
+      .addCase(loginUser.pending, (state, action) => {
+        state.loading = true
+        state.error = false
+      })
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.loading = false
+        state.error = false
+        setTokens({
+          accessToken: payload.accessToken,
+          refreshToken: payload.refreshToken
+        })
+      })
+      .addCase(loginUser.rejected, (state, action) => {
+        state.loading = false
+        state.error = true
+      })
   }
 });
 

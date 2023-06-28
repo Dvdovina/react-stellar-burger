@@ -3,6 +3,7 @@ const config = {
     orderUrl: `https://norma.nomoreparties.space/api/orders`,
     registerUrl: `https://norma.nomoreparties.space/api/auth/register`,
     tokenUrl: `https://norma.nomoreparties.space/api/auth/token`,
+    loginUrl: `https://norma.nomoreparties.space/api/auth/login`,
     headers: {
         'Content-Type': 'application/json'
     }
@@ -106,12 +107,17 @@ const fetchWithRefresh = async (url, options) => {
     }
 };
 
+const setTokens = ({ accessToken, refreshToken }) => {
+    localStorage.setItem('accessToken', accessToken)
+    localStorage.setItem('refreshToken', refreshToken)
+}
+
 //API регистрации
 const postNewUser = ({ name, email, password }) => {
     return fetch(`${config.registerUrl}`,
         {
             method: 'POST',
-            headers: config.headers,
+            headers: config.headers, 
             body: JSON.stringify({
                 name,
                 email,
@@ -124,11 +130,26 @@ const postNewUser = ({ name, email, password }) => {
         });
 }
 
+//API Логин
+const postLogin = ({ email, password }) => {
+    return fetchWithRefresh(`${config.loginUrl}`,
+        {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+                authorization: localStorage.getItem('accessToken')
+            },
+            body: JSON.stringify({
+                email,
+                password,
+            })
+        })
+        .then(checkResponse)
+        .catch((err) => {
+            console.log(err)
+        });
+}
 
-const setTokens = ({accessToken, refreshToken}) => {
-    localStorage.setItem('accessToken', accessToken.split(' ')[1])
-    localStorage.setItem('refreshToken', refreshToken)
-  }
-  
 
-export { getData, postOrder, getToken, patchToken, refreshToken, fetchWithRefresh, postNewUser, setTokens }
+
+export { getData, postOrder, getToken, patchToken, refreshToken, fetchWithRefresh, setTokens, postNewUser, postLogin }
