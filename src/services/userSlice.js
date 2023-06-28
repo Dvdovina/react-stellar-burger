@@ -33,6 +33,7 @@ const initialState = {
   token: null,
   loading: false,
   error: false,
+  isAuth: false
 };
 
 export const userSlice = createSlice({
@@ -49,30 +50,35 @@ export const userSlice = createSlice({
         state.loading = false
         state.error = false
         state.user = action.payload;
+        state.isAuth = true
         setTokens({
           accessToken: payload.accessToken,
           refreshToken: payload.refreshToken
         })
       })
-      .addCase(registerUser.rejected, (state, action) => {
+      .addCase(registerUser.rejected, (state) => {
         state.loading = false
         state.error = true
+        state.isAuth = false
       })
-      .addCase(loginUser.pending, (state, action) => {
+      .addCase(loginUser.pending, (state) => {
         state.loading = true
         state.error = false
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false
         state.error = false
+        state.user = action.payload;
+        state.isAuth = true
         setTokens({
           accessToken: payload.accessToken,
           refreshToken: payload.refreshToken
         })
       })
-      .addCase(loginUser.rejected, (state, action) => {
+      .addCase(loginUser.rejected, (state) => {
         state.loading = false
         state.error = true
+        state.isAuth = false
       })
   }
 });
