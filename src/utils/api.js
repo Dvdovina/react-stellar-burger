@@ -75,7 +75,7 @@ const patchUser = ({ name, email, password }) => {
 };
 
 //API регистрации
-const postNewUser = ({ name, email, password }) => {
+const postRegisterUser = ({ name, email, password }) => {
     return fetch(`${config.registerUrl}`,
         {
             method: 'POST',
@@ -188,5 +188,10 @@ const setTokens = ({ accessToken, refreshToken }) => {
     localStorage.setItem('refreshToken', refreshToken)
 }
 
+const deleteTokens = () => {
+    localStorage.removeItem('accessToken')
+    localStorage.removeItem('refreshToken')
+}
 
-export { getData, postOrder, getUser, patchUser, refreshToken, fetchWithRefresh, setTokens, postNewUser, postLogin, postLogOut, postForgotPass, postResetPass }
+
+export { getData, postOrder, getUser, patchUser, refreshToken, fetchWithRefresh, setTokens, deleteTokens, postRegisterUser, postLogin, postLogOut, postForgotPass, postResetPass }

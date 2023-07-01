@@ -1,5 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { postNewUser, setTokens, postLogin, postLogOut, getUser, patchUser, postForgotPass, postResetPass } from '../utils/api';
+import {
+  postRegisterUser,
+  setTokens,
+  deleteTokens,
+  postLogin,
+  postLogOut,
+  getUser,
+  patchUser,
+  postForgotPass,
+  postResetPass
+} from '../utils/api';
 
 
 
@@ -32,7 +42,7 @@ export const register = createAsyncThunk(
   'user/register',
   async (name, email, password, thunkApi) => {
     try {
-      return await postNewUser(name, email, password);
+      return await postRegisterUser(name, email, password);
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }
@@ -102,6 +112,36 @@ export const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(createUser.pending, (state) => {
+        state.loading = true
+        state.error = false
+      })
+      .addCase(createUser.fulfilled, (state) => {
+        state.loading = false
+        state.error = false
+        state.user = action.payload
+        state.isAuth = true
+      })
+      .addCase(createUser.rejected, (state) => {
+        state.loading = false
+        state.error = true
+        state.isAuth = false
+      })
+      .addCase(updateUser.pending, (state) => {
+        state.loading = true
+        state.error = false
+      })
+      .addCase(updateUser.fulfilled, (state) => {
+        state.loading = false
+        state.error = false
+        state.user = action.payload
+        state.isAuth = true
+      })
+      .addCase(updateUser.rejected, (state) => {
+        state.loading = false
+        state.error = true
+        state.isAuth = false
+      })
       .addCase(register.pending, (state) => {
         state.loading = true
         state.error = false
@@ -109,7 +149,7 @@ export const userSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.loading = false
         state.error = false
-        state.user = action.payload;
+        state.user = action.payload
         state.isAuth = true
         setTokens({
           accessToken: payload.accessToken,
@@ -128,7 +168,7 @@ export const userSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.loading = false
         state.error = false
-        state.user = action.payload;
+        state.user = action.payload
         state.isAuth = true
         setTokens({
           accessToken: payload.accessToken,
@@ -139,6 +179,45 @@ export const userSlice = createSlice({
         state.loading = false
         state.error = true
         state.isAuth = false
+      })
+      .addCase(logOut.pending, (state) => {
+        state.loading = true
+        state.error = false
+      })
+      .addCase(logOut.fulfilled, (state, action) => {
+        state.loading = false
+        state.error = false
+        state.user = {}
+        state.isAuth = false
+        deleteTokens()
+      })
+      .addCase(logOut.rejected, (state) => {
+        state.loading = false
+        state.error = true
+      })
+      .addCase(forgotPassword.pending, (state) => {
+        state.loading = true
+        state.error = false
+      })
+      .addCase(forgotPassword.fulfilled, (state) => {
+        state.loading = false
+        state.error = false
+      })
+      .addCase(forgotPassword.rejected, (state) => {
+        state.loading = false
+        state.error = true
+      })
+      .addCase(resetPassword.pending, (state) => {
+        state.loading = true
+        state.error = false
+      })
+      .addCase(resetPassword.fulfilled, (state) => {
+        state.loading = false
+        state.error = false
+      })
+      .addCase(resetPassword.rejected, (state) => {
+        state.loading = false
+        state.error = true
       })
   }
 });
