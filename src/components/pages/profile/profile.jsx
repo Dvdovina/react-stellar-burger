@@ -2,11 +2,27 @@ import profileStyles from './profile.module.css'
 import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState, useRef } from 'react';
 import { NavLink } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { logOut } from '../../../services/userSlice';
 
 
 function Profile() {
 
+    const dispatch = useDispatch()
+
+    const handleLogout = () => {
+        dispatch(logOut(payload));
+    };
+
+
+    const { user } = useSelector(
+        (store) => store.user);
+
+
     const inputRef = useRef(null);
+
+
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -28,8 +44,9 @@ function Profile() {
                             `${profileStyles.link} text text_type_main-medium text_color_inactive`}>
                         История заказов
                     </NavLink>
-                    <NavLink
+                    <NavLink 
                         to={'/logout'}
+                        onClick={handleLogout}
                         className={({ isActive }) => isActive ? `${profileStyles.link} text text_type_main-medium ${profileStyles.link_active}` :
                             `${profileStyles.link} text text_type_main-medium text_color_inactive`}>
                         Выход
