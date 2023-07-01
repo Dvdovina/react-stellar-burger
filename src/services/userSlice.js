@@ -1,5 +1,30 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { postNewUser, setTokens, postLogin, postLogOut } from '../utils/api';
+import { postNewUser, setTokens, postLogin, postLogOut, getUser, patchUser, postForgotPass, postResetPass } from '../utils/api';
+
+
+
+//AsyncThunk Пользователь
+export const createUser = createAsyncThunk(
+  'user/createUser',
+  async (payload) => {
+    try {
+      return await getUser(payload);
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  },
+);
+
+export const updateUser = createAsyncThunk(
+  'user/updateUser',
+  async (name, email, password) => {
+    try {
+      return await patchUser(name, email, password);
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  },
+);
 
 
 //AsyncThunk Регистрация
@@ -26,11 +51,36 @@ export const login = createAsyncThunk(
   },
 );
 
+//AsyncThunk Лог-аут
 export const logOut = createAsyncThunk(
   'user/logOut',
   async (payload, thunkApi) => {
     try {
       return await postLogOut(payload);
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  },
+);
+
+//AsyncThunk Забытый пароль
+export const forgotPassword = createAsyncThunk(
+  'user/forgotPassword',
+  async (email) => {
+    try {
+      return await postForgotPass(email);
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  },
+);
+
+//AsyncThunk Сбросить и поменять пароль
+export const resetPassword = createAsyncThunk(
+  'user/resetPassword',
+  async (password, token) => {
+    try {
+      return await postResetPass(password, token);
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }
