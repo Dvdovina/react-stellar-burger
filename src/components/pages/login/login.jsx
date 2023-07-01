@@ -3,7 +3,7 @@ import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burg
 import { useState, useRef } from 'react';
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../../../services/userSlice';
+import { login } from '../../../services/userSlice';
 
 
 
@@ -16,7 +16,7 @@ function Login() {
     const dispatch = useDispatch()
 
     const onSubmit = (payload) => {
-        dispatch(loginUser(payload))
+        dispatch(login(payload))
     }
 
     const [userInfo, setUserInfo] = useState({

@@ -1,31 +1,41 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { postNewUser, setTokens, postLogin } from '../utils/api';
+import { postNewUser, setTokens, postLogin, postLogOut } from '../utils/api';
 
 
 //AsyncThunk Регистрация
-export const registerUser = createAsyncThunk(
+export const register = createAsyncThunk(
   'user/register',
-  async (name, email, password) => {
+  async (name, email, password, thunkApi) => {
     try {
       return await postNewUser(name, email, password);
     } catch (error) {
-      return rejectWithValue(error);
+      return thunkApi.rejectWithValue(error);
     }
   },
 );
 
 //AsyncThunk Логин
-export const loginUser = createAsyncThunk(
+export const login = createAsyncThunk(
   'user/login',
-  async (email, password) => {
+  async (email, password, thunkApi) => {
     try {
       return await postLogin(email, password);
     } catch (error) {
-      return rejectWithValue(error);
+      return thunkApi.rejectWithValue(error);
     }
   },
 );
 
+export const logOut = createAsyncThunk(
+  'user/logOut',
+  async (payload, thunkApi) => {
+    try {
+      return await postLogOut(payload);
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  },
+);
 
 
 const initialState = {
@@ -42,11 +52,11 @@ export const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(registerUser.pending, (state) => {
+      .addCase(register.pending, (state) => {
         state.loading = true
         state.error = false
       })
-      .addCase(registerUser.fulfilled, (state, action) => {
+      .addCase(register.fulfilled, (state, action) => {
         state.loading = false
         state.error = false
         state.user = action.payload;
@@ -56,16 +66,16 @@ export const userSlice = createSlice({
           refreshToken: payload.refreshToken
         })
       })
-      .addCase(registerUser.rejected, (state) => {
+      .addCase(register.rejected, (state) => {
         state.loading = false
         state.error = true
         state.isAuth = false
       })
-      .addCase(loginUser.pending, (state) => {
+      .addCase(login.pending, (state) => {
         state.loading = true
         state.error = false
       })
-      .addCase(loginUser.fulfilled, (state, action) => {
+      .addCase(login.fulfilled, (state, action) => {
         state.loading = false
         state.error = false
         state.user = action.payload;
@@ -75,7 +85,7 @@ export const userSlice = createSlice({
           refreshToken: payload.refreshToken
         })
       })
-      .addCase(loginUser.rejected, (state) => {
+      .addCase(login.rejected, (state) => {
         state.loading = false
         state.error = true
         state.isAuth = false

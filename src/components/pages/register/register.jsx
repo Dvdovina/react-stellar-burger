@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useState, useRef } from 'react';
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch } from 'react-redux'
-import { registerUser } from '../../../services/userSlice';
+import { register } from '../../../services/userSlice';
 
 
 
@@ -14,7 +14,7 @@ function Register() {
     const dispatch = useDispatch()
 
     const onSubmit = (payload) => {
-        dispatch(registerUser(payload))
+        dispatch(register(payload))
     }
 
     const [userInfo, setUserInfo] = useState({
