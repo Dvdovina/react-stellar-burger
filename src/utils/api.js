@@ -4,6 +4,10 @@ const config = {
     registerUrl: `https://norma.nomoreparties.space/api/auth/register`,
     tokenUrl: `https://norma.nomoreparties.space/api/auth/token`,
     loginUrl: `https://norma.nomoreparties.space/api/auth/login`,
+    logoutUrl: `https://norma.nomoreparties.space/api/auth/logout`,
+    userUrl: `https://norma.nomoreparties.space/api/auth/login`,
+    passForgotUrl: `https://norma.nomoreparties.space/api/password-reset`,
+    passResetUrl: `https://norma.nomoreparties.space/api/password-reset/reset`,
     headers: {
         'Content-Type': 'application/json'
     }
@@ -42,25 +46,22 @@ const postOrder = (order, options = {}) => {
         });
 }
 
-//Токены
 
-const getToken = ({ token }) => {
-    return request('auth/user',
+//API Пользователь
+const getUser = () => {
+    return fetchWithRefresh(`${config.userUrl}`,
         {
             method: "GET",
             headers: {
+                authorization: localStorage.getItem('accessToken'),
                 "Content-Type": "application/json;charset=utf-8",
-                authorization: localStorage.getItem('accessToken')
             },
-            body: JSON.stringify({
-                token
-            }),
-        });
-};
+        })
+}
 
 
-const patchToken = ({ token }) => {
-    return request('auth/user',
+const patchUser = ({ name, email, password }) => {
+    return fetchWithRefresh(`${config.userUrl}`,
         {
             method: "PATCH",
             headers: {
@@ -68,11 +69,85 @@ const patchToken = ({ token }) => {
                 authorization: localStorage.getItem('accessToken')
             },
             body: JSON.stringify({
-                token
+                name, email, password
             }),
         });
 };
 
+//API регистрации
+const postNewUser = ({ name, email, password }) => {
+    return fetch(`${config.registerUrl}`,
+        {
+            method: 'POST',
+            headers: config.headers,
+            body: JSON.stringify({
+                name,
+                email,
+                password,
+            })
+        })
+        .then(checkResponse)
+        .catch((err) => {
+            console.log(err)
+        });
+}
+
+//API Логин
+const postLogin = ({ email, password }) => {
+    return fetchWithRefresh(`${config.loginUrl}`,
+        {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+                authorization: localStorage.getItem('accessToken')
+            },
+            body: JSON.stringify({
+                email,
+                password,
+            })
+        })
+}
+
+//API Лог-аут
+const postLogOut = () => {
+    return fetchWithRefresh(`${config.logoutUrl}`,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                authorization: localStorage.getItem('accessToken')
+            },
+            body: JSON.stringify({
+                token: localStorage.getItem("refreshToken"),
+            })
+        })
+}
+
+//API Забытый пароль
+const postForgotPass = ({ email }) => {
+    return fetchWithRefresh(`${config.passForgotUrl}`,
+        {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                email
+            })
+        })
+}
+
+//API Сбросить и поменять пароль
+const postResetPass = ({ password, token }) => {
+    return fetchWithRefresh(`${config.passResetUrl}`,
+        {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                password, token
+            })
+        })
+}
+
+//Токены
 const refreshToken = () => {
     return fetch(`${config.tokenUrl}`,
         {
@@ -85,6 +160,7 @@ const refreshToken = () => {
             }),
         }).then(checkResponse);
 };
+
 
 const fetchWithRefresh = async (url, options) => {
     try {
@@ -112,44 +188,5 @@ const setTokens = ({ accessToken, refreshToken }) => {
     localStorage.setItem('refreshToken', refreshToken)
 }
 
-//API регистрации
-const postNewUser = ({ name, email, password }) => {
-    return fetch(`${config.registerUrl}`,
-        {
-            method: 'POST',
-            headers: config.headers, 
-            body: JSON.stringify({
-                name,
-                email,
-                password,
-            })
-        })
-        .then(checkResponse)
-        .catch((err) => {
-            console.log(err)
-        });
-}
 
-//API Логин
-const postLogin = ({ email, password }) => {
-    return fetchWithRefresh(`${config.loginUrl}`,
-        {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json;charset=utf-8",
-                authorization: localStorage.getItem('accessToken')
-            },
-            body: JSON.stringify({
-                email,
-                password,
-            })
-        })
-        .then(checkResponse)
-        .catch((err) => {
-            console.log(err)
-        });
-}
-
-
-
-export { getData, postOrder, getToken, patchToken, refreshToken, fetchWithRefresh, setTokens, postNewUser, postLogin }
+export { getData, postOrder, getUser, patchUser, refreshToken, fetchWithRefresh, setTokens, postNewUser, postLogin, postLogOut, postForgotPass, postResetPass }
