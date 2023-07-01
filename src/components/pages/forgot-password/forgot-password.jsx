@@ -10,6 +10,8 @@ function ForgotPassword() {
 
     const inputRef = useRef(null);
 
+    const dispatch = useDispatch()
+
     const onSubmit = (payload) => {
         dispatch(forgotPassword(payload))
     }
