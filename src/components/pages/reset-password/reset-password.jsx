@@ -4,12 +4,15 @@ import { useState, useRef } from 'react';
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { resetPassword } from '../../../services/userSlice';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 
 
 
 function ResetPassword() {
 
     const inputRef = useRef(null);
+
+    const navigate = useNavigate();
 
     const dispatch = useDispatch()
 
@@ -33,6 +36,7 @@ function ResetPassword() {
     const handleSubmit = (e) => {
         e.preventDefault()
         onSubmit(userInfo)
+        navigate("/login", { replace: true });
     }
 
     return (
