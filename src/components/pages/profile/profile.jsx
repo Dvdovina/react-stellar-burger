@@ -40,7 +40,6 @@ function Profile() {
         onSubmit(userInfo)
     }
 
-
     // Выход
     const handleLogout = () => {
         dispatch(logOut(payload));
@@ -63,7 +62,7 @@ function Profile() {
                         История заказов
                     </NavLink>
                     <NavLink
-                        to={'/logout'}
+                        to={'/login'}
                         onClick={handleLogout}
                         className={({ isActive }) => isActive ? `${profileStyles.link} text text_type_main-medium ${profileStyles.link_active}` :
                             `${profileStyles.link} text text_type_main-medium text_color_inactive`}>

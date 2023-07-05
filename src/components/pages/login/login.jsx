@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { login } from '../../../services/userSlice';
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -12,6 +13,8 @@ function Login() {
 
 
     const inputRef = useRef(null);
+
+    const navigate = useNavigate();
 
     const dispatch = useDispatch()
 
@@ -35,6 +38,8 @@ function Login() {
     const handleSubmit = (e) => {
         e.preventDefault()
         onSubmit(userInfo)
+        navigate("/", { replace: true });
+
     }
 
     return (

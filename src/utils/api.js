@@ -128,7 +128,7 @@ const postForgotPass = ({ email }) => {
     return fetchWithRefresh(`${config.passForgotUrl}`,
         {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: config.headers,
             body: JSON.stringify({
                 email
             })
@@ -140,7 +140,7 @@ const postResetPass = ({ password, token }) => {
     return fetchWithRefresh(`${config.passResetUrl}`,
         {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: config.headers,
             body: JSON.stringify({
                 password, token
             })
