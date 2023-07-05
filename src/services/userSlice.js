@@ -27,7 +27,7 @@ export const createUser = createAsyncThunk(
 
 export const updateUser = createAsyncThunk(
   'user/updateUser',
-  async (name, email, password) => {
+  async (name, email, password, thunkApi) => {
     try {
       return await patchUser(name, email, password);
     } catch (error) {

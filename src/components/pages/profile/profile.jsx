@@ -1,5 +1,5 @@
 import profileStyles from './profile.module.css'
-import { Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState, useRef, useEffect } from 'react';
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,23 +9,21 @@ import { updateUser } from '../../../services/userSlice';
 
 function Profile() {
 
-    const { user } = useSelector(
-        (store) => store.user);
-
     const inputRef = useRef(null);
 
     const dispatch = useDispatch()
 
-    //Обновить данные
-    const onSubmit = () => {
-        dispatch(updateUser())
-    }
+    const { user } = useSelector(
+        (store) => store.user,
+    );
 
-    const [userInfo, setUserInfo] = useState({
-        name: '',
-        email: '',
-        password: '',
-    })
+    const currentData = { ...user, password: '' }
+
+    const [userInfo, setUserInfo] = useState(currentData)
+
+    const [updatedInfo, setUpdatedInfo] = useState(false)
+
+
 
     const onInputChange = (event) => {
         const { name, value } = event.target
@@ -33,17 +31,36 @@ function Profile() {
             ...userInfo,
             [name]: value,
         })
+        setUpdatedInfo(true)
+    }
+
+    //Обновить данные
+    const onSubmit = () => {
+        dispatch(updateUser())
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
         onSubmit(userInfo)
+        setUpdatedInfo(false)
+    }
+
+    //Сбросить изменения
+    const handleReset = () => {
+        setUserInfo(currentData)
+        setUpdatedInfo(false)
     }
 
     // Выход
     const handleLogout = () => {
         dispatch(logOut(payload));
     };
+
+    useEffect(() => {
+        const isUpdated =
+            JSON.stringify(currentData) !== JSON.stringify(userInfo)
+        setUpdatedInfo(isUpdated)
+    }, [userInfo, currentData])
 
     return (
         <>
@@ -62,7 +79,7 @@ function Profile() {
                         История заказов
                     </NavLink>
                     <NavLink
-                        to={'/login'}
+                        to={'/logout'}
                         onClick={handleLogout}
                         className={({ isActive }) => isActive ? `${profileStyles.link} text text_type_main-medium ${profileStyles.link_active}` :
                             `${profileStyles.link} text text_type_main-medium text_color_inactive`}>
@@ -100,6 +117,24 @@ function Profile() {
                         placeholder={'Пароль'}
                         icon="EditIcon"
                     />
+                    {updatedInfo && (
+                        <div className={profileStyles.buttons}>
+                            <Button
+                                onClick={handleReset}
+                                htmlType="reset"
+                                type="secondary"
+                                size="medium"
+                            >
+                                Сбросить
+                            </Button>
+                            <Button
+                                htmlType="submit"
+                                type="secondary"
+                                size="large">
+                                Сохранить
+                            </Button>
+                        </div>
+                    )}
                 </form>
             </section>
         </>
