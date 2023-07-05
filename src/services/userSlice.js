@@ -99,7 +99,10 @@ export const resetPassword = createAsyncThunk(
 
 
 const initialState = {
-  user: {},
+  user: {
+    name: null,
+    email: null,
+  },
   loading: false,
   error: false,
   isAuth: false
@@ -115,84 +118,82 @@ export const userSlice = createSlice({
         state.loading = true
         state.error = false
       })
-      .addCase(createUser.fulfilled, (state) => {
+      .addCase(createUser.fulfilled, (state, {payload}) => {
         state.loading = false
         state.error = false
-        state.user = action.payload
+        state.user = payload.user
         state.isAuth = true
       })
-      .addCase(createUser.rejected, (state) => {
+      .addCase(createUser.rejected, (state, action) => {
         state.loading = false
-        state.error = true
+        state.error = action.error
         state.isAuth = false
       })
       .addCase(updateUser.pending, (state) => {
         state.loading = true
         state.error = false
       })
-      .addCase(updateUser.fulfilled, (state) => {
+      .addCase(updateUser.fulfilled, (state, {payload}) => {
         state.loading = false
         state.error = false
-        state.user = action.payload
+        state.user = payload.user
         state.isAuth = true
       })
-      .addCase(updateUser.rejected, (state) => {
+      .addCase(updateUser.rejected, (state, action) => {
         state.loading = false
-        state.error = true
+        state.error = action.error
         state.isAuth = false
       })
       .addCase(register.pending, (state) => {
         state.loading = true
         state.error = false
       })
-      .addCase(register.fulfilled, (state, action) => {
+      .addCase(register.fulfilled, (state, {payload}) => {
         state.loading = false
         state.error = false
-        state.user = action.payload
+        state.user = payload.user
         state.isAuth = true
         setTokens({
           accessToken: payload.accessToken,
           refreshToken: payload.refreshToken
         })
       })
-      .addCase(register.rejected, (state) => {
+      .addCase(register.rejected, (state, action) => {
         state.loading = false
-        state.error = true
+        state.error = action.error
         state.isAuth = false
       })
       .addCase(login.pending, (state) => {
         state.loading = true
-        state.error = false
+        state.error = null
       })
-      .addCase(login.fulfilled, (state, action) => {
-        state.loading = false
-        state.error = false
-        state.user = action.payload
-        state.isAuth = true
+      .addCase(login.fulfilled, (state, {payload}) => {
         setTokens({
           accessToken: payload.accessToken,
           refreshToken: payload.refreshToken
         })
-      })
-      .addCase(login.rejected, (state) => {
+        state.user = payload.user
+        state.isAuth = true
         state.loading = false
-        state.error = true
-        state.isAuth = false
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.error
       })
       .addCase(logOut.pending, (state) => {
         state.loading = true
         state.error = false
       })
-      .addCase(logOut.fulfilled, (state, action) => {
+      .addCase(logOut.fulfilled, (state, {payload}) => {
         state.loading = false
         state.error = false
-        state.user = {}
+        state.user = payload.user
         state.isAuth = false
         deleteTokens()
       })
-      .addCase(logOut.rejected, (state) => {
+      .addCase(logOut.rejected, (state, action) => {
         state.loading = false
-        state.error = true
+        state.error = action.error
       })
       .addCase(forgotPassword.pending, (state) => {
         state.loading = true
@@ -202,9 +203,9 @@ export const userSlice = createSlice({
         state.loading = false
         state.error = false
       })
-      .addCase(forgotPassword.rejected, (state) => {
+      .addCase(forgotPassword.rejected, (state, action) => {
         state.loading = false
-        state.error = true
+        state.error = action.error
       })
       .addCase(resetPassword.pending, (state) => {
         state.loading = true
@@ -214,9 +215,9 @@ export const userSlice = createSlice({
         state.loading = false
         state.error = false
       })
-      .addCase(resetPassword.rejected, (state) => {
+      .addCase(resetPassword.rejected, (state, action) => {
         state.loading = false
-        state.error = true
+        state.error = action.error
       })
   }
 });
