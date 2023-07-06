@@ -35,14 +35,13 @@ function Profile() {
     }
 
     //Обновить данные
-    const onSubmit = () => {
-        dispatch(updateUser())
+    const onSubmit = (values) => {
+        dispatch(updateUser(values))
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
         onSubmit(userInfo)
-        setUpdatedInfo(false)
     }
 
     //Сбросить изменения
@@ -80,7 +79,7 @@ function Profile() {
                         История заказов
                     </NavLink>
                     <NavLink
-                        to={'/logout'}
+                        to={'/login'}
                         onClick={handleLogout}
                         className={({ isActive }) => isActive ? `${profileStyles.link} text text_type_main-medium ${profileStyles.link_active}` :
                             `${profileStyles.link} text text_type_main-medium text_color_inactive`}>
