@@ -5,7 +5,7 @@ const config = {
     tokenUrl: `https://norma.nomoreparties.space/api/auth/token`,
     loginUrl: `https://norma.nomoreparties.space/api/auth/login`,
     logoutUrl: `https://norma.nomoreparties.space/api/auth/logout`,
-    userUrl: `https://norma.nomoreparties.space/api/auth/login`,
+    userUrl: `https://norma.nomoreparties.space/api/auth/user`,
     passForgotUrl: `https://norma.nomoreparties.space/api/password-reset`,
     passResetUrl: `https://norma.nomoreparties.space/api/password-reset/reset`,
     headers: {
