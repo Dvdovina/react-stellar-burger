@@ -5,11 +5,14 @@ import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../../../services/userSlice';
 import { updateUser } from '../../../services/userSlice';
+import { useNavigate } from "react-router-dom";
 
 
 function Profile() {
 
     const inputRef = useRef(null);
+
+    const navigate = useNavigate();
 
     const dispatch = useDispatch()
 
@@ -54,13 +57,8 @@ function Profile() {
     const handleLogout = (e) => {
             e.preventDefault()
             dispatch(logOut())
+            navigate("/login");
     };
-
-    useEffect(() => {
-        const isUpdated =
-            JSON.stringify(currentData) !== JSON.stringify(userInfo)
-        setUpdatedInfo(isUpdated)
-    }, [userInfo, currentData])
 
     return (
         <>
@@ -79,7 +77,7 @@ function Profile() {
                         История заказов
                     </NavLink>
                     <NavLink
-                        to={'/login'}
+                        to={'/logout'}
                         onClick={handleLogout}
                         className={({ isActive }) => isActive ? `${profileStyles.link} text text_type_main-medium ${profileStyles.link_active}` :
                             `${profileStyles.link} text text_type_main-medium text_color_inactive`}>
