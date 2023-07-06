@@ -52,8 +52,9 @@ function Profile() {
     }
 
     // Выход
-    const handleLogout = () => {
-        dispatch(logOut(payload));
+    const handleLogout = (e) => {
+            e.preventDefault()
+            dispatch(logOut())
     };
 
     useEffect(() => {
