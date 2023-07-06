@@ -9,9 +9,24 @@ import ErrorPage from "../pages/error-page/error-page";
 import Profile from "../pages/profile/profile";
 import Register from "../pages/register/register";
 import ResetPassword from "../pages/reset-password/reset-password";
+import { getUser } from "../../services/userSlice";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 
 function App() {
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    try {
+      if (localStorage.getItem('accessToken')) {
+        dispatch(getUser())
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }, [])
 
 
   return (
