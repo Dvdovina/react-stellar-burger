@@ -5,7 +5,7 @@ import {
   deleteTokens,
   postLogin,
   postLogOut,
-  getUser,
+  getUserApi,
   patchUser,
   postForgotPass,
   postResetPass
@@ -14,11 +14,11 @@ import {
 
 
 //AsyncThunk Пользователь
-export const createUser = createAsyncThunk(
-  'user/createUser',
+export const getUser = createAsyncThunk(
+  'user/getUser',
   async (payload) => {
     try {
-      return await getUser(payload);
+      return await getUserApi(payload);
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }
@@ -114,17 +114,17 @@ export const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(createUser.pending, (state) => {
+      .addCase(getUser.pending, (state) => {
         state.loading = true
         state.error = false
       })
-      .addCase(createUser.fulfilled, (state, {payload}) => {
+      .addCase(getUser.fulfilled, (state, {payload}) => {
         state.loading = false
         state.error = false
         state.user = payload.user
         state.isAuth = true
       })
-      .addCase(createUser.rejected, (state, action) => {
+      .addCase(getUser.rejected, (state, action) => {
         state.loading = false
         state.error = action.error
         state.isAuth = false

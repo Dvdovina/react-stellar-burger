@@ -48,7 +48,7 @@ const postOrder = (order, options = {}) => {
 
 
 //API Пользователь
-const getUser = () => {
+const getUserApi = () => {
     return fetchWithRefresh(`${config.userUrl}`,
         {
             method: "GET",
@@ -194,4 +194,4 @@ const deleteTokens = () => {
 }
 
 
-export { getData, postOrder, getUser, patchUser, refreshToken, fetchWithRefresh, setTokens, deleteTokens, postRegisterUser, postLogin, postLogOut, postForgotPass, postResetPass }
+export { getData, postOrder, getUserApi, patchUser, refreshToken, fetchWithRefresh, setTokens, deleteTokens, postRegisterUser, postLogin, postLogOut, postForgotPass, postResetPass }
