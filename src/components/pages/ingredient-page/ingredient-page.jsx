@@ -3,13 +3,13 @@ import ingredientPageStyles from './ingredient-page.module.css'
 
 
 
-function IngredientPage({ currentIngredient }) {
+function IngredientPage() {
 
 
     return (
         <>
             <section className={ingredientPageStyles.container}>
-                <IngredientDetails currentIngredient={currentIngredient} />
+                <IngredientDetails />
             </section>
         </>
     )
