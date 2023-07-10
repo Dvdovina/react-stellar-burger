@@ -102,11 +102,6 @@ function BurgerIngredients() {
                     </div>
                 )
                 }
-                {isOpen &&
-                    (<Modal onClose={handleCloseModal}>
-                        <IngredientDetails />
-                    </Modal>)
-                }
             </section>
         </>
     )

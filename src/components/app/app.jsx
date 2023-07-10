@@ -23,7 +23,6 @@ function App() {
   const navigate = useNavigate()
   const location = useLocation()
   const background = location.state && location.state.background;
-  const ingredientId = "/ingredients/:id";
 
   useEffect(() => {
     try {
@@ -45,7 +44,7 @@ function App() {
       <AppHeader />
       <Routes location={background || location} >
         <Route path='/' element={<Home />} />
-        <Route path={ingredientId} element={<IngredientPage />} />
+        <Route path='/ingredients/:ingredientId'element={<IngredientDetails />} />
         <Route path='/profile' element={<Protected><Profile /></Protected>} />
         <Route path='/login' element={<Protected onlyUnAuth><Login /></Protected>} />
         <Route path='/register' element={<Protected onlyUnAuth><Register /></Protected>} />
@@ -55,7 +54,7 @@ function App() {
       </Routes>
       {background && (
       <Routes>
-        <Route path={ingredientId} element={<Modal onClose={handleCloseModal}><IngredientDetails /></Modal>} />
+        <Route path='/ingredients/:ingredientId' element={<Modal onClose={handleCloseModal}><IngredientDetails /></Modal>} />
       </Routes>
         )}
     </div>
