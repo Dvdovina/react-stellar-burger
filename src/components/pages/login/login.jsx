@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { login } from '../../../services/userSlice';
 import { useNavigate } from "react-router-dom";
+import { useForm } from '../../../hooks/useForm';
 
 
 
 
 function Login() {
-
 
     const inputRef = useRef(null);
 
@@ -18,28 +18,16 @@ function Login() {
 
     const dispatch = useDispatch()
 
+    const { values, handleChange } = useForm({  email: '', password: '', });
+
     const onSubmit = (payload) => {
         dispatch(login(payload))
     }
 
-    const [userInfo, setUserInfo] = useState({
-        email: '',
-        password: '',
-    })
-
-    const onInputChange = (event) => {
-        const { name, value } = event.target
-        setUserInfo({
-            ...userInfo,
-            [name]: value,
-        })
-    }
-
     const handleSubmit = (e) => {
         e.preventDefault()
-        onSubmit(userInfo)
+        onSubmit(values)
         navigate("/", { replace: true });
-
     }
 
     return (
@@ -49,20 +37,20 @@ function Login() {
                 <Input
                     type={'email'}
                     placeholder={'E-mail'}
-                    onChange={onInputChange}
-                    value={userInfo.email}
+                    onChange={handleChange}
+                    value={values.email}
                     name={'email'}
                     error={false}
                     ref={inputRef}
                     errorText={'Ошибка'}
                 />
                 <PasswordInput
-                    onChange={onInputChange}
-                    value={userInfo.password}
+                    onChange={handleChange}
+                    value={values.password}
                     name={'password'}
                     placeholder={'Пароль'}
                 />
-                <Button htmlType="submit" type="primary" size="large" disabled={!userInfo.email || !userInfo.password}>Войти</Button>
+                <Button htmlType="submit" type="primary" size="large" disabled={!values.email || !values.password}>Войти</Button>
             </form>
             <span className="text text_type_main-default text_color_inactive pt-20">
                 Вы - новый пользователь? <Link to="/register" className={loginStyles.link}>Зарегистрироваться</Link>

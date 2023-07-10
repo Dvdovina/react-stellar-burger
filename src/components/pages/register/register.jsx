@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch } from 'react-redux'
 import { register } from '../../../services/userSlice';
+import { useForm } from '../../../hooks/useForm';
 
 
 
@@ -17,23 +18,11 @@ function Register() {
         dispatch(register(payload))
     }
 
-    const [userInfo, setUserInfo] = useState({
-        name: '',
-        email: '',
-        password: '',
-    })
-
-    const onInputChange = (event) => {
-        const { name, value } = event.target
-        setUserInfo({
-            ...userInfo,
-            [name]: value,
-        })
-    }
+    const { values, handleChange } = useForm({ name: '', email: '', password: '', });
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        onSubmit(userInfo)
+        onSubmit(values)
     }
 
 
@@ -44,8 +33,8 @@ function Register() {
                     <Input
                         type={'text'}
                         placeholder={'Имя'}
-                        onChange={onInputChange}
-                        value={userInfo.name}
+                        onChange={handleChange}
+                        value={values.name}
                         name={'name'}
                         error={false}
                         ref={inputRef}
@@ -54,20 +43,20 @@ function Register() {
                     <Input
                         type={'email'}
                         placeholder={'E-mail'}
-                        onChange={onInputChange}
-                        value={userInfo.email}
+                        onChange={handleChange}
+                        value={values.email}
                         name={'email'}
                         error={false}
                         ref={inputRef}
                         errorText={'Ошибка'}
                     />
                     <PasswordInput
-                        onChange={onInputChange}
-                        value={userInfo.password}
+                        onChange={handleChange}
+                        value={values.password}
                         name={'password'}
                         placeholder={'Пароль'}
                     />
-                    <Button htmlType="submit" type="primary" size="large" disabled={!userInfo.name || !userInfo.email || !userInfo.password}>Зарегистрироваться</Button>
+                    <Button htmlType="submit" type="primary" size="large" disabled={!values.name || !values.email || !values.password}>Зарегистрироваться</Button>
                 </form>
                 <span className="text text_type_main-default text_color_inactive pt-20">
                     Уже зарегистрированы? <Link to="/login" className={registerStyles.link}>Войти</Link>
