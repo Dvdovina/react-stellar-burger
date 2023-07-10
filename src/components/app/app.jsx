@@ -44,7 +44,7 @@ function App() {
       <AppHeader />
       <Routes location={background || location} >
         <Route path='/' element={<Home />} />
-        <Route path='/ingredients/:ingredientId'element={<IngredientDetails />} />
+        <Route path='/ingredients/:id'element={<IngredientPage />} />
         <Route path='/profile' element={<Protected><Profile /></Protected>} />
         <Route path='/login' element={<Protected onlyUnAuth><Login /></Protected>} />
         <Route path='/register' element={<Protected onlyUnAuth><Register /></Protected>} />
@@ -54,7 +54,7 @@ function App() {
       </Routes>
       {background && (
       <Routes>
-        <Route path='/ingredients/:ingredientId' element={<Modal onClose={handleCloseModal}><IngredientDetails /></Modal>} />
+        <Route path='/ingredients/:id' element={<Modal onClose={handleCloseModal}><IngredientDetails /></Modal>} />
       </Routes>
         )}
     </div>
