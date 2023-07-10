@@ -42,7 +42,7 @@ function Profile() {
         dispatch(updateUser(values))
     }
 
-    const handleSubmit = (e) => {
+    const updateUserInfo = (e) => {
         e.preventDefault()
         onSubmit(userInfo)
     }
@@ -86,7 +86,7 @@ function Profile() {
                         В этом разделе вы можете<br /> изменить свои персональные данные
                     </span>
                 </nav>
-                <form className={profileStyles.form} onSubmit={handleSubmit}>
+                <form className={profileStyles.form} onSubmit={updateUserInfo}>
                     <Input
                         type={'text'}
                         placeholder={'Имя'}
