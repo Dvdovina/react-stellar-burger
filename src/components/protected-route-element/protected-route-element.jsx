@@ -2,29 +2,25 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from "react-redux";
 
 
-function ProtectedRouteElement({ onlyUnAuth = false, component }) {
+function Protected({ children, onlyUnAuth = false, }) {
 
-    const isAuthChecked = useSelector((store) => store.user.isAuthChecked);
-    const user = useSelector((store) => store.user.user);
-    const location = useLocation();
 
-    if (!isAuthChecked) {
-        return null;
+    const location = useLocation()
+    const from = location.state?.from || { from: { pathname: "/" } }
+
+
+    const { isAuth } = useSelector(
+        (store) => store.user,)
+
+    if (onlyUnAuth && isAuth) {
+        return <Navigate to={from} />
     }
 
-    if (onlyUnAuth && user) {
-        const { from } = location.state || { from: { pathname: "/" } };
-        return <Navigate to={from} />;
+    if (!onlyUnAuth && !isAuth) {
+        return <Navigate to={'/login'} state={{ from: location }} />
     }
 
-    if (!onlyUnAuth && !user) {
-        return <Navigate to="/login" state={{ from: location }} />;
-    }
-    return component;
+    return children
 }
 
-
-export const OnlyAuth = ProtectedRouteElement;
-export const OnlyUnAuth = ({ component }) => (
-  <ProtectedRouteElement onlyUnAuth={true} component={component} />
-);
+export default Protected

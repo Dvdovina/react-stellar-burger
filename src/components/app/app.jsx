@@ -12,6 +12,7 @@ import ResetPassword from "../pages/reset-password/reset-password";
 import { getUser } from "../../services/userSlice";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+import Protected from "../protected-route-element/protected-route-element";
 
 
 function App() {
@@ -23,8 +24,8 @@ function App() {
       if (localStorage.getItem('accessToken')) {
         dispatch(getUser())
       }
-    } catch (e) {
-      console.log(e)
+    } catch (error) {
+      console.log(error)
     }
   }, [])
 
@@ -35,7 +36,7 @@ function App() {
       <Routes >
         <Route path='/' element={<Home />} />
         <Route path='/ingredients/:id' element={<IngredientPage />} />
-        <Route path='/profile' element={<Profile />} />
+        <Route path='/profile' element={<Protected><Profile /></Protected>} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/forgot-password' element={<ForgotPassword />} />
