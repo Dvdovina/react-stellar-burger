@@ -6,7 +6,7 @@ function Protected({ children, onlyUnAuth = false, }) {
 
 
     const location = useLocation()
-    const from = location.state?.from || { from: { pathname: "/" } }
+    const { from } = location.state || { from: { pathname: "/" } };
 
 
     const { isAuth } = useSelector(
