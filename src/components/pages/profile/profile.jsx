@@ -61,7 +61,6 @@ function Profile() {
     };
 
     return (
-        <>
             <section className={profileStyles.section}>
                 <nav className={profileStyles.menu}>
                     <NavLink
@@ -135,7 +134,6 @@ function Profile() {
                     )}
                 </form>
             </section>
-        </>
     )
 }
 

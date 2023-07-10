@@ -84,7 +84,6 @@ function BurgerConstructor() {
         }, [ingredients, dispatch])
 
         return (
-            <>
                 <section className={` ${constructorStyles.section} pt-5 pl-4 pr-4`} ref={dropRef} >
                     <div className={` ${constructorStyles.buns} pb-5 pr-7`}>
                         {bun && (<ConstructorElement
@@ -134,7 +133,6 @@ function BurgerConstructor() {
                         }
                     </div>
                 </section>
-            </>
         )
     }
 

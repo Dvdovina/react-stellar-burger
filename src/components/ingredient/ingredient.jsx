@@ -29,7 +29,6 @@ const Ingredient = ({ item, current }) => {
     })
 
     return (
-        <>
             <Link state={{ background: location }} to={`/ingredients/${item._id}`} className={ingredientStyles.link} onClick={() => current(item)} ref={dragRef} style={{ isDrag }} id={_id}>
                 <li className={ingredientStyles.item} >
                     {!!counter && <Counter count={counter} size="default" className={ingredientStyles.counter} extraClass="m-1" />}
@@ -41,7 +40,6 @@ const Ingredient = ({ item, current }) => {
                     <p className={`text text_type_main-default ${ingredientStyles.text}`}>{name}</p>
                 </li>
             </Link>
-        </>
     )
 }
 

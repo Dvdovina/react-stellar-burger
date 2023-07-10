@@ -62,7 +62,6 @@ function BurgerIngredients() {
     const [mainsRef, mainsInView] = useInView({ threshold: 0.2 });
 
     return (
-        <>
             <section className={ingredientsStyles.section}>
                 <h1 className="text text_type_main-large">Соберите бургер</h1>
                 <div className={ingredientsStyles.tab}>
@@ -103,7 +102,6 @@ function BurgerIngredients() {
                 )
                 }
             </section>
-        </>
     )
 }
 

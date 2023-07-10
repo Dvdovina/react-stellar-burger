@@ -38,7 +38,6 @@ function Register() {
 
 
     return (
-        <>
             <section className={registerStyles.section}>
                 <form className={registerStyles.form} onSubmit={handleSubmit}>
                     <h2 className="text text_type_main-medium">Регистрация</h2>
@@ -74,7 +73,6 @@ function Register() {
                     Уже зарегистрированы? <Link to="/login" className={registerStyles.link}>Войти</Link>
                 </span>
             </section>
-        </>
     )
 }
 

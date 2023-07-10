@@ -39,7 +39,6 @@ function ForgotPassword() {
     }
 
     return (
-        <>
             <section className={forgotPasswordStyles.section}>
                 <form className={forgotPasswordStyles.form} onSubmit={handleSubmit}>
                     <h2 className="text text_type_main-medium">Восстановление пароля</h2>
@@ -59,7 +58,6 @@ function ForgotPassword() {
                     Вспомнили пароль? <Link to="/login" className={forgotPasswordStyles.link}>Войти</Link>
                 </span>
             </section>
-        </>
     )
 }
 

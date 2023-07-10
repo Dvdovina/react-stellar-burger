@@ -8,11 +8,9 @@ function IngredientPage() {
 
 
     return (
-        <>
             <section className={ingredientPageStyles.container}>
                 <IngredientDetails />
             </section>
-        </>
     )
 }
 

@@ -40,7 +40,6 @@ function ResetPassword() {
     }
 
     return (
-        <>
             <section className={resetPasswordStyles.section}>
                 <form className={resetPasswordStyles.form} onSubmit={handleSubmit}>
                     <h2 className="text text_type_main-medium">Восстановление пароля</h2>
@@ -65,7 +64,6 @@ function ResetPassword() {
                     Вспомнили пароль? <Link to="/login" className={resetPasswordStyles.link}>Войти</Link>
                 </span>
             </section>
-        </>
     )
 }
 
