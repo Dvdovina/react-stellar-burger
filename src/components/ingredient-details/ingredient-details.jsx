@@ -1,11 +1,14 @@
 import { ingredientPropType } from "../../utils/prop-types";
 import detailsStyles from './ingredient-details.module.css';
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 
 function IngredientDetails() {
 
     const { currentIngredient } = useSelector((state) => state.currentIngredient);
+
+    const { id } = useParams();
 
     return (
         <>

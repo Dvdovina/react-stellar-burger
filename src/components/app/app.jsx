@@ -8,6 +8,7 @@ import ErrorPage from "../pages/error-page/error-page";
 import Profile from "../pages/profile/profile";
 import Register from "../pages/register/register";
 import ResetPassword from "../pages/reset-password/reset-password";
+import IngredientPage from "../pages/ingredient-page/ingredient-page";
 import { getUser } from "../../services/userSlice";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
@@ -43,6 +44,7 @@ function App() {
       <AppHeader />
       <Routes location={background || location} >
         <Route path='/' element={<Home />} />
+        <Route path='/ingredients/:id' element={<IngredientPage />} />
         <Route path='/profile' element={<Protected><Profile /></Protected>} />
         <Route path='/login' element={<Protected onlyUnAuth><Login /></Protected>} />
         <Route path='/register' element={<Protected onlyUnAuth><Register /></Protected>} />
