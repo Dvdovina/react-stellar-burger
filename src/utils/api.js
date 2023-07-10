@@ -13,6 +13,7 @@ const config = {
     }
 };
 
+
 const checkResponse = (res) => {
     if (res.ok) {
         return res.json();
@@ -32,12 +33,14 @@ const getData = () => {
         });
 }
 
-const postOrder = (order, options = {}) => {
+const postOrder = (order, options = {}, auth) => {
     return fetch(`${config.orderUrl}`,
         {
             method: 'POST',
-            headers: config.headers,
-            ...options,
+            headers: {
+                authorization: localStorage.getItem('accessToken'),
+                "Content-Type": "application/json;charset=utf-8", ...options
+            },
             body: JSON.stringify(order)
         })
         .then(checkResponse)
