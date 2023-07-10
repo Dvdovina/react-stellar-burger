@@ -32,7 +32,7 @@ function BurgerConstructor() {
     //Открытие модального окна (state isOpen) и отправление заказа 
     const handleOpenModal = async () => {
         if (localStorage.getItem('accessToken')) {
-            await dispatch(submitOrder(cart));
+          dispatch(submitOrder(cart));
         } else {
             navigate('/login');
         }
