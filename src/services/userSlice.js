@@ -122,10 +122,6 @@ export const userSlice = createSlice({
         state.error = false
         state.user = payload.user
         state.isAuth = true
-        setTokens({
-          accessToken: payload.accessToken,
-          refreshToken: payload.refreshToken
-        })
       })
       .addCase(getUser.rejected, (state, action) => {
         state.loading = false
@@ -156,10 +152,6 @@ export const userSlice = createSlice({
         state.error = false
         state.user = payload.user
         state.isAuth = true
-        setTokens({
-          accessToken: payload.accessToken,
-          refreshToken: payload.refreshToken
-        })
       })
       .addCase(register.rejected, (state, action) => {
         state.loading = false
