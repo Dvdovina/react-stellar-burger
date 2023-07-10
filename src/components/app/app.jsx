@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import Protected from "../protected-route-element/protected-route-element";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
+import { fetchIngredients } from "../../services/ingredientsSlice";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
     try {
       if (localStorage.getItem('accessToken')) {
         dispatch(getUser())
+        dispatch(fetchIngredients())
       }
     } catch (error) {
       console.log(error)
