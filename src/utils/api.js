@@ -14,7 +14,7 @@ const config = {
 };
 
 
-const checkResponse = (res) => {
+export const checkResponse = (res) => {
     if (res.ok) {
         return res.json();
     }
@@ -97,12 +97,11 @@ const postRegisterUser = ({ name, email, password }) => {
 
 //API Логин
 const postLogin = ({ email, password }) => {
-    return fetchWithRefresh(`${config.loginUrl}`,
+    return fetch(`${config.loginUrl}`,
         {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
-                authorization: localStorage.getItem('accessToken')
             },
             body: JSON.stringify({
                 email,
@@ -113,7 +112,7 @@ const postLogin = ({ email, password }) => {
 
 //API Лог-аут
 const postLogOut = () => {
-    return fetchWithRefresh(`${config.logoutUrl}`,
+    return fetch(`${config.logoutUrl}`,
         {
             method: 'POST',
             headers: {
@@ -128,7 +127,7 @@ const postLogOut = () => {
 
 //API Забытый пароль
 const postForgotPass = ({ email }) => {
-    return fetchWithRefresh(`${config.passForgotUrl}`,
+    return fetch(`${config.passForgotUrl}`,
         {
             method: 'POST',
             headers: config.headers,
@@ -140,7 +139,7 @@ const postForgotPass = ({ email }) => {
 
 //API Сбросить и поменять пароль
 const postResetPass = ({ password, token }) => {
-    return fetchWithRefresh(`${config.passResetUrl}`,
+    return fetch(`${config.passResetUrl}`,
         {
             method: 'POST',
             headers: config.headers,
@@ -186,15 +185,5 @@ const fetchWithRefresh = async (url, options) => {
     }
 };
 
-const setTokens = ({ accessToken, refreshToken }) => {
-    localStorage.setItem('accessToken', accessToken)
-    localStorage.setItem('refreshToken', refreshToken)
-}
 
-const deleteTokens = () => {
-    localStorage.removeItem('accessToken')
-    localStorage.removeItem('refreshToken')
-}
-
-
-export { getData, postOrder, getUserApi, patchUser, refreshToken, fetchWithRefresh, setTokens, deleteTokens, postRegisterUser, postLogin, postLogOut, postForgotPass, postResetPass }
+export { getData, postOrder, getUserApi, patchUser, refreshToken, fetchWithRefresh, postRegisterUser, postLogin, postLogOut, postForgotPass, postResetPass }
