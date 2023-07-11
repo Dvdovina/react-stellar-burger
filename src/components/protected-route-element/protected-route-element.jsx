@@ -1,5 +1,6 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from "react-redux";
+import Preloader from '../preloader/preloader';
 
 
 export const Protected = ({ onlyUnAuth = false, component }) => {
@@ -8,7 +9,7 @@ export const Protected = ({ onlyUnAuth = false, component }) => {
     const location = useLocation();
 
     if (!isAuthChecked) {
-        return null;
+        return <Preloader />
     }
 
 
