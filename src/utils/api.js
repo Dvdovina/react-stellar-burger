@@ -33,8 +33,8 @@ const getData = () => {
         });
 }
 
-const postOrder = (order, options = {}, auth) => {
-    return fetch(`${config.orderUrl}`,
+const postOrder = (order, options = {}) => {
+    return fetchWithRefresh(`${config.orderUrl}`,
         {
             method: 'POST',
             headers: {
@@ -43,7 +43,6 @@ const postOrder = (order, options = {}, auth) => {
             },
             body: JSON.stringify(order)
         })
-        .then(checkResponse)
         .catch((err) => {
             console.log(err)
         });
