@@ -40,6 +40,7 @@ function Profile() {
     //Обновить данные
     const onSubmit = (values) => {
         dispatch(updateUser(values))
+        setUpdatedInfo(false)
     }
 
     const updateUserInfo = (e) => {
