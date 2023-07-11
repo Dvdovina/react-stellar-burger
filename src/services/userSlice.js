@@ -7,14 +7,15 @@ import {
   patchUser,
   postForgotPass,
   postResetPass,
+  checkResponse
 } from '../utils/api';
 
 //AsyncThunk Пользователь
 export const getUser = createAsyncThunk(
   'user/getUser',
-  async (token) => {
+  async (payload) => {
     try {
-      const res = await getUserApi(token);
+      const res = await getUserApi(payload);
       return res;
     } catch (error) {
       localStorage.removeItem("accessToken");
@@ -57,11 +58,11 @@ export const login = createAsyncThunk(
   'user/login', 
   async (email, password) => {
     try {
-      const res = await postLogin(email, password);
-      localStorage.setItem("refreshToken", res.refreshToken);
-      localStorage.setItem("accessToken", res.accessToken);
-      setAuthChecked(true)
-      return res;
+      const response = await postLogin(email, password);
+      const data = await checkResponse(response);
+      localStorage.setItem("refreshToken", data.refreshToken);
+      localStorage.setItem("accessToken", data.accessToken);
+      return data
     } catch (error) {
       throw error;
     }
@@ -74,9 +75,10 @@ export const logOut = createAsyncThunk(
   async () => {
     try {
       const res = await postLogOut();
+      const data = await checkResponse(res);
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
-      return res
+      return data
     } catch (error) {
       throw error;
     }
@@ -125,16 +127,13 @@ const initialState = {
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {
-    setAuthChecked(state, action) {
-      state.isAuthChecked  = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getUser.pending, (state) => {
         state.loading = true
         state.error = false
+        state.isAuthChecked = false;
       })
       .addCase(getUser.fulfilled, (state, { payload }) => {
         state.loading = false
@@ -145,6 +144,7 @@ export const userSlice = createSlice({
       .addCase(getUser.rejected, (state, action) => {
         state.loading = false
         state.error = action.error.message
+        state.isAuthChecked = true;
       })
       .addCase(updateUser.pending, (state) => {
         state.loading = true
@@ -225,4 +225,3 @@ export const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const { setAuthChecked } = userSlice.actions;
