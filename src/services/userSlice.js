@@ -104,7 +104,7 @@ const initialState = {
   },
   loading: false,
   error: false,
-  isAuth: false
+  isAuthChecked: false,
 };
 
 export const userSlice = createSlice({
@@ -116,17 +116,18 @@ export const userSlice = createSlice({
       .addCase(getUser.pending, (state) => {
         state.loading = true
         state.error = false
+        state.isAuthChecked = false;
       })
       .addCase(getUser.fulfilled, (state, {payload}) => {
         state.loading = false
         state.error = false
         state.user = payload.user
-        state.isAuth = true
+        state.isAuthChecked = true;
       })
       .addCase(getUser.rejected, (state, action) => {
         state.loading = false
         state.error = action.error
-        state.isAuth = false
+        state.isAuthChecked = true;
       })
       .addCase(updateUser.pending, (state) => {
         state.loading = true
@@ -136,12 +137,10 @@ export const userSlice = createSlice({
         state.loading = false
         state.error = false
         state.user = payload.user
-        state.isAuth = true
       })
       .addCase(updateUser.rejected, (state, action) => {
         state.loading = false
         state.error = action.error
-        state.isAuth = false
       })
       .addCase(register.pending, (state) => {
         state.loading = true
@@ -151,12 +150,10 @@ export const userSlice = createSlice({
         state.loading = false
         state.error = false
         state.user = payload.user
-        state.isAuth = true
       })
       .addCase(register.rejected, (state, action) => {
         state.loading = false
         state.error = action.error
-        state.isAuth = false
       })
       .addCase(login.pending, (state) => {
         state.loading = true
@@ -168,7 +165,6 @@ export const userSlice = createSlice({
           refreshToken: payload.refreshToken
         })
         state.user = payload.user
-        state.isAuth = true
         state.loading = false
       })
       .addCase(login.rejected, (state, action) => {
@@ -183,7 +179,6 @@ export const userSlice = createSlice({
         state.loading = false
         state.error = false
         state.user = payload.user
-        state.isAuth = false
         deleteTokens()
       })
       .addCase(logOut.rejected, (state, action) => {

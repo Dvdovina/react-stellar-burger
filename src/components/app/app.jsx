@@ -12,10 +12,11 @@ import IngredientPage from "../pages/ingredient-page/ingredient-page";
 import { getUser } from "../../services/userSlice";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import Protected from "../protected-route-element/protected-route-element";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
 import { fetchIngredients } from "../../services/ingredientsSlice";
+import { OnlyAuth, OnlyUnAuth } from "../protected-route-element/protected-route-element";
+
 
 
 function App() {
@@ -41,11 +42,11 @@ function App() {
       <Routes location={background || location} >
         <Route path='/' element={<Home />} />
         <Route path='/ingredients/:id' element={<IngredientPage />} />
-        <Route path='/profile' element={<Protected><Profile /></Protected>} />
-        <Route path='/login' element={<Protected onlyUnAuth><Login /></Protected>} />
-        <Route path='/register' element={<Protected onlyUnAuth><Register /></Protected>} />
-        <Route path='/forgot-password' element={<Protected onlyUnAuth><ForgotPassword /></Protected>} />
-        <Route path='/reset-password' element={<Protected onlyUnAuth><ResetPassword /></Protected>} />
+        <Route path='/profile' element={<OnlyAuth component={<Profile />} />} />
+        <Route path='/login' element={<OnlyUnAuth component={<Login />} />} />
+        <Route path='/register' element={<OnlyUnAuth component={<Register />} />} />
+        <Route path='/forgot-password' element={<OnlyUnAuth component={<ForgotPassword />} />} />
+        <Route path='/reset-password' element={<OnlyUnAuth component={<ResetPassword />} />} />
         <Route path='*' element={<ErrorPage />} />
       </Routes>
       {background && (
