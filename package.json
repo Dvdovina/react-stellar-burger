@@ -15,6 +15,7 @@
     "react-dnd-html5-backend": "^14.1.0",
     "react-dom": "^17.0.1",
     "react-intersection-observer": "^8.32.5",
+    "react-loader-spinner": "^5.3.4",
     "react-redux": "^7.2.9",
     "react-router": "^6.13.0",
     "react-router-dom": "^6.13.0",
