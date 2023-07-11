@@ -25,7 +25,8 @@ function ForgotPassword() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        onSubmit(values)
+        onSubmit(values.email)
+        localStorage.setItem('email', values.email);
         navigate("/reset-password", { replace: true });
     }
 

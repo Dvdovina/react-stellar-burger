@@ -6,6 +6,7 @@ import { resetPassword } from '../../../services/userSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { useForm } from '../../../hooks/useForm';
+import { Navigate } from "react-router-dom";
 
 
 
@@ -27,6 +28,10 @@ function ResetPassword() {
         e.preventDefault()
         onSubmit(values)
         navigate("/login", { replace: true });
+    }
+
+    if (!localStorage.getItem('email')) {
+        return <Navigate to={'/forgot-password'} replace={true} />;
     }
 
     return (
