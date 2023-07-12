@@ -1,4 +1,8 @@
-.section{
+.section {
     display: flex;
-    margin-top: 100px;
+    flex-direction: row;
+    gap: 60px;
+    justify-content: center;
+    margin: 0 380px 0 372px;
+    max-width: 100%;
 }
