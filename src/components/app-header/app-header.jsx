@@ -27,7 +27,7 @@ function AppHeader() {
                         </NavLink>
                     </li>
                     <li className={`${headerStyles.item} pb-4 pt-4 pl-5`}>
-                        <NavLink end to={'/profile/orders'}
+                        <NavLink end to={'/feed'}
                             className={({ isActive }) => isActive ? `${headerStyles.link} text text_type_main-default ${headerStyles.link_active}` :
                                 `${headerStyles.link} text text_type_main-default text_color_inactive`}>
                             <ListIcon type={list ? "primary" : "secondary"} />
