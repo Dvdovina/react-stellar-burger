@@ -1,0 +1,45 @@
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    margin-top: 100px;
+    min-width: 580px;
+}
+
+.status {
+    display: flex;
+    gap: 36px;
+    justify-content: space-between;
+}
+
+.status_box {
+    display: flex;
+    flex-direction: column;
+    min-width: 206px;
+}
+
+.orders_list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.number {
+    
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.done {
+    color: #00CCCC;
+}
+
+.shadow {
+    text-shadow: 0px 0px 16px rgba(51, 51, 255, 0.25),
+        0px 0px 8px rgba(51, 51, 255, 0.25),
+        0px 4px 32px rgba(51, 51, 255, 0.5);
+}
