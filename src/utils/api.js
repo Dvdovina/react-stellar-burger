@@ -33,13 +33,13 @@ const getData = () => {
         });
 }
 
-const postOrder = (order, options = {}) => {
+const postOrder = (order) => {
     return fetchWithRefresh(`${config.orderUrl}`,
         {
             method: 'POST',
             headers: {
                 authorization: localStorage.getItem('accessToken'),
-                "Content-Type": "application/json;charset=utf-8", ...options
+                "Content-Type": "application/json;charset=utf-8",
             },
             body: JSON.stringify(order)
         })
@@ -101,7 +101,6 @@ const postLogin = ({ email, password }) => {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
-                authorization: localStorage.getItem('accessToken')
             },
             body: JSON.stringify({
                 email,
