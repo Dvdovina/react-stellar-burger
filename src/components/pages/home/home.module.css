@@ -1,0 +1,8 @@
+.main {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    justify-content: center;
+    margin: 0 40px;
+    max-width: 96%;
+  }

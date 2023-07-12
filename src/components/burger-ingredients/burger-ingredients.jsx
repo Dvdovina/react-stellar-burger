@@ -57,12 +57,11 @@ function BurgerIngredients() {
     };
 
     //реализация подсвечивания переключателя табов
-    const [bunsRef, bunsInView] = useInView({ threshold: 0 });
-    const [saucesRef, saucesInView] = useInView({ threshold: 0.7 });
-    const [mainsRef, mainsInView] = useInView({ threshold: 0.1 });
+    const [bunsRef, bunsInView] = useInView({ threshold: .1 });
+    const [saucesRef, saucesInView] = useInView({ threshold: .9 });
+    const [mainsRef, mainsInView] = useInView({ threshold: 0.2 });
 
     return (
-        <>
             <section className={ingredientsStyles.section}>
                 <h1 className="text text_type_main-large">Соберите бургер</h1>
                 <div className={ingredientsStyles.tab}>
@@ -102,13 +101,7 @@ function BurgerIngredients() {
                     </div>
                 )
                 }
-                {isOpen &&
-                    (<Modal onClose={handleCloseModal}>
-                        <IngredientDetails />
-                    </Modal>)
-                }
             </section>
-        </>
     )
 }
 
