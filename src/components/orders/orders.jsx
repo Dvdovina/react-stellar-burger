@@ -6,9 +6,10 @@ function Orders() {
 
 
     return(
-        <section>
+        <div className={ordersStyle.container}>
+            <span>#1234567</span>
 
-        </section>
+        </div>
     )
 }
 

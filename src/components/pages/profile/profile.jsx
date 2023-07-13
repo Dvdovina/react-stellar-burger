@@ -7,34 +7,35 @@ import { useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from "react-router-dom";
 
 
+
 function Profile() {
 
     const dispatch = useDispatch()
     const navigate = useNavigate();
-    const {pathname} = useLocation()
+    const { pathname } = useLocation()
 
 
- //Смена текста
+    //Смена текста
     const changeText = () => {
         switch (pathname) {
             case '/profile':
-              return (
-                <>
-                  В этом разделе вы можете
-                  <br /> изменить свои персональные данные
-                </>
-              )
+                return (
+                    <>
+                        В этом разделе вы можете
+                        <br /> изменить свои персональные данные
+                    </>
+                )
             case '/profile/orders':
-              return (
-                <>
-                  В этом разделе вы можете
-                  <br /> просмотреть свою историю заказов
-                </>
-              )
+                return (
+                    <>
+                        В этом разделе вы можете
+                        <br /> просмотреть свою историю заказов
+                    </>
+                )
             default:
-              return ''
-          }
+                return ''
         }
+    }
 
     // Выход
     const handleLogout = (e) => {
@@ -69,7 +70,6 @@ function Profile() {
                     {changeText()}
                 </span>
             </nav>
-            <UserProfile/>
         </section>
     )
 }
