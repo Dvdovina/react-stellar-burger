@@ -19,6 +19,7 @@ import { OnlyAuth, OnlyUnAuth } from "../protected-route-element/protected-route
 import Feed from "../pages/feed/feed";
 import Orders from "../orders/orders";
 import Order from "../pages/order/order";
+import UserProfile from "../userProfile/userProfile";
 
 
 
@@ -48,6 +49,7 @@ function App() {
         <Route path='/feed' element={<Feed />} />
         <Route path='/feed/:id' element={<Order />} />
         <Route path='/profile' element={<OnlyAuth component={<Profile />} />} />
+        <Route path='/profile' element={<OnlyAuth component={<UserProfile />} />} />
         <Route path='/profile/orders' element={<OnlyAuth component={<Orders />} />} />
         <Route path='/profile/orders/:id' element={<OnlyAuth component={<Order />} />} />
         <Route path='/login' element={<OnlyUnAuth component={<Login />} />} />
