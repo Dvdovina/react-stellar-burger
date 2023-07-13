@@ -69,6 +69,7 @@ function Profile() {
                     {changeText()}
                 </span>
             </nav>
+            <UserProfile/>
         </section>
     )
 }

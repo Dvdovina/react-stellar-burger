@@ -1,4 +1,4 @@
-import profileStyles from '../pages/profile/profile.module.css'
+import userProfileStyles from './userProfile.module.css'
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -48,8 +48,7 @@ function UserProfile(){
     }
 
     return(
-        <section>
-            <form className={profileStyles.form} onSubmit={updateUserInfo}>
+            <form className={userProfileStyles.form} onSubmit={updateUserInfo}>
                     <Input
                         type={'text'}
                         placeholder={'Имя'}
@@ -78,7 +77,7 @@ function UserProfile(){
                         icon="EditIcon"
                     />
                     {updatedInfo && (
-                        <div className={profileStyles.buttons}>
+                        <div className={userProfileStyles.buttons}>
                             <Button
                                 onClick={handleReset}
                                 htmlType="reset"
@@ -96,7 +95,6 @@ function UserProfile(){
                         </div>
                     )}
                 </form>
-        </section>
     )
 }
 
