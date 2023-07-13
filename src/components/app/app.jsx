@@ -17,9 +17,9 @@ import Modal from "../modal/modal";
 import { fetchIngredients } from "../../services/ingredientsSlice";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route-element/protected-route-element";
 import Feed from "../pages/feed/feed";
-import Orders from "../orders/orders";
+import OrdersPage from "../pages/orders-page/orders-page";
 import Order from "../pages/order/order";
-import UserProfile from "../userProfile/userProfile";
+
 
 
 
@@ -39,9 +39,6 @@ function App() {
     navigate(-1);
   };
 
-
-
-
   return (
     <div className={`custom-scroll ${styles.app}`}>
       <AppHeader />
@@ -51,8 +48,7 @@ function App() {
         <Route path='/feed' element={<Feed />} />
         <Route path='/feed/:id' element={<Order />} />
         <Route path='/profile' element={<OnlyAuth component={<Profile />} />} />
-        <Route path='/profile' element={<OnlyAuth component={<UserProfile />} />} />
-        <Route path='/profile/orders' element={<OnlyAuth component={<Orders />} />} />
+        <Route path='/profile/orders' element={<OnlyAuth component={<OrdersPage />} />} />
         <Route path='/profile/orders/:id' element={<OnlyAuth component={<Order />} />} />
         <Route path='/login' element={<OnlyUnAuth component={<Login />} />} />
         <Route path='/register' element={<OnlyUnAuth component={<Register />} />} />
