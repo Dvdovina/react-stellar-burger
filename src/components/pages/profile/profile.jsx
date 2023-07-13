@@ -2,14 +2,39 @@ import profileStyles from './profile.module.css'
 import { NavLink } from 'react-router-dom'
 import { logOut } from '../../../services/userSlice';
 import UserProfile from '../../userProfile/userProfile';
+import Orders from '../../orders/orders';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+
 
 function Profile() {
 
-
     const dispatch = useDispatch()
     const navigate = useNavigate();
+    const {pathname} = useLocation()
+
+
+ //Смена текста
+    const changeText = () => {
+        switch (pathname) {
+            case '/profile':
+              return (
+                <>
+                  В этом разделе вы можете
+                  <br /> изменить свои персональные данные
+                </>
+              )
+            case '/profile/orders':
+              return (
+                <>
+                  В этом разделе вы можете
+                  <br /> просмотреть свою историю заказов
+                </>
+              )
+            default:
+              return ''
+          }
+        }
 
     // Выход
     const handleLogout = (e) => {
@@ -41,10 +66,9 @@ function Profile() {
                     Выход
                 </NavLink>
                 <span className="text text_type_main-small text_color_inactive pt-20">
-                    В этом разделе вы можете<br /> изменить свои персональные данные
+                    {changeText()}
                 </span>
             </nav>
-            <UserProfile />
         </section>
     )
 }
