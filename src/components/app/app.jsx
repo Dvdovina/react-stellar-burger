@@ -17,6 +17,7 @@ import Modal from "../modal/modal";
 import { fetchIngredients } from "../../services/ingredientsSlice";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route-element/protected-route-element";
 import Feed from "../pages/feed/feed";
+import Orders from "../pages/orders/orders";
 
 
 
@@ -45,6 +46,7 @@ function App() {
         <Route path='/ingredients/:id' element={<IngredientPage />} />
         <Route path='/feed' element={<Feed />} />
         <Route path='/profile' element={<OnlyAuth component={<Profile />} />} />
+        <Route path='/profile/orders' element={<OnlyAuth component={<Orders />} />} />
         <Route path='/login' element={<OnlyUnAuth component={<Login />} />} />
         <Route path='/register' element={<OnlyUnAuth component={<Register />} />} />
         <Route path='/forgot-password' element={<OnlyUnAuth component={<ForgotPassword />} />} />
