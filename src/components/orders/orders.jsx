@@ -1,14 +1,18 @@
-import ordersStyle from './orders.module.css'
-
+import ordersStyles from './orders.module.css'
+import OrderCard from '../orderCard/orderCard'
 
 
 function Orders() {
 
-
-    return(
-        <div className={ordersStyle.container}>
-            <span>#1234567</span>
-
+    return (
+        <div className={ordersStyles.container}>
+            <ul className={`custom-scroll ${ordersStyles.order_list}`}>
+                <OrderCard/>
+                <OrderCard/>
+                <OrderCard/>
+                <OrderCard/>
+                <OrderCard/>
+            </ul>
         </div>
     )
 }

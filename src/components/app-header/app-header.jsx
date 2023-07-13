@@ -6,8 +6,9 @@ import { NavLink, useMatch, Link } from "react-router-dom";
 function AppHeader() {
 
     const home = useMatch('/');
-    const list = useMatch('/profile/orders');
+    const list = useMatch('/feed');
     const profile = useMatch('/profile');
+
 
     return (
         <header className={headerStyles.header}>

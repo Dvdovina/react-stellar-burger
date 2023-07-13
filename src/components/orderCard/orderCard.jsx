@@ -1,12 +1,9 @@
-import feedCardStyles from './feedCard.module.css'
+import orderCardStyles from './orderCard.module.css'
 import { FormattedDate, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import testIcon from '../../images/ingredientTest.svg'
 
 
-
-
-function FeedCard() {
-
+function OrderCard() {
 
     //Дата Заказа
     const today = new Date()
@@ -21,43 +18,46 @@ function FeedCard() {
 
 
     return (
-        <li className={feedCardStyles.card}>
-            <div className={feedCardStyles.text_box}>
+        <li className={orderCardStyles.card}>
+            <div className={orderCardStyles.text_box}>
                 <span className="text text_type_digits-default">#12345</span>
                 <span className="text text_type_main-small text_color_inactive">
                     <FormattedDate date={fiveDaysAgo} />
                 </span>
             </div>
-            <p className="text text_type_main-medium">Тестовое Название Заказа</p>
-            <div className={feedCardStyles.icons_box}>
-                <div className={feedCardStyles.imgs} >
+            <div className={orderCardStyles.info_box}>
+                <p className="text text_type_main-medium">Тестовое Название Заказа</p>
+                <p className={`text text_type_main-default ${orderCardStyles.done}`}>Выполнен</p>
+            </div>
+            <div className={orderCardStyles.icons_box}>
+                <div className={orderCardStyles.imgs} >
                     <img
                         src={testIcon}
                         alt='тестовое изображение'
-                        className={feedCardStyles.img}
+                        className={orderCardStyles.img}
                     />
                     <img
                         src={testIcon}
                         alt='тестовое изображение'
-                        className={feedCardStyles.img}
+                        className={orderCardStyles.img}
                     />
                     <img
                         src={testIcon}
                         alt='тестовое изображение'
-                        className={feedCardStyles.img}
+                        className={orderCardStyles.img}
                     />
                     <img
                         src={testIcon}
                         alt='тестовое изображение'
-                        className={feedCardStyles.img}
+                        className={orderCardStyles.img}
                     />
                     <img
                         src={testIcon}
                         alt='тестовое изображение'
-                        className={feedCardStyles.img}
+                        className={orderCardStyles.img}
                     />
                 </div>
-                <div className={feedCardStyles.price}>
+                <div className={orderCardStyles.price}>
                     <p className="text text_type_digits-default">100</p>
                     <CurrencyIcon type="primary" />
                 </div>
@@ -67,4 +67,4 @@ function FeedCard() {
 }
 
 
-export default FeedCard
+export default OrderCard

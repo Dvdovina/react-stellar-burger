@@ -2,5 +2,19 @@
     align-items: center;
     display: flex;
     flex-direction: column;
-    max-width: 640px;
+    min-width: 844px;
+}
+
+.order_list {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    list-style-type: none;
+    margin: 0;
+    max-height: 916px;
+    overflow-y: scroll;
+    padding: 0;
+    scroll-behavior: smooth;
+    width: 100%;
 }
