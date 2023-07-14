@@ -8,7 +8,7 @@
     list-style-type: none;
     margin: 0;
     padding: 24px;
-    width: 96%;
+    min-width: 570px;
 }
 
 .text_box {
@@ -36,3 +36,9 @@
     display: flex;
     gap: 8px;
 }
+
+.link {
+    background: inherit;
+    color: inherit;
+    text-decoration: none;
+  }

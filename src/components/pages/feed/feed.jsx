@@ -6,10 +6,6 @@ import FeedStats from '../../feedStats/feedStats'
 
 function Feed() {
 
-
-
-
-
     return (
         <section className={feedStyles.section}>
             <FeedList />
