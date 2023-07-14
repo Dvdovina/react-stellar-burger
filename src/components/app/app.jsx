@@ -18,7 +18,8 @@ import { fetchIngredients } from "../../services/ingredientsSlice";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route-element/protected-route-element";
 import Feed from "../pages/feed/feed";
 import OrdersPage from "../pages/orders-page/orders-page";
-import Order from "../pages/order/order";
+import OrderPage from "../pages/order-page/order-page";
+import OrderModal from "../order-modal/order-modal";
 
 
 
@@ -46,10 +47,10 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/ingredients/:id' element={<IngredientPage />} />
         <Route path='/feed' element={<Feed />} />
-        <Route path='/feed/:id' element={<Order />} />
+        <Route path='/feed/:id' element={<OrderPage />} />
         <Route path='/profile' element={<OnlyAuth component={<Profile />} />} />
         <Route path='/profile/orders' element={<OnlyAuth component={<OrdersPage />} />} />
-        <Route path='/profile/orders/:id' element={<OnlyAuth component={<Order />} />} />
+        <Route path='/profile/orders/:id' element={<OnlyAuth component={<OrderPage />} />} />
         <Route path='/login' element={<OnlyUnAuth component={<Login />} />} />
         <Route path='/register' element={<OnlyUnAuth component={<Register />} />} />
         <Route path='/forgot-password' element={<OnlyUnAuth component={<ForgotPassword />} />} />
@@ -59,8 +60,8 @@ function App() {
       {background && (
         <Routes>
           <Route path='/ingredients/:id' element={<Modal onClose={handleCloseModal}><IngredientDetails /></Modal>} />
-          <Route path='/feed/:id' element={<Modal onClose={handleCloseModal}><Order /></Modal>} />
-          <Route path='/profile/orders/:id' element={<Modal onClose={handleCloseModal}><Order /></Modal>} />
+          <Route path='/feed/:id' element={<Modal onClose={handleCloseModal}><OrderModal /></Modal>} />
+          <Route path='/profile/orders/:id' element={<Modal onClose={handleCloseModal}><OrderModal /></Modal>} />
         </Routes>
       )}
     </div>
