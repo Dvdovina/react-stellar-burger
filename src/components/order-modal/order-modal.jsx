@@ -4,9 +4,9 @@ import orderModalStyles from './order-modal.module.css'
 function OrderModal() {
 
     return(
-        <section>
+        <div className={orderModalStyles.container}>
             
-        </section>
+        </div>
     )
 }
 
