@@ -6,12 +6,10 @@ export const socketMiddleware = (wsActions) => {
             const { type } = action;
             const {
                 wsConnect,
-                wsSendMessage,
                 onOpen,
                 onClose,
                 onError,
                 onMessage,
-                wsConnecting,
                 wsDisconnect,
             } = wsActions;
             if (type === wsConnect.type) {
