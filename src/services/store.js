@@ -4,6 +4,7 @@ import ingredientsSlice from './ingredientsSlice'
 import constructorSlice from './constructorSlice'
 import orderSlice from './orderSlice'
 import userSlice from './userSlice'
+import { socketMiddleware } from './middleware/websocketMiddleware'
 
 export const store = configureStore({
     reducer: {
