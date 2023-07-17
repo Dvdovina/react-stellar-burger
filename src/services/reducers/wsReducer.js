@@ -11,8 +11,8 @@ const initialState = {
     status: WebsocketStatus.OFFLINE,
     orders: [],
     error: '',
-    totalOrders: 0,
-    totalOrdersToday: 0
+    total: 0,
+    totalToday: 0
 };
 
 export const wsReducer = createReducer(initialState, (builder) => {
@@ -28,8 +28,8 @@ export const wsReducer = createReducer(initialState, (builder) => {
         })
         .addCase(wsMessage, (state, action) => {
             state.orders = action.payload.orders
-            state.totalOrders = action.payload.totalOrders
-            state.totalOrdersToday = action.payload.totalOrdersToday
+            state.total = action.payload.total
+            state.totalToday = action.payload.totalToday
         })
         .addCase(wsError, (state, action) => {
             state.error = action.payload

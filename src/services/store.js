@@ -25,7 +25,7 @@ export const store = configureStore({
         userBurgerIngredients: constructorSlice,
         order: orderSlice,
         user: userSlice,
-        orders: wsReducer
+        feed: wsReducer
     },
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware().concat(ordersMiddlware);

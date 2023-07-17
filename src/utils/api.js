@@ -13,6 +13,8 @@ const config = {
     }
 };
 
+export const WS_FEED_URL = "wss://norma.nomoreparties.space/orders/all";
+
 
 export const checkResponse = (res) => {
     if (res.ok) {
