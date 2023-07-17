@@ -1,4 +1,4 @@
-import { configureStore} from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
 import currentIngredientSlice from "./currentIngredientSlice"
 import ingredientsSlice from './ingredientsSlice'
 import constructorSlice from './constructorSlice'
@@ -17,8 +17,6 @@ const ordersMiddlware = socketMiddleware({
     onMessage: wsMessage,
     onError: wsError,
 });
-
-
 
 export const store = configureStore({
     reducer: {
