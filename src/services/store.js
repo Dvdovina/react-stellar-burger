@@ -16,7 +16,7 @@ export const store = configureStore({
         user: userSlice,
         webSocket: wsSlice
     },
-    middleware: (getDefaultMiddleware) => {
-        return getDefaultMiddleware().concat(socketMiddleware(wsSlice.actions))
-    }
+    // middleware: (getDefaultMiddleware) => {
+    //     return getDefaultMiddleware().concat(socketMiddleware(wsSlice.actions))
+    // }
 })

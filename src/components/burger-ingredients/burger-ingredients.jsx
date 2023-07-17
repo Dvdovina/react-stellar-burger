@@ -1,12 +1,9 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import Ingredient from "../ingredient/ingredient";
 import ingredientsStyles from "./burger-ingredients.module.css"
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import Modal from "../modal/modal";
-import IngredientDetails from "../ingredient-details/ingredient-details";
 import { useSelector, useDispatch } from 'react-redux';
-import { showIngredient, hideIngredient } from "../../services/currentIngredientSlice"
-import { fetchIngredients } from "../../services/ingredientsSlice";
+import { showIngredient} from "../../services/currentIngredientSlice"
 import { useInView } from "react-intersection-observer";
 
 
@@ -14,25 +11,13 @@ function BurgerIngredients() {
 
     const dispatch = useDispatch();
 
-    //api из стора
-    useEffect(() => {
-        dispatch(fetchIngredients());
-    }, [dispatch]);
-
     //ингредиенты из стора
     const { ingredients, ingredientsError } = useSelector(
         (store) => store.ingredients);
 
-    //стейт модального окна из стора
-    const { isOpen } = useSelector((state) => state.currentIngredient);
-
     //Модальные окна
     const handleOpenModal = (item) => {
         dispatch(showIngredient(item))
-    };
-
-    const handleCloseModal = () => {
-        dispatch(hideIngredient())
     };
 
     //перебор ингредиентов по типу
