@@ -9,6 +9,16 @@
     margin: 0;
     padding: 24px;
     width: 570px;
+    transition: .2s ease-in-out;
+}
+
+.card:hover {
+    box-shadow: 0px 0px 16px rgba(51, 51, 255, 0.1),
+        0px 0px 8px rgba(51, 51, 255, 0.1),
+        0px 4px 32px rgba(51, 51, 255, 0.1);
+    text-shadow: 0px 0px 16px rgba(51, 51, 255, 0.1),
+        0px 0px 8px rgba(51, 51, 255, 0.25),
+        0px 4px 32px rgba(51, 51, 255, 0.5);
 }
 
 .text_box {
@@ -41,4 +51,4 @@
     background: inherit;
     color: inherit;
     text-decoration: none;
-  }
+}
