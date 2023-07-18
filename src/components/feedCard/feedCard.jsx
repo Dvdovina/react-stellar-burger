@@ -29,9 +29,6 @@ function FeedCard({ order }) {
     );
 
 
-
-
-
     return (
         <Link state={{ background: location }} to={`/feed/${_id}`} className={feedCardStyles.link}>
             <li className={feedCardStyles.card}>
@@ -43,33 +40,15 @@ function FeedCard({ order }) {
                 </div>
                 <p className="text text_type_main-medium">{name}</p>
                 <div className={feedCardStyles.icons_box}>
-                    <div className={feedCardStyles.imgs} >
-                        <img
-                            src={testIcon}
-                            alt='тестовое изображение'
-                            className={feedCardStyles.img}
-                        />
-                        <img
-                            src={testIcon}
-                            alt='тестовое изображение'
-                            className={feedCardStyles.img}
-                        />
-                        <img
-                            src={testIcon}
-                            alt='тестовое изображение'
-                            className={feedCardStyles.img}
-                        />
-                        <img
-                            src={testIcon}
-                            alt='тестовое изображение'
-                            className={feedCardStyles.img}
-                        />
-                        <img
-                            src={testIcon}
-                            alt='тестовое изображение'
-                            className={feedCardStyles.img}
-                        />
-                    </div>
+                    <ul className={feedCardStyles.imgs_list} >
+                        <li className={feedCardStyles.icons} >
+                            <img
+                                src={testIcon}
+                                alt='тестовое изображение'
+                                className={feedCardStyles.img}
+                            />
+                        </li>
+                    </ul>
                     <div className={feedCardStyles.price}>
                         <p className="text text_type_digits-default">{totalPrice}</p>
                         <CurrencyIcon type="primary" />
