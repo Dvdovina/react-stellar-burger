@@ -3,16 +3,34 @@ import { FormattedDate, CurrencyIcon } from '@ya.praktikum/react-developer-burge
 import testIcon from '../../images/ingredientTest.svg'
 import { useLocation, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useMemo } from 'react';
 
 
 function FeedCard({ order }) {
 
     const location = useLocation();
 
-    const { ingredients } = useSelector(
-        (store) => store.ingredients);
+    const allIngredients = useSelector((state) => state.ingredients.ingredients);
 
-    const { name, number, createdAt, _id } = order
+    const { name, number, createdAt, _id, ingredients } = order
+
+    const orderIngredients = useMemo(() => {
+        if (ingredients) {
+            return ingredients.map((id) =>
+                allIngredients.find((item) => item._id === id)
+            );
+        }
+    }, [allIngredients]);
+
+    const totalPrice = orderIngredients.reduce(
+        (acc, i) =>
+            acc + (i?.price || 0),
+        0
+    );
+
+
+
+
 
     return (
         <Link state={{ background: location }} to={`/feed/${_id}`} className={feedCardStyles.link}>
@@ -53,7 +71,7 @@ function FeedCard({ order }) {
                         />
                     </div>
                     <div className={feedCardStyles.price}>
-                        <p className="text text_type_digits-default">100</p>
+                        <p className="text text_type_digits-default">{totalPrice}</p>
                         <CurrencyIcon type="primary" />
                     </div>
                 </div>
