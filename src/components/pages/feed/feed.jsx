@@ -15,14 +15,14 @@ function Feed() {
     }, []);
 
     const dispatch = useDispatch()
-    const { orders, error } = useSelector(
+    const { orders, total, totalToday } = useSelector(
         (store) => store.feed,
     );
 
     return (
         <section className={feedStyles.section}>
             <FeedList orders={orders} />
-            <FeedStats orders={orders} />
+            <FeedStats orders={orders} total={total} totalToday={totalToday} />
         </section>
     )
 }
