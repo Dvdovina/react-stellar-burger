@@ -1,23 +1,8 @@
 import feedListStyles from './feedList.module.css'
 import FeedCard from '../feedCard/feedCard'
-import { WS_FEED_URL } from '../../utils/api'
-import { useSelector, useDispatch } from 'react-redux';
-import { wsConnect, wsDisconnect } from '../../services/actions/wsActions'
-import { useEffect } from 'react';
 
 
-function FeedList() {
-
-   const dispatch = useDispatch()
-   const { orders, error } = useSelector(
-      (store) => store.feed,
-   );
-
-   useEffect(() => {
-      dispatch(wsConnect(WS_FEED_URL));
-      return () => dispatch(wsDisconnect());
-   }, []);
-
+function FeedList({orders}) {
 
    return (
       <section className={feedListStyles.section}>
