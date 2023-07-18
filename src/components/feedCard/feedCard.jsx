@@ -28,6 +28,14 @@ function FeedCard({ order }) {
         0
     );
 
+    const sortedIngredients = orderIngredients.slice(0, 4);
+
+    const loadIngredients = () => {
+        return sortedIngredients.map((ingredient, i) => (
+            <div key={i} className={feedCardStyles.img} style={{ backgroundImage: `url('${ingredient?.image_mobile}')` }} />
+        ));
+    };
+
 
     return (
         <Link state={{ background: location }} to={`/feed/${_id}`} className={feedCardStyles.link}>
@@ -41,13 +49,16 @@ function FeedCard({ order }) {
                 <p className="text text_type_main-medium">{name}</p>
                 <div className={feedCardStyles.icons_box}>
                     <ul className={feedCardStyles.imgs_list} >
-                        <li className={feedCardStyles.icons} >
-                            <img
-                                src={testIcon}
-                                alt='тестовое изображение'
-                                className={feedCardStyles.img}
-                            />
-                        </li>
+                        {loadIngredients()}
+                        {orderIngredients.length > 4 && (
+                            <li className={feedCardStyles.icons} key={4}>
+                                <div className={feedCardStyles.img}
+                                    style={{ backgroundImage: `url('${orderIngredients[4]?.image_mobile}')` }}>
+                                    <div className={feedCardStyles.overlay}>{`+${orderIngredients.length - 5}`}
+                                    </div>
+                                </div>
+                            </li>
+                        )}
                     </ul>
                     <div className={feedCardStyles.price}>
                         <p className="text text_type_digits-default">{totalPrice}</p>
