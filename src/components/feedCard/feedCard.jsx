@@ -1,6 +1,5 @@
 import feedCardStyles from './feedCard.module.css'
 import { FormattedDate, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import testIcon from '../../images/ingredientTest.svg'
 import { useLocation, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useMemo } from 'react';
@@ -35,7 +34,6 @@ function FeedCard({ order }) {
             <div key={i} className={feedCardStyles.img} style={{ backgroundImage: `url('${ingredient?.image_mobile}')` }} />
         ));
     };
-
 
     return (
         <Link state={{ background: location }} to={`/feed/${_id}`} className={feedCardStyles.link}>
