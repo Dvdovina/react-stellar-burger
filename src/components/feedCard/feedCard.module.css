@@ -33,6 +33,7 @@
 
 .imgs_list {
     display: flex;
+    flex-direction: row-reverse;
     margin: 0;
     padding: 0;
 }

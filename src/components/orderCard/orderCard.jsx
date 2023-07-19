@@ -28,6 +28,14 @@ function OrderCard({ order }) {
         0
     );
 
+    const sortedIngredients = orderIngredients.slice(0, 5);
+
+    const loadIngredients = () => {
+        return sortedIngredients.map((item, i) => (
+            <div key={i} className={orderCardStyles.img} style={{ backgroundImage: `url('${item?.image_mobile}')` }} />
+        ));
+    };
+
     return (
         <Link state={{ background: location }} to={`/profile/orders/${_id}`} className={orderCardStyles.link}>
             <li className={orderCardStyles.card}>
@@ -42,13 +50,12 @@ function OrderCard({ order }) {
                     <p className={`text text_type_main-default ${orderCardStyles.done}`}>Выполнен</p>
                 </div>
                 <div className={orderCardStyles.icons_box}>
-                    <div className={orderCardStyles.imgs} >
-                        <img
-
-                            alt='тестовое изображение'
-                            className={orderCardStyles.img}
-                        />
-                    </div>
+                    <ul className={orderCardStyles.imgs_list} >
+                    {loadIngredients()}
+                        {orderIngredients.length > 5 && (
+                            <OrderIcons orderIngredients={orderIngredients}/>
+                        )}
+                    </ul>
                     <div className={orderCardStyles.price}>
                         <p className="text text_type_digits-default">{totalPrice}</p>
                         <CurrencyIcon type="primary" />
