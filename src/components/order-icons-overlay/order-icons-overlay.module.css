@@ -12,9 +12,10 @@
     border-radius: 50%;
     border: 2px solid #4C4CFF;
     height: 64px;
-    margin-right: -16px;
+    margin-right: 100px;
     position: relative;
     width: 64px;  
+    z-index: 1;
 }
 
 .overlay {

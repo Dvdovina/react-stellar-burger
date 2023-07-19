@@ -28,13 +28,13 @@
 
 .icons_box {
     display: flex;
-    justify-content: space-between;
 }
 
 .imgs_list {
     display: flex;
     margin: 0;
     padding: 0;
+    flex-direction: row-reverse;
 }
 
 .img {
@@ -47,6 +47,7 @@
     margin-right: -16px;
     position: relative;
     width: 64px;  
+    z-index: 2;
 }
 
 .price {
@@ -54,6 +55,7 @@
     align-self: center;
     display: flex;
     gap: 8px;
+    margin-left: auto;
 }
 
 .link {

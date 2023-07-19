@@ -3,7 +3,7 @@ import { FormattedDate, CurrencyIcon } from '@ya.praktikum/react-developer-burge
 import { useLocation, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useMemo } from 'react';
-import OrderIcons from '../order-icons/order-icons';
+import OrderIconsOverlay from '../order-icons-overlay/order-icons-overlay';
 
 
 function FeedCard({ order }) {
@@ -30,7 +30,7 @@ function FeedCard({ order }) {
 
     const sortedIngredients = orderIngredients.slice(0, 5);
 
-    const loadIngredients = () => {
+    const loadIngredientsIcons = () => {
         return sortedIngredients.map((item, i) => (
             <div key={i} className={feedCardStyles.img} style={{ backgroundImage: `url('${item?.image_mobile}')` }} />
         ));
@@ -47,12 +47,12 @@ function FeedCard({ order }) {
                 </div>
                 <p className="text text_type_main-medium">{name}</p>
                 <div className={feedCardStyles.icons_box}>
-                    <ul className={feedCardStyles.imgs_list} >
-                        {loadIngredients()}
-                        {orderIngredients.length > 5 && (
-                            <OrderIcons orderIngredients={orderIngredients}/>
-                        )}
-                    </ul>
+                    <div className={feedCardStyles.imgs_list} >
+                        {loadIngredientsIcons()}
+                    </div>
+                    {orderIngredients.length > 5 && (
+                        <OrderIconsOverlay orderIngredients={orderIngredients} />
+                    )}
                     <div className={feedCardStyles.price}>
                         <p className="text text_type_digits-default">{totalPrice}</p>
                         <CurrencyIcon type="primary" />
