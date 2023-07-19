@@ -12,7 +12,7 @@ function OrderCard({ order }) {
 
     const allIngredients = useSelector((state) => state.ingredients.ingredients);
 
-    const { name, number, createdAt, _id, ingredients } = order
+    const { name, number, createdAt, _id, ingredients, status } = order
 
     const orderIngredients = useMemo(() => {
         if (ingredients) {
@@ -36,6 +36,17 @@ function OrderCard({ order }) {
         ));
     };
 
+    const setTextColor = () => {
+        if (status === "done") {
+            return `text text_type_main-default ${orderCardStyles.done}`
+        } else if (status === "created") {
+            return `text text_type_main-default ${orderCardStyles.created}`
+        }
+        else if (status === "pending") {
+            return `text text_type_main-default ${orderCardStyles.created}`
+        }
+    }
+
     return (
         <Link state={{ background: location }} to={`/profile/orders/${_id}`} className={orderCardStyles.link}>
             <li className={orderCardStyles.card}>
@@ -47,7 +58,7 @@ function OrderCard({ order }) {
                 </div>
                 <div className={orderCardStyles.info_box}>
                     <p className="text text_type_main-medium">{name}</p>
-                    <p className={`text text_type_main-default ${orderCardStyles.done}`}>Выполнен</p>
+                    <p className={setTextColor()}>{status === 'done' ? 'Выполнен' : 'Готовится'}</p>
                 </div>
                 <div className={orderCardStyles.icons_box}>
                     <div className={orderCardStyles.imgs_list} >
