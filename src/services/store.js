@@ -5,8 +5,24 @@ import constructorSlice from './constructorSlice'
 import orderSlice from './orderSlice'
 import userSlice from './userSlice'
 import { wsReducer } from './reducers/wsReducer'
+import { wsProfileReducer } from './reducers/wsProfileReducer'
 import { socketMiddleware } from './middleware/wsMiddleware'
-import { wsOpen, wsClose, wsConnect, wsDisconnect, wsConnecting, wsMessage, wsError } from './actions/wsActions'
+import {
+    wsOpen,
+    wsClose,
+    wsConnect,
+    wsDisconnect,
+    wsConnecting,
+    wsMessage,
+    wsError,
+    wsProfileOpen,
+    wsProfileClose,
+    wsProfileConnect,
+    wsProfileDisconnect,
+    wsProfileConnecting,
+    wsProfileMessage,
+    wsProfileError
+} from './actions/wsActions'
 
 const ordersMiddlware = socketMiddleware({
     onOpen: wsOpen,
@@ -18,6 +34,16 @@ const ordersMiddlware = socketMiddleware({
     onError: wsError,
 });
 
+const ordersProfileMiddlware = socketMiddleware({
+    onOpen: wsProfileOpen,
+    onClose: wsProfileClose,
+    wsConnect: wsProfileConnect,
+    wsDisconnect: wsProfileDisconnect,
+    wsConnecting: wsProfileConnecting,
+    onMessage: wsProfileMessage,
+    onError: wsProfileError
+});
+
 export const store = configureStore({
     reducer: {
         ingredients: ingredientsSlice,
@@ -25,9 +51,10 @@ export const store = configureStore({
         userBurgerIngredients: constructorSlice,
         order: orderSlice,
         user: userSlice,
-        feed: wsReducer
+        feed: wsReducer,
+        profileOrders: wsProfileReducer
     },
     middleware: (getDefaultMiddleware) => {
-        return getDefaultMiddleware().concat(ordersMiddlware);
+        return getDefaultMiddleware().concat(ordersMiddlware, ordersProfileMiddlware);
     },
 })
