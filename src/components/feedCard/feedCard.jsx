@@ -31,8 +31,8 @@ function FeedCard({ order }) {
     const sortedIngredients = orderIngredients.slice(0, 5);
 
     const loadIngredients = () => {
-        return sortedIngredients.map((ingredient, i) => (
-            <div key={i} className={feedCardStyles.img} style={{ backgroundImage: `url('${ingredient?.image_mobile}')` }} />
+        return sortedIngredients.map((item, i) => (
+            <div key={i} className={feedCardStyles.img} style={{ backgroundImage: `url('${item?.image_mobile}')` }} />
         ));
     };
 
