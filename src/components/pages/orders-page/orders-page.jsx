@@ -2,17 +2,30 @@ import ordersPageStyles from './orders-page.module.css'
 import Orders from '../../orders/orders'
 import { NavLink } from 'react-router-dom'
 import { logOut } from '../../../services/userSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { WS_PROFILE_URL } from '../../../utils/api';
+import { wsProfileConnect, wsProfileDisconnect } from '../../../services/actions/wsActions';
+import { useEffect } from 'react';
 
 
 function OrdersPage() {
 
-
-
     const dispatch = useDispatch()
     const navigate = useNavigate();
+
+    const accessToken = localStorage.getItem("accessToken");
+    const accessTokenNoBearer = accessToken.slice(7);
+
+
+    useEffect(() => {
+        dispatch(wsProfileConnect(`${WS_PROFILE_URL}?token=${accessTokenNoBearer}`));
+        return () => dispatch(wsProfileDisconnect(`${WS_PROFILE_URL}?token=${accessTokenNoBearer}`));
+    }, []);
+
+    const { orders } = useSelector(
+        (store) => store.profileOrders,
+    );
 
     // Выход
     const handleLogout = (e) => {
@@ -47,7 +60,7 @@ function OrdersPage() {
                     <br /> просмотреть свою историю заказов
                 </span>
             </nav>
-            <Orders />
+            <Orders orders={orders} />
         </section>
     )
 }

@@ -9,12 +9,13 @@ import { useEffect } from 'react';
 
 function Feed() {
 
+    const dispatch = useDispatch()
+
     useEffect(() => {
         dispatch(wsConnect(WS_FEED_URL));
         return () => dispatch(wsDisconnect());
     }, []);
 
-    const dispatch = useDispatch()
     const { orders, total, totalToday } = useSelector(
         (store) => store.feed,
     );
