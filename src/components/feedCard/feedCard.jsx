@@ -3,6 +3,7 @@ import { FormattedDate, CurrencyIcon } from '@ya.praktikum/react-developer-burge
 import { useLocation, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useMemo } from 'react';
+import OrderIcons from '../order-icons/order-icons';
 
 
 function FeedCard({ order }) {
@@ -27,7 +28,7 @@ function FeedCard({ order }) {
         0
     );
 
-    const sortedIngredients = orderIngredients.slice(0, 4);
+    const sortedIngredients = orderIngredients.slice(0, 5);
 
     const loadIngredients = () => {
         return sortedIngredients.map((ingredient, i) => (
@@ -48,14 +49,8 @@ function FeedCard({ order }) {
                 <div className={feedCardStyles.icons_box}>
                     <ul className={feedCardStyles.imgs_list} >
                         {loadIngredients()}
-                        {orderIngredients.length > 4 && (
-                            <li className={feedCardStyles.icons} key={4}>
-                                <div className={feedCardStyles.img}
-                                    style={{ backgroundImage: `url('${orderIngredients[4]?.image_mobile}')` }}>
-                                    <div className={feedCardStyles.overlay}>{`+${orderIngredients.length - 5}`}
-                                    </div>
-                                </div>
-                            </li>
+                        {orderIngredients.length > 5 && (
+                            <OrderIcons orderIngredients={orderIngredients}/>
                         )}
                     </ul>
                     <div className={feedCardStyles.price}>
