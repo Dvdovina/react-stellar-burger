@@ -1,4 +1,5 @@
 const config = {
+    baseURL: `https://norma.nomoreparties.space/api/`,
     url: `https://norma.nomoreparties.space/api/ingredients`,
     orderUrl: `https://norma.nomoreparties.space/api/orders`,
     registerUrl: `https://norma.nomoreparties.space/api/auth/register`,
@@ -48,6 +49,17 @@ const postOrder = (order) => {
         })
         .catch((err) => {
             console.log(err)
+        });
+}
+
+const getOrder = (_id) => {
+    return fetch(`${baseURL}orders/${_id}`, {
+        method: "GET",
+        headers: config.headers
+    })
+        .then(checkResponse)
+        .catch((err) => {
+            console.log(err);
         });
 }
 
@@ -188,4 +200,4 @@ const fetchWithRefresh = async (url, options) => {
 };
 
 
-export { getData, postOrder, getUserApi, patchUser, refreshToken, fetchWithRefresh, postRegisterUser, postLogin, postLogOut, postForgotPass, postResetPass }
+export { getData, postOrder, getOrder, getUserApi, patchUser, refreshToken, fetchWithRefresh, postRegisterUser, postLogin, postLogOut, postForgotPass, postResetPass }
