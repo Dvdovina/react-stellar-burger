@@ -19,7 +19,7 @@ import { OnlyAuth, OnlyUnAuth } from "../protected-route-element/protected-route
 import Feed from "../pages/feed/feed";
 import OrdersPage from "../pages/orders-page/orders-page";
 import OrderPage from "../pages/order-page/order-page";
-import OrderModal from "../order-modal/order-modal";
+import OrderProfilePage from "../pages/order-profile-page/order-profile-page";
 
 
 
@@ -50,7 +50,7 @@ function App() {
         <Route path='/feed/:id' element={<OrderPage />} />
         <Route path='/profile' element={<OnlyAuth component={<Profile />} />} />
         <Route path='/profile/orders' element={<OnlyAuth component={<OrdersPage />} />} />
-        <Route path='/profile/orders/:id' element={<OnlyAuth component={<OrderPage />} />} />
+        <Route path='/profile/orders/:id' element={<OnlyAuth component={<OrderProfilePage />} />} />
         <Route path='/login' element={<OnlyUnAuth component={<Login />} />} />
         <Route path='/register' element={<OnlyUnAuth component={<Register />} />} />
         <Route path='/forgot-password' element={<OnlyUnAuth component={<ForgotPassword />} />} />
@@ -61,7 +61,7 @@ function App() {
         <Routes>
           <Route path='/ingredients/:id' element={<Modal onClose={handleCloseModal}><IngredientDetails /></Modal>} />
           <Route path='/feed/:id' element={<Modal onClose={handleCloseModal}><OrderPage /></Modal>} />
-          <Route path='/profile/orders/:id' element={<Modal onClose={handleCloseModal}><OrderPage /></Modal>} />
+          <Route path='/profile/orders/:id' element={<Modal onClose={handleCloseModal}><OrderProfilePage /></Modal>} />
         </Routes>
       )}
     </div>

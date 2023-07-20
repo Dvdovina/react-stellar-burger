@@ -4,7 +4,7 @@ import { wsConnect, wsDisconnect } from '../../../services/actions/wsActions'
 import { WS_FEED_URL } from '../../../utils/api'
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { useParams, useMatch } from 'react-router'
+import { useParams } from 'react-router'
 
 
 function OrderPage() {
