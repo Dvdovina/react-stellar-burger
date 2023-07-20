@@ -1,5 +1,5 @@
 const config = {
-    baseURL: `https://norma.nomoreparties.space/api/`,
+    baseUrl: `https://norma.nomoreparties.space/api/`,
     url: `https://norma.nomoreparties.space/api/ingredients`,
     orderUrl: `https://norma.nomoreparties.space/api/orders`,
     registerUrl: `https://norma.nomoreparties.space/api/auth/register`,
@@ -53,7 +53,7 @@ const postOrder = (order) => {
 }
 
 const getOrder = (_id) => {
-    return fetch(`${baseURL}orders/${_id}`, {
+    return fetch(`${config.baseUrl}orders/${_id}`, {
         method: "GET",
         headers: config.headers
     })
