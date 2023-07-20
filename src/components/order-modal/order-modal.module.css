@@ -14,6 +14,14 @@
     color: #00CCCC;
 }
 
+.done {
+    color: #00CCCC;
+}
+
+.created {
+    color: white
+}
+
 .cart_list {
     display: flex;
     flex-direction: column;

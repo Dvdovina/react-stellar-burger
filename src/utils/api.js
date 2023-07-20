@@ -1,6 +1,6 @@
 const config = {
     baseUrl: `https://norma.nomoreparties.space/api/`,
-    url: `https://norma.nomoreparties.space/api/ingredients`,
+    ingredientsUrl: `https://norma.nomoreparties.space/api/ingredients`,
     orderUrl: `https://norma.nomoreparties.space/api/orders`,
     registerUrl: `https://norma.nomoreparties.space/api/auth/register`,
     tokenUrl: `https://norma.nomoreparties.space/api/auth/token`,
@@ -26,7 +26,7 @@ export const checkResponse = (res) => {
 }
 
 const getData = () => {
-    return fetch(`${config.url}`,
+    return fetch(`${config.ingredientsUrl}`,
         {
             method: "GET",
             headers: config.headers
@@ -51,18 +51,6 @@ const postOrder = (order) => {
             console.log(err)
         });
 }
-
-const getOrder = (_id) => {
-    return fetch(`${config.baseUrl}orders/${_id}`, {
-        method: "GET",
-        headers: config.headers
-    })
-        .then(checkResponse)
-        .catch((err) => {
-            console.log(err);
-        });
-}
-
 
 //API Пользователь
 const getUserApi = () => {
@@ -200,4 +188,4 @@ const fetchWithRefresh = async (url, options) => {
 };
 
 
-export { getData, postOrder, getOrder, getUserApi, patchUser, refreshToken, fetchWithRefresh, postRegisterUser, postLogin, postLogOut, postForgotPass, postResetPass }
+export { getData, postOrder, getUserApi, patchUser, refreshToken, fetchWithRefresh, postRegisterUser, postLogin, postLogOut, postForgotPass, postResetPass }
