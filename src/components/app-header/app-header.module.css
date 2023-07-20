@@ -12,6 +12,11 @@
     align-self: center;
     display: flex;
     position: absolute;
+    transition: .2s ease-in-out;
+}
+
+.logo:hover {
+    opacity: .7;
 }
 
 .navigation {

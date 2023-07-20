@@ -1,8 +1,7 @@
-import { ingredientPropType } from "../../utils/prop-types";
 import detailsStyles from './ingredient-details.module.css';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector} from "react-redux";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+
 
 
 function IngredientDetails() {

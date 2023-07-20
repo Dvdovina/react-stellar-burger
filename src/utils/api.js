@@ -1,5 +1,6 @@
 const config = {
-    url: `https://norma.nomoreparties.space/api/ingredients`,
+    baseUrl: `https://norma.nomoreparties.space/api/`,
+    ingredientsUrl: `https://norma.nomoreparties.space/api/ingredients`,
     orderUrl: `https://norma.nomoreparties.space/api/orders`,
     registerUrl: `https://norma.nomoreparties.space/api/auth/register`,
     tokenUrl: `https://norma.nomoreparties.space/api/auth/token`,
@@ -13,6 +14,9 @@ const config = {
     }
 };
 
+export const WS_FEED_URL = "wss://norma.nomoreparties.space/orders/all";
+export const WS_PROFILE_URL = "wss://norma.nomoreparties.space/orders"
+
 
 export const checkResponse = (res) => {
     if (res.ok) {
@@ -22,7 +26,7 @@ export const checkResponse = (res) => {
 }
 
 const getData = () => {
-    return fetch(`${config.url}`,
+    return fetch(`${config.ingredientsUrl}`,
         {
             method: "GET",
             headers: config.headers
@@ -47,7 +51,6 @@ const postOrder = (order) => {
             console.log(err)
         });
 }
-
 
 //API Пользователь
 const getUserApi = () => {

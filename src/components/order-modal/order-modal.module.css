@@ -1,0 +1,47 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 50px auto 60px;
+    max-width: 580px;
+    width: 100%;
+}
+
+.number {
+    align-self: center;
+}
+
+.done {
+    color: #00CCCC;
+}
+
+.done {
+    color: #00CCCC;
+}
+
+.created {
+    color: white
+}
+
+.cart_list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    list-style-type: none;
+    margin: 0;
+    max-height: 366px;
+    overflow-y: scroll;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+.info_box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.price_box {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}

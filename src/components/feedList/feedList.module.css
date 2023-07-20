@@ -1,0 +1,19 @@
+.section {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    min-width: 608px;
+}
+
+.order_list {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    list-style-type: none;
+    margin: 0;
+    max-height: 852px;
+    overflow-y: scroll;
+    padding: 0;
+    scroll-behavior: smooth;
+}

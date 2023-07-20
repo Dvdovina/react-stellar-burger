@@ -1,0 +1,11 @@
+.form {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}
