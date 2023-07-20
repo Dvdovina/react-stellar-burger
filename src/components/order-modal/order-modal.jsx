@@ -7,7 +7,6 @@ import { useMemo } from 'react'
 
 function OrderModal({ orders }) {
 
-
     const { id } = useParams();
 
     const order = orders.find((order) => order._id === id);
