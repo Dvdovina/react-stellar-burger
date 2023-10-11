@@ -1,3 +1,7 @@
+import { TUser, TUserLogin, TOrder, TUserEmail, TPasswordReset } from "./common-types";
+import { THeaders } from "./api-types";
+
+
 const config = {
     baseUrl: `https://norma.nomoreparties.space/api/`,
     ingredientsUrl: `https://norma.nomoreparties.space/api/ingredients`,
@@ -18,7 +22,7 @@ export const WS_FEED_URL = "wss://norma.nomoreparties.space/orders/all";
 export const WS_PROFILE_URL = "wss://norma.nomoreparties.space/orders"
 
 
-export const checkResponse = (res) => {
+export const checkResponse = (res: Response) => {
     if (res.ok) {
         return res.json();
     }
@@ -32,22 +36,22 @@ const getData = () => {
             headers: config.headers
         })
         .then(checkResponse)
-        .catch((err) => {
+        .catch((err: any) => {
             console.log(err);
         });
 }
 
-const postOrder = (order) => {
+const postOrder = (order: TOrder) => {
     return fetchWithRefresh(`${config.orderUrl}`,
         {
             method: 'POST',
             headers: {
                 authorization: localStorage.getItem('accessToken'),
                 "Content-Type": "application/json;charset=utf-8",
-            },
+            } as (HeadersInit | undefined) & THeaders,
             body: JSON.stringify(order)
         })
-        .catch((err) => {
+        .catch((err: any) => {
             console.log(err)
         });
 }
@@ -60,55 +64,46 @@ const getUserApi = () => {
             headers: {
                 authorization: localStorage.getItem('accessToken'),
                 "Content-Type": "application/json;charset=utf-8",
-            },
+            } as (HeadersInit | undefined) & THeaders,
         })
 }
 
 
-const patchUser = ({ name, email, password }) => {
+const patchUser = (data: TUser) => {
     return fetchWithRefresh(`${config.userUrl}`,
         {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
                 authorization: localStorage.getItem('accessToken')
-            },
-            body: JSON.stringify({
-                name, email, password
-            }),
+            } as (HeadersInit | undefined) & THeaders,
+            body: JSON.stringify(data),
         });
 };
 
 //API регистрации
-const postRegisterUser = ({ name, email, password }) => {
+const postRegisterUser = (data: TUser) => {
     return fetch(`${config.registerUrl}`,
         {
             method: 'POST',
             headers: config.headers,
-            body: JSON.stringify({
-                name,
-                email,
-                password,
-            })
+            body: JSON.stringify(data)
         })
         .then(checkResponse)
-        .catch((err) => {
+        .catch((err: any) => {
             console.log(err)
         });
 }
 
 //API Логин
-const postLogin = ({ email, password }) => {
+const postLogin = (data: TUserLogin) => {
     return fetch(`${config.loginUrl}`,
         {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
             },
-            body: JSON.stringify({
-                email,
-                password,
-            })
+            body: JSON.stringify(data)
         })
 }
 
@@ -120,7 +115,7 @@ const postLogOut = () => {
             headers: {
                 'Content-Type': 'application/json',
                 authorization: localStorage.getItem('accessToken')
-            },
+            } as (HeadersInit | undefined) & THeaders,
             body: JSON.stringify({
                 token: localStorage.getItem("refreshToken"),
             })
@@ -128,7 +123,7 @@ const postLogOut = () => {
 }
 
 //API Забытый пароль
-const postForgotPass = ({ email }) => {
+const postForgotPass = (email: TUserEmail ) => {
     return fetch(`${config.passForgotUrl}`,
         {
             method: 'POST',
@@ -138,15 +133,14 @@ const postForgotPass = ({ email }) => {
             })
         })
 }
-
 //API Сбросить и поменять пароль
-const postResetPass = ({ password, token }) => {
+const postResetPass = (data: TPasswordReset) => {
     return fetch(`${config.passResetUrl}`,
         {
             method: 'POST',
             headers: config.headers,
             body: JSON.stringify({
-                password, token
+                data
             })
         })
 }
@@ -166,11 +160,11 @@ const refreshToken = () => {
 };
 
 
-const fetchWithRefresh = async (url, options) => {
+const fetchWithRefresh = async (url: string, options:  RequestInit & { headers: { authorization: string | null, "Content-Type": string } }) => {
     try {
         const res = await fetch(url, options);
         return await checkResponse(res);
-    } catch (err) {
+    } catch (err: any) {
         if (err.message === "jwt expired") {
             const refreshData = await refreshToken();
             if (!refreshData.success) {
