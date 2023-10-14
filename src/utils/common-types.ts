@@ -59,3 +59,9 @@ export type TIngredient = {
     password: string;
     token: string;
   };
+
+
+  export type TProtectedRoute = {
+    onlyUnAuth: boolean;
+    component: JSX.Element
+  }

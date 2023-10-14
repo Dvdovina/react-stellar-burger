@@ -147,6 +147,8 @@ export const userSlice = createSlice({
         state.loading = false
         state.error = true
         state.isAuthChecked = true;
+        state.user.email = null
+        state.user.name = null
       })
       .addCase(updateUser.pending, (state) => {
         state.loading = true
