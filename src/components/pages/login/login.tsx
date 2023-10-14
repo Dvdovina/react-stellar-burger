@@ -1,12 +1,13 @@
 import loginStyles from './login.module.css';
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { login } from '../../../services/userSlice';
 import { useNavigate } from "react-router-dom";
 import { useForm } from '../../../hooks/useForm';
-
+import { MouseEvent } from "react";
+import { TUserLogin } from '../../../utils/common-types';
 
 
 
@@ -18,13 +19,13 @@ function Login() {
 
     const dispatch = useDispatch()
 
-    const { values, handleChange } = useForm({  email: '', password: '', });
+    const { values, handleChange } = useForm({ email: '', password: '', });
 
-    const onSubmit = (payload) => {
+    const onSubmit = (payload: TUserLogin) => {
         dispatch(login(payload))
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: MouseEvent<HTMLFormElement>) => {
         e.preventDefault()
         onSubmit(values)
         navigate("/", { replace: true });
