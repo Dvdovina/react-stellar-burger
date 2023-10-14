@@ -10,7 +10,6 @@ import Register from "../pages/register/register";
 import ResetPassword from "../pages/reset-password/reset-password";
 import IngredientPage from "../pages/ingredient-page/ingredient-page";
 import { getUser } from "../../services/userSlice";
-import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
