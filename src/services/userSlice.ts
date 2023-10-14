@@ -10,12 +10,14 @@ import {
   checkResponse
 } from '../utils/api';
 
+import { TUserEmail, TUser, TUserLogin, TPasswordReset } from '../utils/common-types';
+
 //AsyncThunk Пользователь
 export const getUser = createAsyncThunk(
   'user/getUser',
-  async (payload) => {
+  async () => {
     try {
-      const res = await getUserApi(payload);
+      const res = await getUserApi();
       return res;
     } catch (error) {
       localStorage.removeItem("accessToken");
@@ -27,9 +29,9 @@ export const getUser = createAsyncThunk(
 
 export const updateUser = createAsyncThunk(
   'user/updateUser',
-  async (name, email, password) => {
+  async (payload: TUser) => {
     try {
-      const res = await patchUser(name, email, password);
+      const res = await patchUser(payload);
       return res;
     } catch (error) {
       throw error;
@@ -40,9 +42,9 @@ export const updateUser = createAsyncThunk(
 //AsyncThunk Регистрация
 export const register = createAsyncThunk(
   'user/register',
-  async (name, email, password) => {
+  async (payload: TUser) => {
     try {
-      const res = await postRegisterUser(name, email, password);
+      const res = await postRegisterUser(payload);
       localStorage.setItem("refreshToken", res.refreshToken);
       localStorage.setItem("accessToken", res.accessToken);
       return res
@@ -56,9 +58,9 @@ export const register = createAsyncThunk(
 //AsyncThunk Логин
 export const login = createAsyncThunk(
   'user/login', 
-  async (email, password) => {
+  async (payload: TUserLogin) => {
     try {
-      const response = await postLogin(email, password);
+      const response = await postLogin(payload);
       const data = await checkResponse(response);
       localStorage.setItem("refreshToken", data.refreshToken);
       localStorage.setItem("accessToken", data.accessToken);
@@ -88,7 +90,7 @@ export const logOut = createAsyncThunk(
 //AsyncThunk Забытый пароль
 export const forgotPassword = createAsyncThunk(
   'user/forgotPassword',
-  async (email) => {
+  async (email: TUserEmail) => {
     try {
       const res = await postForgotPass(email);
       return res
@@ -103,9 +105,9 @@ export const forgotPassword = createAsyncThunk(
 //AsyncThunk Сбросить и поменять пароль
 export const resetPassword = createAsyncThunk(
   'user/resetPassword',
-  async (password, token) => {
+  async (payload: TPasswordReset) => {
     try {
-      const res = await postResetPass(password, token);
+      const res = await postResetPass(payload);
       return res
     } catch (error) {
       throw error;
@@ -143,9 +145,8 @@ export const userSlice = createSlice({
       })
       .addCase(getUser.rejected, (state, action) => {
         state.loading = false
-        state.error = action.error.message
+        state.error = true
         state.isAuthChecked = true;
-        state.user = null
       })
       .addCase(updateUser.pending, (state) => {
         state.loading = true
@@ -158,7 +159,7 @@ export const userSlice = createSlice({
       })
       .addCase(updateUser.rejected, (state, action) => {
         state.loading = false
-        state.error = action.error.message
+        state.error = true
       })
       .addCase(register.pending, (state) => {
         state.loading = true
@@ -171,11 +172,11 @@ export const userSlice = createSlice({
       })
       .addCase(register.rejected, (state, action) => {
         state.loading = false
-        state.error = action.error
+        state.error = true
       })
       .addCase(login.pending, (state) => {
         state.loading = true
-        state.error = null
+        state.error = true
       })
       .addCase(login.fulfilled, (state, { payload }) => {
         state.user = payload.user
@@ -183,7 +184,7 @@ export const userSlice = createSlice({
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false
-        state.error = action.error.message
+        state.error = true
       })
       .addCase(logOut.pending, (state) => {
         state.loading = true
@@ -196,7 +197,7 @@ export const userSlice = createSlice({
       })
       .addCase(logOut.rejected, (state, action) => {
         state.loading = false
-        state.error = action.error.message
+        state.error = true
       })
       .addCase(forgotPassword.pending, (state) => {
         state.loading = true
@@ -208,7 +209,7 @@ export const userSlice = createSlice({
       })
       .addCase(forgotPassword.rejected, (state, action) => {
         state.loading = false
-        state.error = action.error.message
+        state.error = true
       })
       .addCase(resetPassword.pending, (state) => {
         state.loading = true
@@ -220,7 +221,7 @@ export const userSlice = createSlice({
       })
       .addCase(resetPassword.rejected, (state, action) => {
         state.loading = false
-        state.error = action.error.message
+        state.error = true
       })
   }
 });

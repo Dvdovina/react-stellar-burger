@@ -6,6 +6,8 @@ import { forgotPassword } from '../../../services/userSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { useForm } from '../../../hooks/useForm';
+import {  MouseEvent } from "react";
+import { TUserEmail } from '../../../utils/common-types';
 
 
 
@@ -19,11 +21,11 @@ function ForgotPassword() {
 
     const { values, handleChange } = useForm({ email: '' });
 
-    const onSubmit = (payload) => {
+    const onSubmit = (payload: TUserEmail): void => {
         dispatch(forgotPassword(payload))
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: MouseEvent<HTMLFormElement>) => {
         e.preventDefault()
         onSubmit(values.email)
         localStorage.setItem('email', values.email);

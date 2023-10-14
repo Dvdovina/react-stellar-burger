@@ -20,16 +20,21 @@ import Feed from "../pages/feed/feed";
 import OrdersPage from "../pages/orders-page/orders-page";
 import OrderPage from "../pages/order-page/order-page";
 import OrderProfilePage from "../pages/order-profile-page/order-profile-page";
+import { useAppDispatch } from "../../hooks/useForm";
 
 
-
+type TStateLocation = Location & {
+  state: {
+    background: Location;
+  };
+}
 
 function App() {
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch();
   const navigate = useNavigate()
   const location = useLocation()
-  const background = location.state && location.state.background;
+  const background: TStateLocation  = location.state && location.state.background;
 
   useEffect(() => {
     dispatch(getUser())
@@ -48,13 +53,13 @@ function App() {
         <Route path='/ingredients/:id' element={<IngredientPage />} />
         <Route path='/feed' element={<Feed />} />
         <Route path='/feed/:id' element={<OrderPage />} />
-        <Route path='/profile' element={<OnlyAuth component={<Profile />} />} />
-        <Route path='/profile/orders' element={<OnlyAuth component={<OrdersPage />} />} />
-        <Route path='/profile/orders/:id' element={<OnlyAuth component={<OrderProfilePage />} />} />
-        <Route path='/login' element={<OnlyUnAuth component={<Login />} />} />
-        <Route path='/register' element={<OnlyUnAuth component={<Register />} />} />
-        <Route path='/forgot-password' element={<OnlyUnAuth component={<ForgotPassword />} />} />
-        <Route path='/reset-password' element={<OnlyUnAuth component={<ResetPassword />} />} />
+        <Route path='/profile' element={<OnlyAuth onlyUnAuth = {false} component={<Profile />} />} />
+        <Route path='/profile/orders' element={<OnlyAuth onlyUnAuth = {false} component={<OrdersPage />} />} />
+        <Route path='/profile/orders/:id' element={<OnlyAuth onlyUnAuth = {false} component={<OrderProfilePage />} />} />
+        <Route path='/login' element={<OnlyUnAuth onlyUnAuth = {true} component={<Login />} />} />
+        <Route path='/register' element={<OnlyUnAuth onlyUnAuth = {true} component={<Register />} />} />
+        <Route path='/forgot-password' element={<OnlyUnAuth onlyUnAuth = {true} component={<ForgotPassword />} />} />
+        <Route path='/reset-password' element={<OnlyUnAuth onlyUnAuth = {true} component={<ResetPassword />} />} />
         <Route path='*' element={<ErrorPage />} />
       </Routes>
       {background && (
