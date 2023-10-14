@@ -3,20 +3,20 @@ import FeedList from '../../feedList/feedList'
 import FeedStats from '../../feedStats/feedStats'
 import { wsConnect, wsDisconnect } from '../../../services/actions/wsActions'
 import { WS_FEED_URL } from '../../../utils/api'
-import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../hooks/useForm'
 
 
 function Feed() {
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
         dispatch(wsConnect(WS_FEED_URL));
-        return () => dispatch(wsDisconnect());
+        return () => {dispatch(wsDisconnect())};
     }, []);
 
-    const { orders, total, totalToday } = useSelector(
+    const { orders, total, totalToday } = useAppSelector(
         (store) => store.feed,
     );
 
