@@ -1,9 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { TConstructor } from '../utils/common-types';
 
-const initialState = {
+
+const initialState: TConstructor = {
   ingredients: [],
   bun: null
 };
+
 
 export const constructorSlice = createSlice({
   name: 'userBurgerIngredients',
@@ -16,8 +19,8 @@ export const constructorSlice = createSlice({
         state.ingredients = [...state.ingredients, payload]
       }
     },
-    deleteIngredient(state, { payload: id }) {
-      state.ingredients = state.ingredients.filter(item => item.id !== id)
+    deleteIngredient(state, { payload: index }) {
+      state.ingredients.splice(index, 1)
     },
     refreshIngredients(state, { payload }) {
       state.ingredients = payload
