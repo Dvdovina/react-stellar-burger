@@ -30,10 +30,10 @@ export const wsProfileReducer = createReducer(initialState, (builder) => {
         .addCase(wsProfileConnecting, (state) => {
             state.status = WebsocketStatus.CONNECTING
         })
-        .addCase(wsProfileMessage, (state, action) => {
-            state.orders = action.payload.orders.reverse()
+        .addCase(wsProfileMessage, (state, { payload }: any) => {
+            state.orders = payload.orders.reverse()
         })
-        .addCase(wsProfileError, (state, action) => {
-            state.error = action.payload
+        .addCase(wsProfileError, (state, { payload }) => {
+            state.error = payload ?? '';
         })
 })

@@ -26,12 +26,12 @@ export const wsReducer = createReducer(initialState, (builder) => {
         .addCase(wsConnecting, (state) => {
             state.status = WebsocketStatus.CONNECTING
         })
-        .addCase(wsMessage, (state, action) => {
-            state.orders = action.payload.orders
-            state.total = action.payload.total
-            state.totalToday = action.payload.totalToday
+        .addCase(wsMessage, (state, {payload}: any) => {
+            state.orders = payload.orders ?? [];
+            state.total = payload.total ?? null;
+            state.totalToday = payload.totalToday ?? null;
         })
-        .addCase(wsError, (state, action) => {
-            state.error = action.payload
+        .addCase(wsError, (state, { payload }) => {
+            state.error =  payload ?? '';
         })
 })
