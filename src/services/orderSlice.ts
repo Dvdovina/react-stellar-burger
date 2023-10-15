@@ -1,21 +1,22 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { postOrder } from '../utils/api';
+import { TOrderState, TOrder } from '../utils/common-types';
+
 
 export const submitOrder = createAsyncThunk(
   'order/submitOrder',
-  async (order, thunkApi) => {
+  async (order: TOrder, thunkApi) => {
     try {
       const ingredientsId = order.ingredients.map(item => item._id);
-      const bunId = order.bun._id;
-      const allFoodIds = [bunId, ...ingredientsId, bunId];
-      return await postOrder({ ingredients: allFoodIds })
+      const allFoodIds = [...ingredientsId];
+      return await postOrder(order)
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }
   },
 );
 
-const initialState = {
+const initialState: TOrderState = {
   orderNumber: null,
   orderFetchStatus: false,
   orderError: false,

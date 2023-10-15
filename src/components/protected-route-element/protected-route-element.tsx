@@ -16,10 +16,10 @@ export const Protected: FC<TProtectedRoute>  = ({ onlyUnAuth = false, component 
     }
 
 
-    if (onlyUnAuth && user) {
-        const { from } = location.state || { from: { pathname: "/" } };
-        return <Navigate to={from} />;
-    }
+    // if (onlyUnAuth && user) {
+    //     const { from } = location.state || { from: { pathname: "/" } };
+    //     return <Navigate to={from} />;
+    // }
 
     if (!onlyUnAuth && !user) {
         return <Navigate to="/login" state={{ from: location }} />;

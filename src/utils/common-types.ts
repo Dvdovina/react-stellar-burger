@@ -9,7 +9,7 @@ export type TIngredient = {
   name: string;
   price: number;
   image: string;
-  type: FoodType;
+  type: string;
   proteins: number;
   fat: number;
   carbohydrates: number;
@@ -72,3 +72,35 @@ export type TProtectedRoute = {
   onlyUnAuth: boolean;
   component: JSX.Element
 }
+
+export type TIdIngredients = {
+  ingredients: string[];
+};
+
+export type TAuth = {
+  authorization: string;
+};
+
+export type TOrderData = {
+  id: TIdIngredients;
+  token: TAuth;
+};
+
+export type TRequest = 'loading' | 'resolved' | 'rejected';
+
+export type TOrderResponse = {
+  name: string;
+  order: TOrder;
+  success: boolean;
+};
+
+export type TOrderState = {
+  orderNumber: number | null;
+  orderFetchStatus: TRequest | boolean;
+  orderError: string | boolean;
+  isOpen: boolean;
+};
+
+export type TReject = {
+  rejectValue: string;
+};
