@@ -19,7 +19,7 @@ export const getUser = createAsyncThunk(
     try {
       const res = await getUserApi();
       return res;
-    } catch (error) {
+    } catch (error:any) {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       throw error;
@@ -147,8 +147,6 @@ export const userSlice = createSlice({
         state.loading = false
         state.error = true
         state.isAuthChecked = true;
-        state.user.email = null
-        state.user.name = null
       })
       .addCase(updateUser.pending, (state) => {
         state.loading = true
