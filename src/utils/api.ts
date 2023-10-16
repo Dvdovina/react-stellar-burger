@@ -138,10 +138,13 @@ const postResetPass = (data: TPasswordReset) => {
     return fetch(`${config.passResetUrl}`,
         {
             method: 'POST',
-            headers: config.headers,
-            body: JSON.stringify({
+            headers: {
+                'Content-Type': 'application/json',
+                authorization: localStorage.getItem('accessToken')
+            } as (HeadersInit | undefined) & THeaders,
+            body: JSON.stringify(
                 data
-            })
+            )
         })
 }
 
