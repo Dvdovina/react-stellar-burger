@@ -118,8 +118,8 @@ export const resetPassword = createAsyncThunk(
 
 const initialState = {
   user: {
-    name: null,
-    email: null,
+    name: '',
+    email: '',
   },
   loading: false,
   error: false,

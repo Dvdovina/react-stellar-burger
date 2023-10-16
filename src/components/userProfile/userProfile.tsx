@@ -3,16 +3,17 @@ import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burg
 import { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from '../../services/userSlice';
-
+import { useAppDispatch, useAppSelector } from '../../hooks/useForm';
+import { MouseEvent } from 'react';
 
 function UserProfile(){
 
     const inputRef = useRef(null);
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
-    const { user } = useSelector(
-        (store) => store.user,
+    const user = useAppSelector(
+        (store) => store.user.user,
     );
 
     const currentData = { ...user, password: '' }
@@ -21,7 +22,7 @@ function UserProfile(){
 
     const [updatedInfo, setUpdatedInfo] = useState(false)
 
-    const onInputChange = (event) => {
+    const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target
         setUserInfo({
             ...userInfo,
@@ -31,12 +32,12 @@ function UserProfile(){
     }
 
     //Обновить данные
-    const onSubmit = (values) => {
+    const onSubmit = (values: any) => {
         dispatch(updateUser(values))
         setUpdatedInfo(false)
     }
 
-    const updateUserInfo = (e) => {
+    const updateUserInfo = (e: MouseEvent<HTMLFormElement>) => {
         e.preventDefault()
         onSubmit(userInfo)
     }
