@@ -6,14 +6,13 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 
 
-
 function Profile() {
 
     const dispatch = useDispatch()
     const navigate = useNavigate();
 
     // Выход
-    const handleLogout = (e) => {
+    const handleLogout = (e: any) => {
         e.preventDefault()
         dispatch(logOut())
         navigate("/login");
