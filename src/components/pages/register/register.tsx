@@ -1,10 +1,12 @@
 import registerStyles from './register.module.css'
 import { Link } from "react-router-dom";
-import { useState, useRef } from 'react';
+import { useRef, MouseEvent } from 'react';
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch } from 'react-redux'
 import { register } from '../../../services/userSlice';
 import { useForm } from '../../../hooks/useForm';
+import { TUser } from '../../../utils/common-types';
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -14,17 +16,18 @@ function Register() {
 
     const dispatch = useDispatch()
 
-    const onSubmit = (payload) => {
+    const onSubmit = (payload: TUser) => {
         dispatch(register(payload))
     }
+    const navigate = useNavigate();
 
     const { values, handleChange } = useForm({ name: '', email: '', password: '', });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: MouseEvent<HTMLFormElement>) => {
         e.preventDefault()
         onSubmit(values)
+        navigate("/login", { replace: true });
     }
-
 
     return (
             <section className={registerStyles.section}>
