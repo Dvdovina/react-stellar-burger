@@ -2,33 +2,32 @@ import ordersPageStyles from './orders-page.module.css'
 import Orders from '../../orders/orders'
 import { NavLink } from 'react-router-dom'
 import { logOut } from '../../../services/userSlice';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { WS_PROFILE_URL } from '../../../utils/api';
 import { wsProfileConnect, wsProfileDisconnect } from '../../../services/actions/wsActions';
 import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../hooks/useForm'
 
 
 function OrdersPage() {
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const navigate = useNavigate();
 
     const accessToken = localStorage.getItem("accessToken");
-    const accessTokenNoBearer = accessToken.slice(7);
-
+    const accessTokenNoBearer = accessToken?.slice(7);
 
     useEffect(() => {
         dispatch(wsProfileConnect(`${WS_PROFILE_URL}?token=${accessTokenNoBearer}`));
-        return () => dispatch(wsProfileDisconnect(`${WS_PROFILE_URL}?token=${accessTokenNoBearer}`));
+        return () => { dispatch(wsProfileDisconnect(`${WS_PROFILE_URL}?token=${accessTokenNoBearer}`)) };
     }, []);
 
-    const { orders } = useSelector(
+    const { orders } = useAppSelector(
         (store) => store.profileOrders,
     );
 
     // Выход
-    const handleLogout = (e) => {
+    const handleLogout = (e: any) => {
         e.preventDefault()
         dispatch(logOut())
         navigate("/login");

@@ -11,8 +11,8 @@ export const wsError = createAction('WS_ERROR');
 
 export const wsProfileOpen = createAction('WS_PROFILE_OPEN');
 export const wsProfileClose = createAction('WS_PROFILE_CLOSE');
-export const wsProfileConnect = createAction('WS_PROFILE_CONNECT')
-export const wsProfileDisconnect = createAction('WS_PROFILE_DISCONNECT');
+export const wsProfileConnect = createAction<string>('WS_PROFILE_CONNECT')
+export const wsProfileDisconnect = createAction<string>('WS_PROFILE_DISCONNECT');
 export const wsProfileConnecting = createAction('WS_PROFILE_CONNECTING');
 export const wsProfileMessage = createAction('WS_PROFILE_MESSAGE');
 export const wsProfileError = createAction('WS_PROFILE_ERROR');
