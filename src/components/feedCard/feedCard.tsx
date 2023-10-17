@@ -1,16 +1,23 @@
 import feedCardStyles from './feedCard.module.css'
 import { FormattedDate, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useLocation, Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { useMemo } from 'react';
 import OrderIconsOverlay from '../order-icons-overlay/order-icons-overlay';
+import { TOrder } from '../../utils/common-types';
+import { FC } from 'react';
+import { useAppSelector } from '../../hooks/useForm';
 
 
-function FeedCard({ order }) {
+interface IFeedCard {
+    order: TOrder;
+  }
+
+
+const FeedCard: FC<IFeedCard> = ({ order }) => {
 
     const location = useLocation();
 
-    const allIngredients = useSelector((state) => state.ingredients.ingredients);
+    const allIngredients = useAppSelector((state) => state.ingredients.ingredients);
 
     const { name, number, createdAt, _id, ingredients } = order
 
@@ -22,16 +29,16 @@ function FeedCard({ order }) {
         }
     }, [allIngredients]);
 
-    const totalPrice = orderIngredients.reduce(
+    const totalPrice = orderIngredients?.reduce(
         (acc, i) =>
             acc + (i?.price || 0),
         0
     );
 
-    const sortedIngredients = orderIngredients.slice(0, 5);
+    const sortedIngredients = orderIngredients?.slice(0, 5);
 
     const loadIngredientsIcons = () => {
-        return sortedIngredients.map((item, i) => (
+        return sortedIngredients?.map((item, i) => (
             <div key={i} className={feedCardStyles.img} style={{ backgroundImage: `url('${item?.image_mobile}')` }} />
         ));
     };
@@ -50,7 +57,7 @@ function FeedCard({ order }) {
                     <div className={feedCardStyles.imgs_list} >
                         {loadIngredientsIcons()}
                     </div>
-                    {orderIngredients.length > 5 && (
+                    {orderIngredients!.length > 5 && (
                         <OrderIconsOverlay orderIngredients={orderIngredients} />
                     )}
                     <div className={feedCardStyles.price}>
