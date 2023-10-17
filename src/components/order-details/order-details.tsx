@@ -1,11 +1,11 @@
 import orderStyles from "./order-details.module.css"
 import checkMarkGraphics from "../../images/graphics.svg"
-import { useSelector } from 'react-redux';
+import { useAppSelector } from "../../hooks/useForm";
 
 
 function OrderDetails() {
 
-    const { orderNumber } = useSelector(
+    const { orderNumber } = useAppSelector(
         (store) => store.order);
 
     return (
