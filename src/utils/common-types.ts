@@ -1,7 +1,7 @@
-export enum FoodType {
-  bun = 'bun',
-  main = 'main',
-  sauce = 'sauce'
+export type FoodType = {
+  bun: 'Булки',
+  main: 'Соусы',
+  sauce: 'Начинки'
 }
 
 export type TIngredient = {
@@ -9,7 +9,7 @@ export type TIngredient = {
   name: string;
   price: number;
   image: string;
-  type: string;
+  type: FoodType;
   proteins: number;
   fat: number;
   carbohydrates: number;
@@ -20,7 +20,7 @@ export type TIngredient = {
   count?: number;
 }
 
-export type TDraggableItem = TIngredient & { dragId: string }
+export type TDraggableItem = TIngredient & { id: string }
 
 export type TConstructor = {
   ingredients: TDraggableItem[],
@@ -31,7 +31,7 @@ export type TStatus = "created" | "pending" | "done";
 
 export type TOrder = {
   _id: string;
-  ingredients: TIngredient[];
+  ingredients: string[];
   status: TStatus;
   name: string;
   createdAt: string;

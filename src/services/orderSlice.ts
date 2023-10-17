@@ -7,8 +7,6 @@ export const submitOrder = createAsyncThunk(
   'order/submitOrder',
   async (order: TOrder, thunkApi) => {
     try {
-      const ingredientsId = order.ingredients.map(item => item._id);
-      const allFoodIds = [...ingredientsId];
       return await postOrder(order)
     } catch (error) {
       return thunkApi.rejectWithValue(error);

@@ -4,33 +4,34 @@ import { useMemo, useCallback } from "react";
 import DraggableIngredient from "../draggable-ingredient/draggable-ingredient";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
-import { useSelector, useDispatch } from 'react-redux';
 import { hideOrderModal } from "../../services/orderSlice";
 import { submitOrder } from "../../services/orderSlice";
 import { v4 as uuidv4 } from 'uuid';
 import { useDrop } from 'react-dnd'
 import { addIngredient, clearOrder, refreshIngredients } from "../../services/constructorSlice";
 import { useNavigate } from "react-router";
+import { useAppDispatch, useAppSelector } from '../../hooks/useForm'
+import { TOrder, TIngredient } from "../../utils/common-types";
 
 function BurgerConstructor() {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate()
 
-    const { ingredients, bun } = useSelector(
+    const { ingredients, bun } = useAppSelector(
         (store) => store.userBurgerIngredients,
     );
 
-    const { orderError } = useSelector(
+    const { orderError } = useAppSelector(
         (store) => store.order);
 
-    const { isOpen } = useSelector((state) => state.order);
+    const { isOpen } = useAppSelector((state) => state.order);
 
     //Булки и ингредиенты вместе в корзине
     const cart = { ingredients, bun }
 
     //Открытие модального окна (state isOpen) и отправление заказа 
-    const handleOpenModal = async () => {
+    const handleOpenModal = async (cart:any) => {
         if (localStorage.getItem('accessToken')) {
           dispatch(submitOrder(cart));
         } else {
@@ -66,7 +67,7 @@ function BurgerConstructor() {
             collect: (monitor) => ({
                 isActive: monitor.isOver()
             }),
-            drop: (item) => {
+            drop: (item: TIngredient) => {
                 dispatch(addIngredient({
                     ...item,
                     id: uuidv4()
@@ -92,7 +93,6 @@ function BurgerConstructor() {
                             text={`${bun.name} (верх)`}
                             price={bun.price}
                             thumbnail={bun.image}
-                            bun={bun}
                         />
                         )}
                     </div>
@@ -113,7 +113,6 @@ function BurgerConstructor() {
                                 text={`${bun.name} (низ)`}
                                 price={bun.price}
                                 thumbnail={bun.image}
-                                bun={bun}
                             />
                         )}
                     </div>
