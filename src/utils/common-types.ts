@@ -9,7 +9,7 @@ export type TIngredient = {
   name: string;
   price: number;
   image: string;
-  type: FoodType;
+  type: string;
   proteins: number;
   fat: number;
   carbohydrates: number;
