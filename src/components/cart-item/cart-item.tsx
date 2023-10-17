@@ -1,7 +1,13 @@
 import cartItemStyles from './cart-item.module.css'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { TIngredient } from '../../utils/common-types'
+import { FC } from 'react'
 
-function CartItem({ ingredient }) {
+interface ICartItem {
+    ingredient: TIngredient;
+}
+
+const CartItem: FC<ICartItem> = ({ ingredient }) => {
 
     return (
         <li className={cartItemStyles.item} key={ingredient._id}>
