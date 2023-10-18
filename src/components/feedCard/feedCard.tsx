@@ -6,6 +6,7 @@ import OrderIconsOverlay from '../order-icons-overlay/order-icons-overlay';
 import { TOrder } from '../../utils/common-types';
 import { FC } from 'react';
 import { useAppSelector } from '../../hooks/useForm';
+import { TIngredient } from '../../utils/common-types';
 
 
 interface IFeedCard {
@@ -21,7 +22,7 @@ const FeedCard: FC<IFeedCard> = ({ order }) => {
 
     const { name, number, createdAt, _id, ingredients } = order
 
-    const orderIngredients = useMemo(() => {
+    const  orderIngredients: (TIngredient | undefined)[] | undefined = useMemo(() => {
         if (ingredients) {
             return ingredients.map((id) =>
                 allIngredients.find((item) => item._id === id)
