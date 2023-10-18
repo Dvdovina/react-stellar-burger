@@ -76,7 +76,7 @@ function BurgerConstructor() {
         })
 
         // Сортировка ингредиентов при перетаскивании
-        const moveItem = useCallback((dragIndex, hoverIndex) => {
+        const moveItem = useCallback((dragIndex:number, hoverIndex:number) => {
             const dragItem = ingredients[dragIndex]
             const newOrder = [...ingredients]
             newOrder.splice(dragIndex, 1)

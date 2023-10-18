@@ -1,16 +1,25 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useDrag, useDrop } from "react-dnd";
+
+import { useDrag, useDrop, DropTargetOptions } from "react-dnd";
 import { useRef } from "react";
 import { DragIcon, ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import draggableIngredientStyles from './draggable-ingredient.module.css';
 import { deleteIngredient } from "../../services/constructorSlice";
+import { FC } from "react";
+import { useAppSelector } from "../../hooks/useForm";
+import { useAppDispatch } from "../../hooks/useForm";
+import { TIngredient } from "../../utils/common-types";
+
+interface IDraggableIngredient {
+    item: TIngredient
+    moveItem: (dragIndex: number, hoverIndex: number) => void;
+}
 
 
-const DraggableIngredient = ({ item, moveItem }) => {
-    
-    const dispatch = useDispatch();
+const DraggableIngredient: FC<IDraggableIngredient> = ({ item, moveItem }) => {
 
-    const { ingredients } = useSelector(
+    const dispatch = useAppDispatch();
+
+    const { ingredients } = useAppSelector(
         (store) => store.userBurgerIngredients,
     );
 
@@ -18,7 +27,7 @@ const DraggableIngredient = ({ item, moveItem }) => {
     const { _id, name, price, image } = item
 
 
-    const ref = useRef(null);
+    const ref = useRef<HTMLDivElement>(null);
     const index = ingredients.indexOf(item);
 
     // Перетаскивание ингредиентов внутри конструктора --- drag
@@ -40,7 +49,7 @@ const DraggableIngredient = ({ item, moveItem }) => {
                 handlerId: monitor.getHandlerId()
             }
         },
-        hover(item, monitor) {
+        hover(item: TIngredient, monitor: DropTargetOptions) {
             if (!ref.current) {
                 return;
             }
@@ -73,14 +82,14 @@ const DraggableIngredient = ({ item, moveItem }) => {
 
     //Общая переменная перетаскивания
 
-    const dragDropRef = drag(drop(ref));
+    drag(drop(ref));
 
     return (
         <>
             <div
                 className={draggableIngredientStyles.item}
                 style={{ opacity }}
-                ref={dragDropRef}
+                ref={ref}
                 data-handler-id={handlerId}
             >
                 <DragIcon type="primary" />

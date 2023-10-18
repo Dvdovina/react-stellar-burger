@@ -6,6 +6,7 @@ export type FoodType = {
 
 export type TIngredient = {
   _id: string;
+  id: string
   name: string;
   price: number;
   image: string;
@@ -18,6 +19,7 @@ export type TIngredient = {
   image_large: string;
   __v?: number;
   count?: number;
+  index: number;
 }
 
 export type TDraggableItem = TIngredient & { id: string }
