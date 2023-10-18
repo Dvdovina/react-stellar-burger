@@ -4,13 +4,22 @@ import ModalOverlay from "../modal-overlay/modal-overlay";
 import ReactDOM from "react-dom";
 import modalStyles from "./modal.module.css";
 import { useEffect } from "react";
+import { FC } from "react";
 
+const modalRoot: HTMLElement | null = document.querySelector('#react-modals')!;
 
-const modalRoot = document.querySelector('#react-modals');
+interface IModalProps {
+    children: React.ReactNode;
+    onClose: () => void;
+}
 
-function Modal({ children, onClose }) {
+type TKeyboardEvent = {
+    key: string;
+}
+
+export const Modal: FC<IModalProps> = ({ children, onClose }) => {
     useEffect(() => {
-        function closeOnEsc(evt) {
+        function closeOnEsc(evt: TKeyboardEvent) {
             if (evt.key === 'Escape') {
                 onClose();
             }
@@ -26,7 +35,7 @@ function Modal({ children, onClose }) {
             <ModalOverlay onClose={onClose} />
             <div className={modalStyles.container}>
                 <button onClick={onClose} className={modalStyles.close_btn}>
-                    <CloseIcon />
+                    <CloseIcon type="primary" />
                 </button>
                 {children}
             </div>
@@ -34,11 +43,6 @@ function Modal({ children, onClose }) {
         modalRoot
     );
 };
-
-Modal.propTypes = {
-    children: PropTypes.element.isRequired,
-    onClose: PropTypes.func.isRequired,
-  }
 
 export default Modal
 
