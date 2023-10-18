@@ -1,8 +1,10 @@
 import ordersStyles from './orders.module.css'
 import OrderCard from '../orderCard/orderCard'
 
-
-function Orders({ orders }) {
+interface Props {
+    orders: any[];
+ }
+const Orders: React.FC<Props> = ({ orders }) => {
 
     return (
         <div className={ordersStyles.container}>
