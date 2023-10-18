@@ -1,6 +1,14 @@
 import feedStatsStyles from './feedStats.module.css'
+import { FC } from 'react'
+import { TOrder } from '../../utils/common-types'
 
-function FeedStats({ orders, total, totalToday }) {
+interface IFeedStats {
+   orders: TOrder[]
+   total: number | null
+   totalToday: number | null
+}
+
+const FeedStats: FC<IFeedStats> = ({ orders, total, totalToday }) => {
 
 
    const completedOrders = orders.filter(({ status }) => {
