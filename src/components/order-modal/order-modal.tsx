@@ -4,16 +4,24 @@ import { FormattedDate, CurrencyIcon } from '@ya.praktikum/react-developer-burge
 import { useParams } from 'react-router'
 import { useSelector } from 'react-redux'
 import { useMemo } from 'react'
+import { FC } from 'react'
+import { TOrder } from '../../utils/common-types'
+import { useAppSelector } from '../../hooks/useForm'
 
-function OrderModal({ orders }) {
+interface IOrderModal {
+    orders: TOrder[]
+}
+
+
+const OrderModal: FC<IOrderModal> = ({ orders }) => {
 
     const { id } = useParams();
 
     const order = orders.find((order) => order._id === id);
 
-    const { name, number, createdAt, _id, ingredients, status } = order
+    const { name, number, createdAt, _id, ingredients, status } = order as TOrder
 
-    const allIngredients = useSelector((state) => state.ingredients.ingredients);
+    const allIngredients = useAppSelector((state) => state.ingredients.ingredients);
 
     const orderIngredients = useMemo(() => {
         if (ingredients) {
@@ -24,7 +32,7 @@ function OrderModal({ orders }) {
     }, [allIngredients]);
 
 
-    const totalPrice = orderIngredients.reduce(
+    const totalPrice = orderIngredients?.reduce(
         (acc, i) =>
             acc + (i?.price || 0),
         0
@@ -48,7 +56,7 @@ function OrderModal({ orders }) {
             <p className={setTextColor()}>{status === 'done' ? 'Выполнен' : 'Готовится'}</p>
             <p className="text text_type_main-medium pb-6">Состав:</p>
             <ul className={`custom-scroll ${orderModalStyles.cart_list}`}>
-                {orderIngredients.map((ingredient, key) => (
+                {orderIngredients?.map((ingredient, key) => (
                     <CartItem ingredient={ingredient} key={key} />
                 ))}
             </ul>

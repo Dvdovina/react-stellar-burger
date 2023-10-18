@@ -3,7 +3,7 @@ import OrderCard from '../orderCard/orderCard'
 
 interface Props {
     orders: any[];
- }
+}
 const Orders: React.FC<Props> = ({ orders }) => {
 
     return (
