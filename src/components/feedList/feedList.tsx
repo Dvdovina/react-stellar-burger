@@ -1,8 +1,13 @@
 import feedListStyles from './feedList.module.css'
 import FeedCard from '../feedCard/feedCard'
+import { TOrder } from '../../utils/common-types';
 
 
-function FeedList({orders}) {
+interface Props {
+   orders: any[];
+}
+
+const FeedList: React.FC<Props> = ({ orders }) => {
 
    return (
       <section className={feedListStyles.section}>

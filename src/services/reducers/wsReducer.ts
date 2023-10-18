@@ -1,5 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit"
 import { wsClose, wsOpen, wsMessage, wsConnecting, wsError } from "../actions/wsActions"
+import { TOrder } from "../../utils/common-types";
 
 const WebsocketStatus = {
     CONNECTING: 'CONNECTING...',
@@ -7,7 +8,15 @@ const WebsocketStatus = {
     OFFLINE: 'OFFLINE'
 }
 
-const initialState = {
+export type wsState = {
+    status: string,
+    orders: TOrder[],
+    error: string,
+    total: number | null,
+    totalToday: number | null
+  };
+
+const initialState: wsState = {
     status: WebsocketStatus.OFFLINE,
     orders: [],
     error: '',
