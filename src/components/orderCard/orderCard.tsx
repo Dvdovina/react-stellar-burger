@@ -4,13 +4,20 @@ import { useLocation, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useMemo } from 'react';
 import OrderIconsOverlay from '../order-icons-overlay/order-icons-overlay';
+import { TOrder } from '../../utils/common-types';
+import { FC } from 'react';
+import { useAppSelector } from '../../hooks/useForm';
+
+interface IOrderCard {
+    order: TOrder;
+}
 
 
-function OrderCard({ order }) {
+const OrderCard: FC<IOrderCard> = ({ order }) => {
 
     const location = useLocation();
 
-    const allIngredients = useSelector((state) => state.ingredients.ingredients);
+    const allIngredients = useAppSelector((state) => state.ingredients.ingredients);
 
     const { name, number, createdAt, _id, ingredients, status } = order
 
@@ -22,16 +29,16 @@ function OrderCard({ order }) {
         }
     }, [allIngredients]);
 
-    const totalPrice = orderIngredients.reduce(
+    const totalPrice = orderIngredients?.reduce(
         (acc, i) =>
             acc + (i?.price || 0),
         0
     );
 
-    const sortedIngredients = orderIngredients.slice(0, 5);
+    const sortedIngredients = orderIngredients?.slice(0, 5);
 
     const loadIngredientsIcons = () => {
-        return sortedIngredients.map((item, i) => (
+        return sortedIngredients?.map((item, i) => (
             <div key={i} className={orderCardStyles.img} style={{ backgroundImage: `url('${item?.image_mobile}')` }} />
         ));
     };
@@ -64,7 +71,7 @@ function OrderCard({ order }) {
                     <div className={orderCardStyles.imgs_list} >
                         {loadIngredientsIcons()}
                     </div>
-                    {orderIngredients.length > 5 && (
+                    {orderIngredients!.length > 5 && (
                         <OrderIconsOverlay orderIngredients={orderIngredients} />
                     )}
                     <div className={orderCardStyles.price}>
