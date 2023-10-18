@@ -11,7 +11,7 @@ import { TIngredient } from '../../utils/common-types';
 
 interface IFeedCard {
     order: TOrder;
-  }
+}
 
 
 const FeedCard: FC<IFeedCard> = ({ order }) => {
@@ -22,13 +22,24 @@ const FeedCard: FC<IFeedCard> = ({ order }) => {
 
     const { name, number, createdAt, _id, ingredients } = order
 
-    const  orderIngredients: (TIngredient | undefined)[] | undefined = useMemo(() => {
-        if (ingredients) {
-            return ingredients.map((id) =>
-                allIngredients.find((item) => item._id === id)
-            );
+
+    const findIngredients = (
+        orderType: TOrder | undefined,
+        ingredientsType: TIngredient[]
+    ) => {
+        if (orderType && orderType.ingredients) {
+            return orderType.ingredients
+                .map((id) => ingredientsType.find((ingredient) => ingredient._id === id))
+                .filter(
+                    (i): i is TIngredient => i !== undefined
+                );
         }
-    }, [allIngredients]);
+        return [];
+    };
+
+    const orderIngredients = useMemo(() => {
+        return findIngredients(order, allIngredients)
+    }, [order, allIngredients]);
 
     const totalPrice = orderIngredients?.reduce(
         (acc, i) =>

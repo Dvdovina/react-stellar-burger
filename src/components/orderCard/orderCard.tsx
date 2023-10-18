@@ -6,11 +6,11 @@ import OrderIconsOverlay from '../order-icons-overlay/order-icons-overlay';
 import { TOrder } from '../../utils/common-types';
 import { FC } from 'react';
 import { useAppSelector } from '../../hooks/useForm';
+import { TIngredient } from '../../utils/common-types';
 
 interface IOrderCard {
     order: TOrder;
 }
-
 
 const OrderCard: FC<IOrderCard> = ({ order }) => {
 
@@ -20,13 +20,23 @@ const OrderCard: FC<IOrderCard> = ({ order }) => {
 
     const { name, number, createdAt, _id, ingredients, status } = order
 
-    const orderIngredients = useMemo(() => {
-        if (ingredients) {
-            return ingredients.map((id) =>
-                allIngredients.find((item) => item._id === id)
-            );
+    const findIngredients = (
+        orderType: TOrder | undefined,
+        ingredientsType: TIngredient[]
+    ) => {
+        if (orderType && orderType.ingredients) {
+            return orderType.ingredients
+                .map((id) => ingredientsType.find((ingredient) => ingredient._id === id))
+                .filter(
+                    (i): i is TIngredient => i !== undefined
+                );
         }
-    }, [allIngredients]);
+        return [];
+    };
+
+    const orderIngredients = useMemo(() => {
+        return findIngredients(order, allIngredients)
+    }, [order, allIngredients]);
 
     const totalPrice = orderIngredients?.reduce(
         (acc, i) =>

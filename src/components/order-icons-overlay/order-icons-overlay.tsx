@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { TIngredient } from '../../utils/common-types';
 
 interface IOrderIconsOverlayProps {
-    orderIngredients: (TIngredient | undefined)[] | undefined
+    orderIngredients: TIngredient[]
 }
 
 const OrderIconsOverlay: FC<IOrderIconsOverlayProps> = ({ orderIngredients }) => {
