@@ -1,7 +1,6 @@
 import orderCardStyles from './orderCard.module.css'
 import { FormattedDate, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useLocation, Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { useMemo } from 'react';
 import OrderIconsOverlay from '../order-icons-overlay/order-icons-overlay';
 import { TOrder } from '../../utils/common-types';
