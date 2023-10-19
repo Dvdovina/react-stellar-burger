@@ -1,11 +1,18 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { postOrder } from '../utils/api';
-import { TOrderState, TOrder } from '../utils/common-types';
+import { TRequest } from '../utils/common-types';
 
+
+export type TOrderState = {
+  orderNumber: number | null;
+  orderFetchStatus: TRequest | boolean;
+  orderError: string | boolean;
+  isOpen: boolean;
+};
 
 export const submitOrder = createAsyncThunk(
   'order/submitOrder',
-  async (item:(string | undefined)[], thunkApi) => {
+  async (item: (string | undefined)[], thunkApi) => {
     try {
       return await postOrder(item)
     } catch (error) {

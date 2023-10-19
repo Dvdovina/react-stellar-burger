@@ -20,7 +20,7 @@ export type TIngredient = {
   __v?: number;
   count?: number;
   index: number;
-  key: (key: string) => void
+  key: (key: string) => void;
 }
 
 export type TDraggableItem = TIngredient & { id: string }
@@ -97,15 +97,5 @@ export type TOrderResponse = {
   success: boolean;
 };
 
-export type TOrderState = {
-  orderNumber: number | null;
-  orderFetchStatus: TRequest | boolean;
-  orderError: string | boolean;
-  isOpen: boolean;
-};
-
-export type TReject = {
-  rejectValue: string;
-};
 
 
