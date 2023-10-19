@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { useForm } from '../../../hooks/useForm';
 import { Navigate } from "react-router-dom";
-import { TPasswordReset } from '../../../utils/common-types';
+import { TPasswordReset } from '../../../utils/api-types';
 
 
 function ResetPassword() {

@@ -5,7 +5,7 @@ import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burg
 import { useDispatch } from 'react-redux'
 import { register } from '../../../services/userSlice';
 import { useForm } from '../../../hooks/useForm';
-import { TUser } from '../../../utils/common-types';
+import { TUser } from '../../../utils/api-types';
 import { useNavigate } from "react-router-dom";
 
 

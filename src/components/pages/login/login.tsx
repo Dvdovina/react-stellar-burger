@@ -7,7 +7,7 @@ import { login } from '../../../services/userSlice';
 import { useNavigate } from "react-router-dom";
 import { useForm } from '../../../hooks/useForm';
 import { MouseEvent } from "react";
-import { TUserLogin } from '../../../utils/common-types';
+import { TUserLogin } from '../../../utils/api-types';
 
 
 

@@ -1,8 +1,4 @@
-export type FoodType = {
-  bun: 'Булки',
-  main: 'Соусы',
-  sauce: 'Начинки'
-}
+//Типы для Ингредиентов
 
 export type TIngredient = {
   _id: string;
@@ -25,12 +21,11 @@ export type TIngredient = {
 
 export type TDraggableItem = TIngredient & { id: string }
 
-export type TConstructor = {
-  ingredients: TDraggableItem[],
-  bun: TIngredient | null
-}
+// Типы для заказа
 
 export type TStatus = "created" | "pending" | "done";
+
+export type TRequest = 'loading' | 'resolved' | 'rejected';
 
 export type TOrder = {
   _id: string;
@@ -43,59 +38,9 @@ export type TOrder = {
   price?: number;
 }
 
-export type TOrdersStats = {
-  success: boolean;
-  orders: TOrder[];
-  total: number;
-  totalToday: number;
-}
-
-export type TUser = {
-  name: string;
-  email: string;
-  password: string;
-}
-
-export type TUserLogin = {
-  email: string;
-  password: string;
-}
-
-export type TUserEmail = {
-  email: string;
-}
-
-export type TPasswordReset = {
-  password: string;
-  token: string;
-};
-
+//Тип для ProtectedRoute
 
 export type TProtectedRoute = {
   onlyUnAuth: boolean;
   component: JSX.Element
 }
-
-export type TIdIngredients = {
-  ingredients: string[];
-};
-
-export type TAuth = {
-  authorization: string;
-};
-
-export type TOrderData = {
-  id: TIdIngredients;
-  token: TAuth;
-};
-
-export type TRequest = 'loading' | 'resolved' | 'rejected';
-
-export type TOrderResponse = {
-  name: string;
-  order: TOrder;
-  success: boolean;
-};
-
-
-

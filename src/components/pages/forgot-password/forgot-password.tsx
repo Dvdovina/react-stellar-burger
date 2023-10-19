@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { useForm } from '../../../hooks/useForm';
 import {  MouseEvent } from "react";
-import { TUserEmail } from '../../../utils/common-types';
+import { TUserEmail } from '../../../utils/api-types';
 
 
 

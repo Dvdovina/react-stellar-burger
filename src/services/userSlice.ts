@@ -10,7 +10,7 @@ import {
   checkResponse
 } from '../utils/api';
 
-import { TUserEmail, TUser, TUserLogin, TPasswordReset } from '../utils/common-types';
+import { TUserEmail, TUser, TUserLogin, TPasswordReset } from '../utils/api-types';
 
 //AsyncThunk Пользователь
 export const getUser = createAsyncThunk(

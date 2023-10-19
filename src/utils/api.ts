@@ -1,4 +1,4 @@
-import { TUser, TUserLogin, TUserEmail, TPasswordReset } from "./common-types";
+import { TUser, TUserLogin, TUserEmail, TPasswordReset } from "./api-types";
 import { THeaders } from "./api-types";
 
 
