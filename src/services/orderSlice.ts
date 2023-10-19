@@ -3,13 +3,6 @@ import { postOrder } from '../utils/api';
 import { TRequest } from '../utils/common-types';
 
 
-export type TOrderState = {
-  orderNumber: number | null;
-  orderFetchStatus: TRequest | boolean;
-  orderError: string | boolean;
-  isOpen: boolean;
-};
-
 export const submitOrder = createAsyncThunk(
   'order/submitOrder',
   async (item: (string | undefined)[], thunkApi) => {
@@ -21,13 +14,21 @@ export const submitOrder = createAsyncThunk(
   },
 );
 
+
+export type TOrderState = {
+  orderNumber: number | null;
+  orderFetchStatus: TRequest | boolean;
+  orderError: string | boolean;
+  isOpen: boolean;
+};
+
+
 const initialState: TOrderState = {
   orderNumber: null,
   orderFetchStatus: false,
   orderError: false,
   isOpen: false
 };
-
 
 const orderSlice = createSlice({
   name: 'order',

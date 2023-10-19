@@ -16,6 +16,7 @@ export type wsState = {
     totalToday: number | null
   };
 
+  
 const initialState: wsState = {
     status: WebsocketStatus.OFFLINE,
     orders: [],

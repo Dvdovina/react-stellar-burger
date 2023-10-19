@@ -19,7 +19,7 @@ export const getUser = createAsyncThunk(
     try {
       const res = await getUserApi();
       return res;
-    } catch (error:any) {
+    } catch (error: any) {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       throw error;
@@ -57,7 +57,7 @@ export const register = createAsyncThunk(
 
 //AsyncThunk Логин
 export const login = createAsyncThunk(
-  'user/login', 
+  'user/login',
   async (payload: TUserLogin) => {
     try {
       const response = await postLogin(payload);
@@ -100,8 +100,6 @@ export const forgotPassword = createAsyncThunk(
   },
 );
 
-
-
 //AsyncThunk Сбросить и поменять пароль
 export const resetPassword = createAsyncThunk(
   'user/resetPassword',
@@ -115,8 +113,17 @@ export const resetPassword = createAsyncThunk(
   },
 );
 
+export type TUserState = {
+  user: {
+    name: string,
+    email: string,
+  },
+  loading: boolean,
+  error: boolean,
+  isAuthChecked: boolean,
+};
 
-const initialState = {
+const initialState: TUserState = {
   user: {
     name: '',
     email: '',
@@ -143,7 +150,7 @@ export const userSlice = createSlice({
         state.user = payload.user
         state.isAuthChecked = true;
       })
-      .addCase(getUser.rejected, (state, action) => {
+      .addCase(getUser.rejected, (state) => {
         state.loading = false
         state.error = true
         state.isAuthChecked = true;
@@ -157,7 +164,7 @@ export const userSlice = createSlice({
         state.error = false
         state.user = payload.user
       })
-      .addCase(updateUser.rejected, (state, action) => {
+      .addCase(updateUser.rejected, (state) => {
         state.loading = false
         state.error = true
       })
@@ -170,7 +177,7 @@ export const userSlice = createSlice({
         state.error = false
         state.user = payload.user
       })
-      .addCase(register.rejected, (state, action) => {
+      .addCase(register.rejected, (state) => {
         state.loading = false
         state.error = true
       })
@@ -182,7 +189,7 @@ export const userSlice = createSlice({
         state.user = payload.user
         state.loading = false
       })
-      .addCase(login.rejected, (state, action) => {
+      .addCase(login.rejected, (state) => {
         state.loading = false
         state.error = true
       })
@@ -195,7 +202,7 @@ export const userSlice = createSlice({
         state.error = false
         state.user = payload.user
       })
-      .addCase(logOut.rejected, (state, action) => {
+      .addCase(logOut.rejected, (state) => {
         state.loading = false
         state.error = true
       })
@@ -207,7 +214,7 @@ export const userSlice = createSlice({
         state.loading = false
         state.error = false
       })
-      .addCase(forgotPassword.rejected, (state, action) => {
+      .addCase(forgotPassword.rejected, (state) => {
         state.loading = false
         state.error = true
       })
@@ -219,7 +226,7 @@ export const userSlice = createSlice({
         state.loading = false
         state.error = false
       })
-      .addCase(resetPassword.rejected, (state, action) => {
+      .addCase(resetPassword.rejected, (state) => {
         state.loading = false
         state.error = true
       })

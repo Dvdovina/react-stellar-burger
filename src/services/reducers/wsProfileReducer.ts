@@ -6,6 +6,7 @@ import {
     wsProfileError,
     wsProfileMessage
 } from "../actions/wsActions"
+import { TOrder } from "../../utils/common-types";
 
 const WebsocketStatus = {
     CONNECTING: 'CONNECTING...',
@@ -13,7 +14,13 @@ const WebsocketStatus = {
     OFFLINE: 'OFFLINE'
 }
 
-const initialState = {
+export type wsProfileState = {
+    status: string,
+    orders: TOrder[],
+    error: string,
+};
+
+const initialState: wsProfileState = {
     status: WebsocketStatus.OFFLINE,
     orders: [],
     error: '',

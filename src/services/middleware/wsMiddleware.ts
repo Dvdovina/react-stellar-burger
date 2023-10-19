@@ -25,15 +25,15 @@ export const socketMiddleware = (wsActions: any) => {
                 socket.onopen = () => {
                     dispatch(onOpen());
                 };
-                socket.onerror = (event:any) => {
+                socket.onerror = (event: any) => {
                     dispatch(onError('Error'));
                 };
-                socket.onmessage = (event:any) => {
+                socket.onmessage = (event: any) => {
                     const { data } = event;
                     const parsedData = JSON.parse(data);
                     dispatch(onMessage(parsedData));
                 };
-                socket.onclose = (event:any) => {
+                socket.onclose = (event: any) => {
                     dispatch(onClose());
                 };
                 if (wsSendMessage && type === wsSendMessage.type) {

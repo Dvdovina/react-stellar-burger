@@ -1,6 +1,4 @@
-import { TUser, TUserLogin, TUserEmail, TPasswordReset } from "./api-types";
-import { THeaders } from "./api-types";
-
+import { TUser, TUserLogin, TUserEmail, TPasswordReset, THeaders } from "./api-types";
 
 const config = {
     baseUrl: `https://norma.nomoreparties.space/api/`,
@@ -49,7 +47,7 @@ const postOrder = (item: (string | undefined)[]) => {
                 authorization: localStorage.getItem('accessToken')!,
                 "Content-Type": "application/json;charset=utf-8",
             } as (HeadersInit | undefined) & THeaders,
-            body: JSON.stringify({ingredients: item})
+            body: JSON.stringify({ ingredients: item })
         })
         .catch((err: any) => {
             console.log(err)
@@ -123,7 +121,7 @@ const postLogOut = () => {
 }
 
 //API Забытый пароль
-const postForgotPass = (email: TUserEmail ) => {
+const postForgotPass = (email: TUserEmail) => {
     return fetch(`${config.passForgotUrl}`,
         {
             method: 'POST',
@@ -163,7 +161,7 @@ const refreshToken = () => {
 };
 
 
-const fetchWithRefresh = async (url: string, options:  RequestInit & { headers: { authorization: string | null, "Content-Type": string } }) => {
+const fetchWithRefresh = async (url: string, options: RequestInit & { headers: { authorization: string | null, "Content-Type": string } }) => {
     try {
         const res = await fetch(url, options);
         return await checkResponse(res);

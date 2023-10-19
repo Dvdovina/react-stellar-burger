@@ -1,6 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
+
+export type currentIngredientState = {
+    currentIngredient: null,
+    isOpen: boolean
+}
+
+const initialState: currentIngredientState = {
     currentIngredient: null,
     isOpen: false
 };
