@@ -5,9 +5,9 @@ import { TOrderState, TOrder } from '../utils/common-types';
 
 export const submitOrder = createAsyncThunk(
   'order/submitOrder',
-  async (order: TOrder, thunkApi) => {
+  async (item:(string | undefined)[], thunkApi) => {
     try {
-      return await postOrder(order)
+      return await postOrder(item)
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }

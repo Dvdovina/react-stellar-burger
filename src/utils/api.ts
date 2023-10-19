@@ -41,15 +41,15 @@ const getData = () => {
         });
 }
 
-const postOrder = (order: TOrder) => {
+const postOrder = (item: (string | undefined)[]) => {
     return fetchWithRefresh(`${config.orderUrl}`,
         {
             method: 'POST',
             headers: {
-                authorization: localStorage.getItem('accessToken'),
+                authorization: localStorage.getItem('accessToken')!,
                 "Content-Type": "application/json;charset=utf-8",
             } as (HeadersInit | undefined) & THeaders,
-            body: JSON.stringify(order)
+            body: JSON.stringify({ingredients: item})
         })
         .catch((err: any) => {
             console.log(err)

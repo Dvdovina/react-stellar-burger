@@ -20,6 +20,7 @@ export type TIngredient = {
   __v?: number;
   count?: number;
   index: number;
+  key: (key: string) => void
 }
 
 export type TDraggableItem = TIngredient & { id: string }

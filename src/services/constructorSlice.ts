@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { TConstructor } from '../utils/common-types';
+import { TDraggableItem, TIngredient } from '../utils/common-types';
 
-
+export type TConstructor = {
+  ingredients: TDraggableItem[],
+  bun: TIngredient | null 
+}
 const initialState: TConstructor = {
   ingredients: [],
   bun: null
