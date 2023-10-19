@@ -13,7 +13,7 @@ function Feed() {
 
     useEffect(() => {
         dispatch(wsConnect(WS_FEED_URL));
-        return () => {dispatch(wsDisconnect())};
+        return () => { dispatch(wsDisconnect()) };
     }, []);
 
     const { orders, total, totalToday } = useAppSelector(

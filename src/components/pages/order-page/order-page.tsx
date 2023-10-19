@@ -15,7 +15,7 @@ function OrderPage() {
 
     useEffect(() => {
         dispatch(wsConnect(WS_FEED_URL));
-        return () => {dispatch(wsDisconnect())};
+        return () => { dispatch(wsDisconnect()) };
     }, []);
 
     const { orders } = useAppSelector(

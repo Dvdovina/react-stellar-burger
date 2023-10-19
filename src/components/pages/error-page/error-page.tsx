@@ -14,12 +14,12 @@ function ErrorPage() {
 
 
     return (
-            <section className={errorPageStyles.section}>
-                <h2 className="text text_type_main-medium">Упс! Такой страницы не существует...</h2>
-                <Button htmlType="button" type="primary" size="medium" onClick={returnToMain}>
-                    Вернуться на главную?
-                </Button>
-            </section>
+        <section className={errorPageStyles.section}>
+            <h2 className="text text_type_main-medium">Упс! Такой страницы не существует...</h2>
+            <Button htmlType="button" type="primary" size="medium" onClick={returnToMain}>
+                Вернуться на главную?
+            </Button>
+        </section>
     )
 }
 

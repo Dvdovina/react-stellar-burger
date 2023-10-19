@@ -11,7 +11,7 @@ import { TOrder } from '../../../utils/common-types';
 function OrderProfilePage() {
 
     const dispatch = useAppDispatch()
-    
+
     const { id } = useParams();
 
     const accessToken = localStorage.getItem("accessToken");

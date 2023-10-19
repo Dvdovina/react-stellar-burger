@@ -9,12 +9,12 @@ import BurgerConstructor from '../../burger-constructor/burger-constructor';
 function Home() {
 
     return (
-            <main className={homeStyles.main}>
-                <DndProvider backend={HTML5Backend}>
-                    <BurgerIngredients />
-                    <BurgerConstructor />
-                </DndProvider>
-            </main>
+        <main className={homeStyles.main}>
+            <DndProvider backend={HTML5Backend}>
+                <BurgerIngredients />
+                <BurgerConstructor />
+            </DndProvider>
+        </main>
     )
 }
 

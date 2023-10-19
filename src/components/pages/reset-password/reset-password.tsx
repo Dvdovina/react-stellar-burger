@@ -35,30 +35,30 @@ function ResetPassword() {
     }
 
     return (
-            <section className={resetPasswordStyles.section}>
-                <form className={resetPasswordStyles.form} onSubmit={handleSubmit}>
-                    <h2 className="text text_type_main-medium">Восстановление пароля</h2>
-                    <PasswordInput
-                        onChange={handleChange}
-                        value={values.password}
-                        name={'password'}
-                        placeholder={'Введите новый пароль'}
-                    />
-                    <Input
-                        type={'text'}
-                        placeholder={'Введите код из письма'}
-                        onChange={handleChange}
-                        value={values.token}
-                        name={'token'}
-                        ref={inputRef}
-                        errorText={'Ошибка'}
-                    />
-                    <Button htmlType="submit" type="primary" size="large" disabled={!values.password || !values.token}>Сохранить</Button>
-                </form>
-                <span className="text text_type_main-default text_color_inactive pt-20">
-                    Вспомнили пароль? <Link to="/login" className={resetPasswordStyles.link}>Войти</Link>
-                </span>
-            </section>
+        <section className={resetPasswordStyles.section}>
+            <form className={resetPasswordStyles.form} onSubmit={handleSubmit}>
+                <h2 className="text text_type_main-medium">Восстановление пароля</h2>
+                <PasswordInput
+                    onChange={handleChange}
+                    value={values.password}
+                    name={'password'}
+                    placeholder={'Введите новый пароль'}
+                />
+                <Input
+                    type={'text'}
+                    placeholder={'Введите код из письма'}
+                    onChange={handleChange}
+                    value={values.token}
+                    name={'token'}
+                    ref={inputRef}
+                    errorText={'Ошибка'}
+                />
+                <Button htmlType="submit" type="primary" size="large" disabled={!values.password || !values.token}>Сохранить</Button>
+            </form>
+            <span className="text text_type_main-default text_color_inactive pt-20">
+                Вспомнили пароль? <Link to="/login" className={resetPasswordStyles.link}>Войти</Link>
+            </span>
+        </section>
     )
 }
 

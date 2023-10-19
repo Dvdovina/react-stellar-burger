@@ -1,12 +1,11 @@
 import userProfileStyles from './userProfile.module.css'
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from '../../services/userSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/useForm';
 import { MouseEvent } from 'react';
 
-function UserProfile(){
+function UserProfile() {
 
     const inputRef = useRef(null);
 
@@ -48,54 +47,54 @@ function UserProfile(){
         setUpdatedInfo(false)
     }
 
-    return(
-            <form className={userProfileStyles.form} onSubmit={updateUserInfo}>
-                    <Input
-                        type={'text'}
-                        placeholder={'Имя'}
-                        onChange={onInputChange}
-                        value={userInfo.name}
-                        name={'name'}
-                        ref={inputRef}
-                        errorText={'Ошибка'}
-                        icon="EditIcon"
-                    />
-                    <Input
-                        type={'email'}
-                        placeholder={'Логин'}
-                        onChange={onInputChange}
-                        value={userInfo.email}
-                        name={'email'}
-                        ref={inputRef}
-                        errorText={'Ошибка'}
-                        icon="EditIcon"
-                    />
-                    <PasswordInput
-                        onChange={onInputChange}
-                        value={userInfo.password}
-                        name={'password'}
-                        placeholder={'Пароль'}
-                        icon="EditIcon"
-                    />
-                    {updatedInfo && (
-                        <div className={userProfileStyles.buttons}>
-                            <Button
-                                onClick={handleReset}
-                                htmlType="reset"
-                                type="secondary"
-                                size="medium"
-                            >
-                                Сбросить
-                            </Button>
-                            <Button
-                                htmlType="submit"
-                                type="secondary"
-                                size="large">
-                                Сохранить
-                            </Button>
-                        </div>
-                    )}
-                </form>
+    return (
+        <form className={userProfileStyles.form} onSubmit={updateUserInfo}>
+            <Input
+                type={'text'}
+                placeholder={'Имя'}
+                onChange={onInputChange}
+                value={userInfo.name}
+                name={'name'}
+                ref={inputRef}
+                errorText={'Ошибка'}
+                icon="EditIcon"
+            />
+            <Input
+                type={'email'}
+                placeholder={'Логин'}
+                onChange={onInputChange}
+                value={userInfo.email}
+                name={'email'}
+                ref={inputRef}
+                errorText={'Ошибка'}
+                icon="EditIcon"
+            />
+            <PasswordInput
+                onChange={onInputChange}
+                value={userInfo.password}
+                name={'password'}
+                placeholder={'Пароль'}
+                icon="EditIcon"
+            />
+            {updatedInfo && (
+                <div className={userProfileStyles.buttons}>
+                    <Button
+                        onClick={handleReset}
+                        htmlType="reset"
+                        type="secondary"
+                        size="medium"
+                    >
+                        Сбросить
+                    </Button>
+                    <Button
+                        htmlType="submit"
+                        type="secondary"
+                        size="large">
+                        Сохранить
+                    </Button>
+                </div>
+            )}
+        </form>
     )
 }
 

@@ -30,41 +30,41 @@ function Register() {
     }
 
     return (
-            <section className={registerStyles.section}>
-                <form className={registerStyles.form} onSubmit={handleSubmit}>
-                    <h2 className="text text_type_main-medium">Регистрация</h2>
-                    <Input
-                        type={'text'}
-                        placeholder={'Имя'}
-                        onChange={handleChange}
-                        value={values.name}
-                        name={'name'}
-                        error={false}
-                        ref={inputRef}
-                        errorText={'Ошибка'}
-                    />
-                    <Input
-                        type={'email'}
-                        placeholder={'E-mail'}
-                        onChange={handleChange}
-                        value={values.email}
-                        name={'email'}
-                        error={false}
-                        ref={inputRef}
-                        errorText={'Ошибка'}
-                    />
-                    <PasswordInput
-                        onChange={handleChange}
-                        value={values.password}
-                        name={'password'}
-                        placeholder={'Пароль'}
-                    />
-                    <Button htmlType="submit" type="primary" size="large" disabled={!values.name || !values.email || !values.password}>Зарегистрироваться</Button>
-                </form>
-                <span className="text text_type_main-default text_color_inactive pt-20">
-                    Уже зарегистрированы? <Link to="/login" className={registerStyles.link}>Войти</Link>
-                </span>
-            </section>
+        <section className={registerStyles.section}>
+            <form className={registerStyles.form} onSubmit={handleSubmit}>
+                <h2 className="text text_type_main-medium">Регистрация</h2>
+                <Input
+                    type={'text'}
+                    placeholder={'Имя'}
+                    onChange={handleChange}
+                    value={values.name}
+                    name={'name'}
+                    error={false}
+                    ref={inputRef}
+                    errorText={'Ошибка'}
+                />
+                <Input
+                    type={'email'}
+                    placeholder={'E-mail'}
+                    onChange={handleChange}
+                    value={values.email}
+                    name={'email'}
+                    error={false}
+                    ref={inputRef}
+                    errorText={'Ошибка'}
+                />
+                <PasswordInput
+                    onChange={handleChange}
+                    value={values.password}
+                    name={'password'}
+                    placeholder={'Пароль'}
+                />
+                <Button htmlType="submit" type="primary" size="large" disabled={!values.name || !values.email || !values.password}>Зарегистрироваться</Button>
+            </form>
+            <span className="text text_type_main-default text_color_inactive pt-20">
+                Уже зарегистрированы? <Link to="/login" className={registerStyles.link}>Войти</Link>
+            </span>
+        </section>
     )
 }
 
