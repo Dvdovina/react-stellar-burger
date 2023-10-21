@@ -9,7 +9,7 @@ import {
   postResetPass,
 } from '../utils/api';
 
-import { TUser, TUserLogin} from '../utils/api-types';
+import { TUser, TUserLogin } from '../utils/api-types';
 
 //AsyncThunk Пользователь
 export const getUser = createAsyncThunk('user/getUser', getUserApi);
@@ -20,10 +20,10 @@ export const updateUser = createAsyncThunk("user/updateUser", patchUser);
 export const register = createAsyncThunk(
   'user/register',
   async (payload: TUser) => {
-      const res = await postRegisterUser(payload);
-      localStorage.setItem("refreshToken", res.refreshToken);
-      localStorage.setItem("accessToken", res.accessToken);
-      return res
+    const res = await postRegisterUser(payload);
+    localStorage.setItem("refreshToken", res.refreshToken);
+    localStorage.setItem("accessToken", res.accessToken);
+    return res
   },
 );
 
@@ -31,10 +31,10 @@ export const register = createAsyncThunk(
 export const login = createAsyncThunk(
   'user/login',
   async (payload: TUserLogin) => {
-      const res = await postLogin(payload);
-      localStorage.setItem("refreshToken", res.refreshToken);
-      localStorage.setItem("accessToken", res.accessToken);
-      return res
+    const res = await postLogin(payload);
+    localStorage.setItem("refreshToken", res.refreshToken);
+    localStorage.setItem("accessToken", res.accessToken);
+    return res
   },
 );
 
@@ -42,10 +42,10 @@ export const login = createAsyncThunk(
 export const logOut = createAsyncThunk(
   'user/logOut',
   async () => {
-      const res = await postLogOut();
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-      return res
+    const res = await postLogOut();
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    return res
   },
 );
 
