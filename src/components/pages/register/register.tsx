@@ -2,7 +2,7 @@ import registerStyles from './register.module.css'
 import { Link } from "react-router-dom";
 import { useRef, FormEvent } from 'react';
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch } from 'react-redux'
+import { useAppDispatch } from '../../../hooks/useForm';
 import { register } from '../../../services/userSlice';
 import { useForm } from '../../../hooks/useForm';
 import { TUser } from '../../../utils/api-types';
@@ -14,7 +14,7 @@ function Register() {
 
     const inputRef = useRef(null);
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const onSubmit = (payload: TUser) => {
         dispatch(register(payload))

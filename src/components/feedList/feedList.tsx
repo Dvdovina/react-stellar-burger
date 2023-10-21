@@ -1,6 +1,6 @@
 import feedListStyles from './feedList.module.css'
 import FeedCard from '../feedCard/feedCard'
-import { TOrder } from '../../utils/common-types';
+
 
 
 interface Props {

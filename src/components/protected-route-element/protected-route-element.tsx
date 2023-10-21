@@ -1,5 +1,4 @@
 import { Navigate, useLocation } from 'react-router-dom';
-import { useSelector } from "react-redux";
 import Preloader from '../preloader/preloader';
 import {  FC } from "react";
 import { useAppSelector } from '../../hooks/useForm';
