@@ -1,6 +1,6 @@
 import registerStyles from './register.module.css'
 import { Link } from "react-router-dom";
-import { useRef, MouseEvent } from 'react';
+import { useRef, FormEvent } from 'react';
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch } from 'react-redux'
 import { register } from '../../../services/userSlice';
@@ -23,7 +23,7 @@ function Register() {
 
     const { values, handleChange } = useForm({ name: '', email: '', password: '', });
 
-    const handleSubmit = (e: MouseEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         onSubmit(values)
         navigate("/login", { replace: true });
