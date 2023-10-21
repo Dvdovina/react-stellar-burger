@@ -13,19 +13,7 @@ import {
 import { TUser, TUserLogin} from '../utils/api-types';
 
 //AsyncThunk Пользователь
-export const getUser = createAsyncThunk(
-  'user/getUser',
-  async () => {
-    try {
-      const res = await getUserApi();
-      return res;
-    } catch (error: any) {
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-      throw error;
-    }
-  },
-);
+export const getUser = createAsyncThunk('user/getUser', getUserApi);
 
 export const updateUser = createAsyncThunk("user/updateUser", patchUser);
 
@@ -33,31 +21,22 @@ export const updateUser = createAsyncThunk("user/updateUser", patchUser);
 export const register = createAsyncThunk(
   'user/register',
   async (payload: TUser) => {
-    try {
       const res = await postRegisterUser(payload);
       localStorage.setItem("refreshToken", res.refreshToken);
       localStorage.setItem("accessToken", res.accessToken);
       return res
-    } catch (error) {
-      throw error;
-    }
   },
 );
-
 
 //AsyncThunk Логин
 export const login = createAsyncThunk(
   'user/login',
   async (payload: TUserLogin) => {
-    try {
       const response = await postLogin(payload);
       const data = await checkResponse(response);
       localStorage.setItem("refreshToken", data.refreshToken);
       localStorage.setItem("accessToken", data.accessToken);
       return data
-    } catch (error) {
-      throw error;
-    }
   },
 );
 
@@ -65,15 +44,11 @@ export const login = createAsyncThunk(
 export const logOut = createAsyncThunk(
   'user/logOut',
   async () => {
-    try {
       const res = await postLogOut();
       const data = await checkResponse(res);
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       return data
-    } catch (error) {
-      throw error;
-    }
   },
 );
 
