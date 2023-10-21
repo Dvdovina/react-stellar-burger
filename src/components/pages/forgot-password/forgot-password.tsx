@@ -1,12 +1,11 @@
 import forgotPasswordStyles from './forgot-password.module.css'
 import { Link } from "react-router-dom";
-import { useRef } from 'react';
+import { useRef, FormEvent } from 'react';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { forgotPassword } from '../../../services/userSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { useForm } from '../../../hooks/useForm';
-import { MouseEvent } from "react";
 import { TUserEmail } from '../../../utils/api-types';
 
 
@@ -25,7 +24,7 @@ function ForgotPassword() {
         dispatch(forgotPassword(payload))
     }
 
-    const handleSubmit = (e: MouseEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         onSubmit(values.email)
         localStorage.setItem('email', values.email);
