@@ -59,7 +59,7 @@ export type TUserState = {
   user: {
     name: string,
     email: string,
-  },
+  } | null,
   loading: boolean,
   error: boolean,
   isAuthChecked: boolean,
@@ -96,6 +96,7 @@ export const userSlice = createSlice({
         state.loading = false
         state.error = true
         state.isAuthChecked = true;
+        state.user = null
       })
       .addCase(updateUser.pending, (state) => {
         state.loading = true

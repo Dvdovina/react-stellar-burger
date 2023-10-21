@@ -53,7 +53,7 @@ function UserProfile() {
                 type={'text'}
                 placeholder={'Имя'}
                 onChange={onInputChange}
-                value={userInfo.name}
+                value={userInfo.name!}
                 name={'name'}
                 ref={inputRef}
                 errorText={'Ошибка'}
@@ -63,7 +63,7 @@ function UserProfile() {
                 type={'email'}
                 placeholder={'Логин'}
                 onChange={onInputChange}
-                value={userInfo.email}
+                value={userInfo.email!}
                 name={'email'}
                 ref={inputRef}
                 errorText={'Ошибка'}
