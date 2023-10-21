@@ -9,7 +9,7 @@ export type TWsActions = {
     onError: ActionCreatorWithPayload<string>;
     onMessage: ActionCreatorWithPayload<unknown>;
     wsConnecting: ActionCreatorWithoutPayload;
-    wsDisconnect: ActionCreatorWithoutPayload;
+    wsDisconnect: ActionCreatorWithPayload<any> ;
 }
 
 
