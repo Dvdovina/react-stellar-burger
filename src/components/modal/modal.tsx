@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from "../modal-overlay/modal-overlay";
 import ReactDOM from "react-dom";
@@ -13,13 +12,9 @@ interface IModalProps {
     onClose: () => void;
 }
 
-type TKeyboardEvent = {
-    key: string;
-}
-
 export const Modal: FC<IModalProps> = ({ children, onClose }) => {
     useEffect(() => {
-        function closeOnEsc(evt: TKeyboardEvent) {
+        function closeOnEsc(evt: KeyboardEvent) {
             if (evt.key === 'Escape') {
                 onClose();
             }
