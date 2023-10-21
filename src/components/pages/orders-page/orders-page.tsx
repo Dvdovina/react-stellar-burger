@@ -5,7 +5,7 @@ import { logOut } from '../../../services/userSlice';
 import { useNavigate } from "react-router-dom";
 import { WS_PROFILE_URL } from '../../../utils/api';
 import { wsProfileConnect, wsProfileDisconnect } from '../../../services/actions/wsActions';
-import { useEffect } from 'react';
+import { SyntheticEvent, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/useForm'
 
 
@@ -27,7 +27,7 @@ function OrdersPage() {
     );
 
     // Выход
-    const handleLogout = (e: any) => {
+    const handleLogout = (e: SyntheticEvent) => {
         e.preventDefault()
         dispatch(logOut())
         navigate("/login");

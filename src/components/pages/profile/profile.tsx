@@ -4,6 +4,7 @@ import { logOut } from '../../../services/userSlice';
 import UserProfile from '../../userProfile/userProfile';
 import { useAppDispatch } from '../../../hooks/useForm';
 import { useNavigate } from "react-router-dom";
+import { SyntheticEvent } from 'react';
 
 
 function Profile() {
@@ -12,7 +13,7 @@ function Profile() {
     const navigate = useNavigate();
 
     // Выход
-    const handleLogout = (e: any) => {
+    const handleLogout = (e: SyntheticEvent) => {
         e.preventDefault()
         dispatch(logOut())
         navigate("/login");
