@@ -1,9 +1,9 @@
 import resetPasswordStyles from './reset-password.module.css'
 import { Link } from "react-router-dom";
-import { useRef, MouseEvent } from 'react';
+import { useRef, FormEvent } from 'react';
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { resetPassword } from '../../../services/userSlice';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../../hooks/useForm';
 import { useNavigate } from "react-router-dom";
 import { useForm } from '../../../hooks/useForm';
 import { Navigate } from "react-router-dom";
@@ -16,7 +16,7 @@ function ResetPassword() {
 
     const navigate = useNavigate();
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const { values, handleChange } = useForm({ password: '', token: '' });
 
@@ -24,7 +24,7 @@ function ResetPassword() {
         dispatch(resetPassword(payload))
     }
 
-    const handleSubmit = (e: MouseEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         onSubmit(values)
         navigate("/login", { replace: true });
