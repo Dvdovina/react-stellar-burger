@@ -3,17 +3,7 @@ import { postOrder } from '../utils/api';
 import { TRequest } from '../utils/common-types';
 
 
-export const submitOrder = createAsyncThunk(
-  'order/submitOrder',
-  async (item: (string | undefined)[], thunkApi) => {
-    try {
-      return await postOrder(item)
-    } catch (error) {
-      return thunkApi.rejectWithValue(error);
-    }
-  },
-);
-
+export const submitOrder = createAsyncThunk('order/submitOrder', postOrder);
 
 export type TOrderState = {
   orderNumber: number | null;
