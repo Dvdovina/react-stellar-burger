@@ -1,4 +1,25 @@
-import { TUser, TUserLogin, TUserEmail, TPasswordReset, THeaders } from "./api-types";
+import { TUser, TUserLogin, TUserEmail, TPasswordReset, THeaders, TResponse } from "./api-types";
+import { TIngredient, TOrder } from "./common-types";
+
+export const WS_FEED_URL = "wss://norma.nomoreparties.space/orders/all";
+export const WS_PROFILE_URL = "wss://norma.nomoreparties.space/orders"
+
+const BASE_URL = "https://norma.nomoreparties.space/api/";
+
+
+export const checkResponse = (res: Response) => {
+    if (res.ok) {
+        return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+}
+
+const request = <T>(
+    endpoint: RequestInfo | URL,
+    options?: RequestInit
+): Promise<T> => {
+    return fetch(`${BASE_URL}${endpoint}`, options).then(checkResponse);
+};
 
 const config = {
     baseUrl: `https://norma.nomoreparties.space/api/`,
@@ -16,28 +37,15 @@ const config = {
     }
 };
 
-export const WS_FEED_URL = "wss://norma.nomoreparties.space/orders/all";
-export const WS_PROFILE_URL = "wss://norma.nomoreparties.space/orders"
 
+const getData = (): Promise<
+    TResponse<"data", TIngredient[]>
+> => {
+    return request("ingredients");
+};
 
-export const checkResponse = (res: Response) => {
-    if (res.ok) {
-        return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-}
-
-const getData = () => {
-    return fetch(`${config.ingredientsUrl}`,
-        {
-            method: "GET",
-            headers: config.headers
-        })
-        .then(checkResponse)
-}
-
-const postOrder = (item: (string | undefined)[]) => {
-    return fetchWithRefresh(`${config.orderUrl}`,
+const postOrder = (item: (string | undefined)[]): Promise<TResponse<'order', Readonly<TOrder>>> => {
+    return request("orders",
         {
             method: 'POST',
             headers: {
@@ -49,8 +57,8 @@ const postOrder = (item: (string | undefined)[]) => {
 }
 
 //API Пользователь
-const getUserApi = () => {
-    return fetchWithRefresh(`${config.userUrl}`,
+const getUserApi = (): Promise<TResponse<'user', Readonly<TUser>>> => {
+    return fetchWithRefresh("auth/user",
         {
             method: "GET",
             headers: {
@@ -60,9 +68,8 @@ const getUserApi = () => {
         })
 }
 
-
 const patchUser = (data: TUser) => {
-    return fetchWithRefresh(`${config.userUrl}`,
+    return fetchWithRefresh("auth/user",
         {
             method: "PATCH",
             headers: {
@@ -74,19 +81,19 @@ const patchUser = (data: TUser) => {
 };
 
 //API регистрации
-const postRegisterUser = (data: TUser) => {
-    return fetch(`${config.registerUrl}`,
+const postRegisterUser = (data: TUser): Promise<TResponse<'user', Readonly<TUser>>> => {
+    return request("auth/register",
         {
             method: 'POST',
             headers: config.headers,
             body: JSON.stringify(data)
         })
-        .then(checkResponse)
+
 }
 
 //API Логин
-const postLogin = (data: TUserLogin) => {
-    return fetch(`${config.loginUrl}`,
+const postLogin = (data: TUserLogin): Promise<TResponse<'user', Readonly<TUser>>> => {
+    return request("auth/login",
         {
             method: 'POST',
             headers: {
@@ -97,8 +104,8 @@ const postLogin = (data: TUserLogin) => {
 }
 
 //API Лог-аут
-const postLogOut = () => {
-    return fetch(`${config.logoutUrl}`,
+const postLogOut = (): Promise<TResponse<'user', Readonly<TUser>>> => {
+    return request("auth/logout",
         {
             method: 'POST',
             headers: {
@@ -112,8 +119,8 @@ const postLogOut = () => {
 }
 
 //API Забытый пароль
-const postForgotPass = (email: TUserEmail) => {
-    return fetch(`${config.passForgotUrl}`,
+const postForgotPass = (email: TUserEmail): Promise<TResponse<'pass-forgot', string>> => {
+    return request("password-reset",
         {
             method: 'POST',
             headers: config.headers,
@@ -123,23 +130,23 @@ const postForgotPass = (email: TUserEmail) => {
         })
 }
 //API Сбросить и поменять пароль
-const postResetPass = (data: TPasswordReset) => {
-    return fetch(`${config.passResetUrl}`,
+const postResetPass = (data: TPasswordReset): Promise<TResponse<'pass-reset', string>> => {
+    return request("password-reset/reset",
         {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 authorization: localStorage.getItem('accessToken')
             } as (HeadersInit | undefined) & THeaders,
-            body: JSON.stringify({
+            body: JSON.stringify(
                 data
-        })
+            )
         })
 }
 
 //Токены
-const refreshToken = () => {
-    return fetch(`${config.tokenUrl}`,
+const refreshToken = (): Promise<TResponse> => {
+    return request("auth/token",
         {
             method: "POST",
             headers: {
@@ -148,13 +155,14 @@ const refreshToken = () => {
             body: JSON.stringify({
                 token: localStorage.getItem("refreshToken"),
             }),
-        }).then(checkResponse);
+        })
 };
 
 
-const fetchWithRefresh = async (url: string, options: RequestInit & { headers: { authorization: string | null, "Content-Type": string } }) => {
+const fetchWithRefresh = async (url: string, options: RequestInit & { headers: { authorization: string | null, "Content-Type": string } }
+): Promise<TResponse<'user', Readonly<TUser>>> => {
     try {
-        const res = await fetch(url, options);
+        const res = await fetch(`${BASE_URL}${url}`, options);
         return await checkResponse(res);
     } catch (err: any) {
         if (err.message === "jwt expired") {
@@ -165,7 +173,7 @@ const fetchWithRefresh = async (url: string, options: RequestInit & { headers: {
             localStorage.setItem("refreshToken", refreshData.refreshToken);
             localStorage.setItem("accessToken", refreshData.accessToken);
             options.headers.authorization = refreshData.accessToken;
-            const res = await fetch(url, options);
+            const res = await fetch(`${BASE_URL}${url}`, options);
             return await checkResponse(res);
         } else {
             return Promise.reject(err);

@@ -35,7 +35,7 @@ const orderSlice = createSlice({
         state.orderError = false
       })
       .addCase(submitOrder.fulfilled, (state, action) => {
-        state.orderNumber = action.payload.order.number.toString();
+        state.orderNumber = action.payload.order.number;
         state.orderFetchStatus = false;
         state.isOpen = true
       })

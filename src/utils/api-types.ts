@@ -5,6 +5,16 @@ export type THeaders = {
   authorization: string | null;
 };
 
+export type TResponse<TDataKey extends string = "", TDataType = {}> = {
+  [key in TDataKey]: TDataType;
+} & {
+  success: boolean;
+  message?: string;
+  headers?: Headers;
+  refreshToken: string;
+  accessToken: string;
+};
+
 export type TUser = {
   name: string;
   email: string;

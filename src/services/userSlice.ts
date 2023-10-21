@@ -7,7 +7,6 @@ import {
   patchUser,
   postForgotPass,
   postResetPass,
-  checkResponse
 } from '../utils/api';
 
 import { TUser, TUserLogin} from '../utils/api-types';
@@ -32,11 +31,10 @@ export const register = createAsyncThunk(
 export const login = createAsyncThunk(
   'user/login',
   async (payload: TUserLogin) => {
-      const response = await postLogin(payload);
-      const data = await checkResponse(response);
-      localStorage.setItem("refreshToken", data.refreshToken);
-      localStorage.setItem("accessToken", data.accessToken);
-      return data
+      const res = await postLogin(payload);
+      localStorage.setItem("refreshToken", res.refreshToken);
+      localStorage.setItem("accessToken", res.accessToken);
+      return res
   },
 );
 
@@ -45,10 +43,9 @@ export const logOut = createAsyncThunk(
   'user/logOut',
   async () => {
       const res = await postLogOut();
-      const data = await checkResponse(res);
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
-      return data
+      return res
   },
 );
 
