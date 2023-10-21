@@ -34,9 +34,6 @@ const getData = () => {
             headers: config.headers
         })
         .then(checkResponse)
-        .catch((err: any) => {
-            console.log(err);
-        });
 }
 
 const postOrder = (item: (string | undefined)[]) => {
@@ -49,9 +46,6 @@ const postOrder = (item: (string | undefined)[]) => {
             } as (HeadersInit | undefined) & THeaders,
             body: JSON.stringify({ ingredients: item })
         })
-        .catch((err: any) => {
-            console.log(err)
-        });
 }
 
 //API Пользователь
@@ -88,9 +82,6 @@ const postRegisterUser = (data: TUser) => {
             body: JSON.stringify(data)
         })
         .then(checkResponse)
-        .catch((err: any) => {
-            console.log(err)
-        });
 }
 
 //API Логин
