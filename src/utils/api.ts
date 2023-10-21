@@ -140,9 +140,9 @@ const postResetPass = (data: TPasswordReset) => {
                 'Content-Type': 'application/json',
                 authorization: localStorage.getItem('accessToken')
             } as (HeadersInit | undefined) & THeaders,
-            body: JSON.stringify(
+            body: JSON.stringify({
                 data
-            )
+        })
         })
 }
 

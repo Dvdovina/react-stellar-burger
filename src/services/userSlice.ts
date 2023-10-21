@@ -10,7 +10,7 @@ import {
   checkResponse
 } from '../utils/api';
 
-import { TUserEmail, TUser, TUserLogin, TPasswordReset } from '../utils/api-types';
+import { TUser, TUserLogin} from '../utils/api-types';
 
 //AsyncThunk Пользователь
 export const getUser = createAsyncThunk(
@@ -27,17 +27,7 @@ export const getUser = createAsyncThunk(
   },
 );
 
-export const updateUser = createAsyncThunk(
-  'user/updateUser',
-  async (payload: TUser) => {
-    try {
-      const res = await patchUser(payload);
-      return res;
-    } catch (error) {
-      throw error;
-    }
-  },
-);
+export const updateUser = createAsyncThunk("user/updateUser", patchUser);
 
 //AsyncThunk Регистрация
 export const register = createAsyncThunk(
@@ -88,30 +78,10 @@ export const logOut = createAsyncThunk(
 );
 
 //AsyncThunk Забытый пароль
-export const forgotPassword = createAsyncThunk(
-  'user/forgotPassword',
-  async (email: TUserEmail) => {
-    try {
-      const res = await postForgotPass(email);
-      return res
-    } catch (error) {
-      throw error;
-    }
-  },
-);
+export const forgotPassword = createAsyncThunk('user/forgotPassword', postForgotPass);
 
 //AsyncThunk Сбросить и поменять пароль
-export const resetPassword = createAsyncThunk(
-  'user/resetPassword',
-  async (payload: TPasswordReset) => {
-    try {
-      const res = await postResetPass(payload);
-      return res
-    } catch (error) {
-      throw error;
-    }
-  },
-);
+export const resetPassword = createAsyncThunk('user/resetPassword', postResetPass);
 
 export type TUserState = {
   user: {
