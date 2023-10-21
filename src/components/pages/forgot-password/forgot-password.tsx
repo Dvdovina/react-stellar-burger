@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useRef, FormEvent } from 'react';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { forgotPassword } from '../../../services/userSlice';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../../hooks/useForm';
 import { useNavigate } from "react-router-dom";
 import { useForm } from '../../../hooks/useForm';
 import { TUserEmail } from '../../../utils/api-types';
@@ -16,7 +16,7 @@ function ForgotPassword() {
 
     const navigate = useNavigate();
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const { values, handleChange } = useForm({ email: '' });
 

@@ -2,13 +2,13 @@ import profileStyles from './profile.module.css'
 import { NavLink } from 'react-router-dom'
 import { logOut } from '../../../services/userSlice';
 import UserProfile from '../../userProfile/userProfile';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../../hooks/useForm';
 import { useNavigate } from "react-router-dom";
 
 
 function Profile() {
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const navigate = useNavigate();
 
     // Выход
