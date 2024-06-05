@@ -23,4 +23,4 @@
 * CSS3
 * HTML5
 
-Ссылка [GitHub Pages](https://dvdovina.github.io/feed)
+Ссылка [GitHub Pages](https://dvdovina.github.io/react-stellar-burger)
