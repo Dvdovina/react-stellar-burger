@@ -1,6 +1,6 @@
 # Stellar Burgers 
 
-### Учебный проект - сайт для заказа бургера из ингредиентов с космической тематикой.
+### Cайт для заказа бургера из ингредиентов с космической тематикой.
 
 ## Функционал:
 
@@ -15,6 +15,7 @@
 ## Стек технологий:
 
 * React
+* Typescript
 * Redux Toolkit
 * WebSocket
 * React Router
@@ -22,4 +23,4 @@
 * CSS3
 * HTML5
 
-Ссылка [GitHub Pages](https://dvdovina.github.io/react-stellar-burger/).
+Ссылка [GitHub Pages](https://dvdovina.github.io/feed)
